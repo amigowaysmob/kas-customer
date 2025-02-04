@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "769537265304",
+    "project_id": "kascustomer",
+    "storage_bucket": "kascustomer.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769537265304:android:e25db359c3ebb3d0684aed",
+        "android_client_info": {
+          "package_name": "com.kascustomer.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAjaJ3zul6pnQmUZDwYxAasZ0tTb4m7D4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
