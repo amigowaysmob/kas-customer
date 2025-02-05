@@ -30,7 +30,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> loginKey = GlobalKey<FormState>();
   TextEditingController loginController=TextEditingController();
-  
+ FocusNode nameFocusNode = FocusNode();
   
  
     late SharedPreferenceHelper sharedPreferenceHelper;
@@ -39,6 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     sharedPreferenceHelper = SharedPreferenceHelper();
     sharedPreferenceHelper.init();
+    nameFocusNode.requestFocus(); 
   }
    
      String? _validateUsername(String? value) {
@@ -119,6 +120,7 @@ Helper.showSignAlert(context:context,content:  state.model.message,onPressed: ()
                 hintText: 'Enter Your Mobile Number',
                  validating:_validatePhoneNumber,
                 type: 'mobileNumber',
+                focusNode: nameFocusNode,
               ),
             vericalSpaceLarge,
              

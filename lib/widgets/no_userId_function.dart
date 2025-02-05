@@ -109,8 +109,8 @@ static  void showSignAlert({required BuildContext context,String? content,requir
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          LogoWidget(),
-                        TextViewMedium(name:content,fontWeight: FontWeight.bold, ),
+                          // LogoWidget(),
+                        TextViewMedium(name:content,fontWeight: FontWeight.bold,textAlign: TextAlign.center, ),
                           vericalSpaceLarge,
                          Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -23,9 +23,16 @@ class ResendTimerWidget extends HookWidget {
     final timer = useRef<Timer?>(null);
  
   void _listenOtp() async {
+  try {
     await SmsAutoFill().listenForCode();
-    print("OTP Listen is called");
+    print("Listening for OTP...");
+  } catch (e) {
+    print("Error while listening for OTP: $e");
   }
+}
+
+
+  
     useEffect(() {
         _listenOtp();
       timer.value = Timer.periodic(const Duration(seconds: 1), (t) {

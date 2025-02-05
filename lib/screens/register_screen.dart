@@ -37,7 +37,12 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController phoneNumberController=TextEditingController();
  TextEditingController referbyController=TextEditingController();
   final GlobalKey<FormState> registerKey = GlobalKey<FormState>();
+  FocusNode nameFocusNode = FocusNode();
   bool _isLoading = false;
+  void initState() {
+    super.initState();
+    nameFocusNode.requestFocus(); // Set autofocus to the name field
+  }
   String? _validateUsername(String? value) {
    
     if (value!=null&& value.isNotEmpty&& !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value!)) {
@@ -170,6 +175,7 @@ String? _validatePhoneNumber(String? value) {
                     hintText: 'Enter Your name*',
                     validating: _validateName,
                     type: 'name',
+                    focusNode:nameFocusNode
                   ),
                 vericalSpaceLarge,
                  
