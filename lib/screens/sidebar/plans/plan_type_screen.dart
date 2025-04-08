@@ -73,26 +73,21 @@ class _PlanTypesScreenState extends State<PlanTypesScreen> {
  }
                           },
                           child: Card(
-                            elevation: 5,
-                            child: Column(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10)
-                                  ),
-                                  child: Image.network(
-                                    image??'',
-                                    fit: BoxFit.fill,
-                                    height: sheight/7,
-                                    width: swidth,
-                                  ),
+                            shadowColor: yellowColor,
+                            elevation: 15,
+                            child: Container(
+                              decoration:BoxDecoration(
+borderRadius: BorderRadius.circular(10),
+border: Border.all(color: appColor)
+                              ),
+                              width: swidth,
+                              height: sheight/10,
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child:ApiConstant.langCode!='ta'? TextViewMedium(name: title,fontSize:13):TextViewSmall(title: title,fontSizes: 12,),
                                 ),
-                                
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child:ApiConstant.langCode!='ta'? TextViewMedium(name: title,fontSize:13):TextViewSmall(title: title,fontSizes: 12,),
-                          )
-                              ],
+                              ),
                             ),
                           ),
                         ),

@@ -22,6 +22,7 @@ import 'package:kasnew/utils/constant.dart';
 import 'package:kasnew/utils/constants/api_constants.dart';
 import 'package:kasnew/utils/enums.dart';
 import 'package:kasnew/widgets/drop_down_widget.dart';
+import 'package:kasnew/widgets/no_userId_function.dart';
 import 'package:kasnew/widgets/text_form_widget.dart';
 import 'package:kasnew/widgets/text_view_medium.dart';
 import 'package:kasnew/widgets/text_view_small.dart';
@@ -181,11 +182,17 @@ class Step1Form extends HookWidget {
         data?.districtData!.map<String>((type) => type.name!).toList();
     List<String> cityData = [];
     var selectedCityValue = useState<String?>(null);
+     void _loadImage() async {
+  File? file = await Helper.compressImage(imagePath.value!); // Await the Future
+ 
+}
     Future<void> getImage(
         ImageSource source, String? title, String? idType) async {
       final image = await picker.pickImage(source: source);
       if (image != null) {
         imagePath.value = File(image.path);
+      imagePath.value = await Helper.compressImage(imagePath.value!);
+    
         // Ensure the file path is set in formData
         if (title == langData?.customerPhoto) {
           formData.photo = imagePath.value; // Save customer photo

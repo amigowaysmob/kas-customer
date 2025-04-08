@@ -210,44 +210,54 @@ class Carddata {
 }
 
 class Myplans {
+  String? id;
+  String? planCreated;
+  String? planType;
   String? planName;
   String? duration;
   String? payable;
   String? progress;
   String? record;
   String? dueDate;
-String? id;
+
   Myplans(
-      {this.planName,
+      {this.id,
+      this.planCreated,
+      this.planType,
+      this.planName,
       this.duration,
       this.payable,
       this.progress,
       this.record,
-      this.dueDate,
-      this.id});
+      this.dueDate});
 
   Myplans.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    planCreated = json['plan_created'];
+    planType = json['plan_type'];
     planName = json['plan_name'];
     duration = json['duration'];
     payable = json['payable'];
     progress = json['progress'];
     record = json['record'];
     dueDate = json['due_date'];
-    id=json['id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['plan_created'] = this.planCreated;
+    data['plan_type'] = this.planType;
     data['plan_name'] = this.planName;
     data['duration'] = this.duration;
     data['payable'] = this.payable;
     data['progress'] = this.progress;
     data['record'] = this.record;
     data['due_date'] = this.dueDate;
-    data['id']=this.id;
     return data;
   }
 }
+
 
 class HomeIcons {
   String? accountLimit;
@@ -309,6 +319,7 @@ class LangData {
   String? othersGift;
   String? eCatalogue;
   String? feedback;
+  String? planCreated;
 
   LangData(
       {this.todayGoldRate,
@@ -341,7 +352,8 @@ class LangData {
       this.myWallet,
       this.othersGift,
       this.eCatalogue,
-      this.feedback});
+      this.feedback,
+      this.planCreated});
 
   LangData.fromJson(Map<String, dynamic> json) {
     todayGoldRate = json['today_gold_rate'];
@@ -375,6 +387,7 @@ class LangData {
     othersGift = json['others_gift'];
     eCatalogue = json['e_catalogue'];
     feedback = json['feedback'];
+    planCreated = json['plan_created'];
   }
 
   Map<String, dynamic> toJson() {
@@ -410,6 +423,7 @@ class LangData {
     data['others_gift'] = this.othersGift;
     data['e_catalogue'] = this.eCatalogue;
     data['feedback'] = this.feedback;
+    data['plan_created'] = this.planCreated;
     return data;
   }
 }

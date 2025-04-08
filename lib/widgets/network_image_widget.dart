@@ -17,6 +17,17 @@ class NetworkImageWidget extends StatelessWidget {
       width: width,
       height: height,
       fit: fit,
+       imageBuilder: (context, imageProvider) => Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: imageProvider,
+              fit: fit, // Change fit property to BoxFit.fill
+              colorFilter: const ColorFilter.mode(
+                Colors.transparent,
+                BlendMode.colorBurn,
+              ),
+            ),
+          ),),
       progressIndicatorBuilder: (context, url, downloadProgress) =>
           Center(child: CircularProgressIndicator(value: downloadProgress.progress,color: appColor,)),
       errorWidget: (context, url, error) => Container(),

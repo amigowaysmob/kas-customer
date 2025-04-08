@@ -9,6 +9,7 @@ import 'package:kasnew/router/app_router.gr.dart';
 
 import 'package:kasnew/states/view_profile_state.dart';
 import 'package:kasnew/utils/constant.dart';
+import 'package:kasnew/utils/constants/api_constants.dart';
 import 'package:kasnew/utils/constants/sharedpreference_help.dart';
 import 'package:kasnew/utils/enums.dart';
 import 'package:kasnew/widgets/indicator_widget.dart';
@@ -89,7 +90,7 @@ class _AccountScreenState extends State<AccountScreen> {
     
 
         return  Scaffold(
-          backgroundColor: Color.fromARGB(255, 242, 237, 237),
+          backgroundColor:Helper.isUser()==true? Color.fromARGB(255, 242, 237, 237):whiteColor,
           appBar:widget.isMenu==true? TitleAppBarWidget(title: 'My Profile',):null,
           body: Helper.isUser()==true? SingleChildScrollView(
             child: Padding(
@@ -196,7 +197,7 @@ context.router.push(BasicDetailEditScreen(userData: userData,));
                         color: whiteColor
                       ),
                       child: Padding(
-                        padding:  EdgeInsets.only(top: screenPadding,left: screenPadding,bottom: 5.r),
+                        padding:  EdgeInsets.all(screenPadding),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

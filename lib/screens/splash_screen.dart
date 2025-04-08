@@ -111,7 +111,7 @@ class _SplashScreenState extends State<SplashScreen> {
    
   }
   _navigateToNextPage() async {
-    await Future.delayed(const Duration(seconds: 6)); // Simulate splash screen delay
+    await Future.delayed(const Duration(milliseconds:500 )); // Simulate splash screen delay
     // final userBox = await Hive.openBox<bool>('userBox');
     // bool? isLoggedIn = userBox.get('isLoggedIn', defaultValue: false);
     // if (isLoggedIn!) {
@@ -130,19 +130,17 @@ class _SplashScreenState extends State<SplashScreen> {
           else{
            context.router.replaceNamed(RouterPath.bottom_path); // Navigate to LoginPage if not logged in
     // }
-          }}
+          }
+          }
 
   @override
  
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SiteSettingsCubit, SiteSettingsState>(
-        builder: (context, state) {
-     
-      if (state.networkStatusEnum == NetworkStatusEnum.loading ||state.networkStatusEnum == NetworkStatusEnum.initial) {
-        return CircularWidgetC();
-      }
+    return BlocConsumer<SiteSettingsCubit, SiteSettingsState>(
+      listener: (context, state) {
+       
       if (state.networkStatusEnum == NetworkStatusEnum.loaded) {
          _navigateToNextPage();
         final siteSettings = state.model;
@@ -153,7 +151,11 @@ sharedPreferenceHelper.saveSiteurl(siteSettings.data?[0].siteUrl);
 sharedPreferenceHelper.saveDelContent(siteSettings.data?[0].deleteAccountContent);
 sharedPreferenceHelper.saveDelReq(siteSettings.data?[0].deleteAccountAlertContent);
 
-        final logoImageUrl = ApiConstant.logoUrl;
+        
+      }},
+        builder: (context, state) {
+     
+     
 
         return Scaffold(
          
@@ -166,7 +168,7 @@ sharedPreferenceHelper.saveDelReq(siteSettings.data?[0].deleteAccountAlertConten
                 
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage(logoImageUrl),
+                    image: AssetImage('assets/images/logo.png'),
                     fit: BoxFit.fill,
                     onError: (exception, stackTrace) {
                       // Handle error during image loading
@@ -178,13 +180,7 @@ sharedPreferenceHelper.saveDelReq(siteSettings.data?[0].deleteAccountAlertConten
             ),
           ),
         );
-      } else {
-        
-           
-        
-       
-        return NoInternetScreen();
-      }
-    });
+    } ); } 
+    
   }
-}
+

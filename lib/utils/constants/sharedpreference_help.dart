@@ -38,6 +38,9 @@ Future<void> saveVersion(String? version) async {
 Future<void> saveLangCode(String? langCode) async {
     await _sharedPreferences?.setString(PrefKeys.langCode, langCode ?? "");
   }
+  Future<void> savesignature(String? signature) async {
+    await _sharedPreferences?.setString(PrefKeys.signature, signature ?? "");
+  }
   Future<void> saveLimit(String? limit) async {
     await _sharedPreferences?.setString(PrefKeys.limit, limit ?? "");
   }
@@ -55,6 +58,9 @@ Future<void> saveDelReq(String? delReq) async {
   }
   Future<void> saveHomeIconKey(String? iconKey) async {
     await _sharedPreferences?.setString(PrefKeys.iconKey,iconKey?? "");
+  }
+  Future<void> saveImageList(List<String> imageList) async {
+    await _sharedPreferences?.setStringList(PrefKeys.imageList,imageList??[]);
   }
    Future<void> saveSite(SiteSettingsModel? langModel) async {
     // Convert the LanguageModel to a JSON string
@@ -127,6 +133,14 @@ String get getHomeLogo{
     return _sharedPreferences?.getString(PrefKeys.chitCount) ?? '';
 
   }
+  List< String> get getImageList{
+    return _sharedPreferences?.getStringList(PrefKeys.imageList) ?? [];
+
+  }
+  String get getSignature{
+    return _sharedPreferences?.getString(PrefKeys.signature) ?? '';
+
+  }
    LangModel? getLanguage() {
     // Get the JSON string from shared preferences
     String? langJson = _sharedPreferences?.getString(PrefKeys.lang);
@@ -161,5 +175,7 @@ mixin PrefKeys {
    static const String limit='limit';
    static const String chitCount='chit_count';
     static const String lang='lang';
+      static const String imageList='imageList';
+     static const String signature='signature';
     static const String isFirstLaunch='isFirstLaunch';
 }

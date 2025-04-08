@@ -126,7 +126,7 @@ Future<void> navigateAndDisplayJusPayPayment(BuildContext context,
               }   
               if (state.networkStatusEnum == NetworkStatusEnum.loaded && state.model.text=='Success') {
                 isLoading.value=false;
-                ToastWidget(message: state.model.message,color: Colors.green,).build(context);
+                // ToastWidget(message: state.model.message,color: Colors.green,).build(context);
               
               // context.router.replaceAll([  PaymentStatusScreen(paymentStatusId:state.model.data?.paymentOrderId.toString())]  );
               navigateAndDisplayJusPayPayment(context,state.model.data?.sdkpayload ,
@@ -146,60 +146,108 @@ Future<void> navigateAndDisplayJusPayPayment(BuildContext context,
             }
             if( state.networkStatusEnum==NetworkStatusEnum.loaded){
               var data=state.model.data;
-              return (data?.summaryData?.length??0)>0 ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              return  Column(
                 children: [
-                  ListView.builder(
-                    itemCount:data?.summaryData?.length ,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder:( context,mainindex){
-                    var nameData=data?.summaryData?[mainindex];
-                          return Column(
-                            children: [
-                  ListView.builder(
-                           itemCount:nameData?.dueItems?.length ,
+               (data?.summaryData?.length??0)>0 ?   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListView.builder(
+                        itemCount:data?.summaryData?.length ,
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (context,subindex){
-                          var subData=nameData?.dueItems?[subindex];
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-               nameData?.passbookNumber!=null&& (nameData?.passbookNumber?.isNotEmpty??false)?      RowBoldTextWidget(title: 'Passbook Number', value: nameData?.passbookNumber,isNoPadding: true,):Container(),
-                    TextViewMedium(name:nameData?.planName,fontWeight: FontWeight.bold,textColors: appColor, ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        itemBuilder:( context,mainindex){
+                        var nameData=data?.summaryData?[mainindex];
+                              return Column(
+                                children: [
+                      ListView.builder(
+                               itemCount:nameData?.dueItems?.length ,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                              itemBuilder: (context,subindex){
+                              var subData=nameData?.dueItems?[subindex];
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      TextViewSmall(title:subData?.date ),
-                      TextViewSmall(title:'₹${ subData?.amount}')
-                    ],),
-                   
-                    vericalSpaceSmall,
-                   
-                  ],
-                            ),
-                          );
-                  }),
-                  
-                            ],
-                          );
-                          
-                  }),
-                  vericalSpaceMedium,
-                  Divider(height: 3,),
-                  vericalSpaceMedium,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextViewSmall(title:'${d?.totalPayable?? 'Total Payable'}'),
-                        BigAmountWidget(rupees: data?.totalAmount)
+                   nameData?.passbookNumber!=null&& (nameData?.passbookNumber?.isNotEmpty??false)?      RowBoldTextWidget(title: 'Passbook Number', value: nameData?.passbookNumber,isNoPadding: true,):Container(),
+                        TextViewMedium(name:nameData?.planName,fontWeight: FontWeight.bold,textColors: appColor, ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                          TextViewSmall(title:subData?.date ),
+                          TextViewSmall(title:'₹${ subData?.amount}')
+                        ],),
+                       
+                        vericalSpaceSmall,
+                       
                       ],
-                    ), 
+                                ),
+                              );
+                      }),
+                      
+                                ],
+                              );
+                              
+                      }),
+                             
+                
+                      
+                                
+                            
+                     
+                    ],
+                  ):(data?.advanceSummaryData?.length??0)<0?NoDataWidget(title: '${d?.noSummaryData??'No Summary Data'}'):Container(),
+                    (data?.advanceSummaryData?.length??0)>0 ?     Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextViewLarge(title:d?.advancePayment?? 'Advance Payment',textcolor: appColor,fontWeight: FontWeight.bold,),
+                      ),
+                      vericalSpaceMedium,
+                      ListView.builder(
+                                   itemCount:data?.advanceSummaryData?.length ,
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                  itemBuilder: (context,subindex){
+                                  var subData=data?.advanceSummaryData?[subindex];
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+
+                       subData?.passbookNumber!=null&& (subData?.passbookNumber?.isNotEmpty??false)?      RowBoldTextWidget(title: 'Passbook Number', value: subData?.passbookNumber,isNoPadding: true,):Container(),
+                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                            children: [
+                              TextViewMedium(name:subData?.planName,fontWeight: FontWeight.bold,textColors: appColor, ),
+                            TextViewSmall(title:'₹${ subData?.amount}')
+                            ],), 
+                           
+                            
+                           
+                            vericalSpaceSmall,
+                           
+                          ],
+                                    ),
+                                  );
+                          }),
+                           vericalSpaceMedium,
+                      Divider(height: 3,),
+                      vericalSpaceMedium,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextViewSmall(title:'${d?.totalPayable?? 'Total Payable'}'),
+                            BigAmountWidget(rupees: data?.totalAmount)
+                          ],
+                        ), 
+                    ],
+                  ):Container(),
                 ],
-              ):NoDataWidget(title: '${d?.noSummaryData??'No Summary Data'}');
+              );
               }
               else{
                 return NoDataWidget(title: '${d?.noSummaryData??'No Summary Data'}');
@@ -209,70 +257,7 @@ Future<void> navigateAndDisplayJusPayPayment(BuildContext context,
             }),
           ),
           
-          //  FormField<bool>(
-          //             initialValue: isChecked.value,
-          //             validator: (value) {
-          //               if (!isChecked.value) {
-          //                 return 'You must agree to the terms and conditions';
-          //               }
-          //               return null;
-          //             },
-          //             builder: (formFieldState) {
-          //         return Column(
-          //           children: [
-          //             Row(
-          //               children: [
-          //                 Checkbox(
-          //                     value: isChecked.value,
-          //                     onChanged: (value) {
-          //                       isChecked.value = value!;
-          //                     }),
-          //                Expanded(
-          //                         child: RichText(
-          //                           text: TextSpan(
-          //                             style: TextStyle(color: Colors.black),
-          //                             children: [
-          //                               TextSpan(text: 'I agree to the ',style: TextStyle(color: appColor,fontSize: 14.sp, fontFamily: 'Monoserrat')),
-          //                               TextSpan(
-          //                                 text: 'Terms of Use',
-          //                                 style: TextStyle(
-          //                                   decoration: TextDecoration.underline,
-          //                                   color:appColor,
-          //                                   fontWeight: FontWeight.bold,
-          //                                   fontFamily: 'Monoserrat'
-          //                                 ),
-          //                                 recognizer: TapGestureRecognizer()
-          //                                   ..onTap = _onTermsOfUseTap,
-          //                               ),
-          //                               TextSpan(text: '  and  ',style: TextStyle(color: appColor, fontFamily: 'Monoserrat')),
-          //                               TextSpan(
-          //                                 text: 'Privacy Policy',
-          //                                 style: TextStyle(
-          //                                  color:appColor,
-          //                                   fontWeight: FontWeight.bold,
-          //                                     decoration: TextDecoration.underline,
-          //                                      fontFamily: 'Monoserrat'
-          //                                 ),
-          //                                 recognizer: TapGestureRecognizer()
-          //                                   ..onTap = _onPrivacyPolicyTap,
-          //                               ),
-          //                             ],
-          //                           ),
-          //                         ),
-          //                       ),
-          //               ],
-          //             ),
-          //              if (formFieldState.hasError)
-          //                     Padding(
-          //                       padding: const EdgeInsets.only(top: 5.0),
-          //                       child: Text(
-          //                         formFieldState.errorText!,
-          //                         style: TextStyle(color: Colors.red),
-          //                       ),
-          //                     ),
-          //           ],
-          //         );},
-          //       )
+     
           ],
           
           ),

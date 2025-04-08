@@ -24,15 +24,22 @@ class SummaryModel {
 
 class Data {
   List<SummaryData>? summaryData;
+  List<AdvanceSummaryData>? advanceSummaryData;
   String? totalAmount;
 
-  Data({this.summaryData, this.totalAmount});
+  Data({this.summaryData, this.advanceSummaryData, this.totalAmount});
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['summary_data'] != null) {
       summaryData = <SummaryData>[];
       json['summary_data'].forEach((v) {
         summaryData!.add(new SummaryData.fromJson(v));
+      });
+    }
+    if (json['advance_summary_data'] != null) {
+      advanceSummaryData = <AdvanceSummaryData>[];
+      json['advance_summary_data'].forEach((v) {
+        advanceSummaryData!.add(new AdvanceSummaryData.fromJson(v));
       });
     }
     totalAmount = json['total_amount'];
@@ -42,6 +49,10 @@ class Data {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.summaryData != null) {
       data['summary_data'] = this.summaryData!.map((v) => v.toJson()).toList();
+    }
+    if (this.advanceSummaryData != null) {
+      data['advance_summary_data'] =
+          this.advanceSummaryData!.map((v) => v.toJson()).toList();
     }
     data['total_amount'] = this.totalAmount;
     return data;
@@ -92,6 +103,27 @@ class DueItems {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['date'] = this.date;
     data['amount'] = this.amount;
+    return data;
+  }
+}
+
+class AdvanceSummaryData {
+  String? passbookNumber;
+  String? amount;
+String? planName;
+  AdvanceSummaryData({this.passbookNumber, this.amount,this.planName});
+
+  AdvanceSummaryData.fromJson(Map<String, dynamic> json) {
+    passbookNumber = json['passbook_number'];
+    amount = json['amount'];
+    planName=json['plan_name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['passbook_number'] = this.passbookNumber;
+    data['amount'] = this.amount;
+    data['plan_name']=this.planName;
     return data;
   }
 }

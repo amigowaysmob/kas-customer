@@ -48,6 +48,7 @@ final isExpanded = useState(false);
 }, []);
 
     return Scaffold(
+      backgroundColor: whiteColor,
       appBar:isMenu==true? TitleAppBarWidget(title: 'Paid Amount Details'):null,
       body:Helper.isUser()==true? SingleChildScrollView(
         child: Padding(

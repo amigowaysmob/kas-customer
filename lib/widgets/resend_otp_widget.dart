@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:ui';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -22,15 +22,15 @@ class ResendTimerWidget extends HookWidget {
     final timeLeft = useState(initialTime);
     final timer = useRef<Timer?>(null);
  
-  void _listenOtp() async {
-  try {
-    await SmsAutoFill().listenForCode();
-    print("Listening for OTP...");
-  } catch (e) {
-    print("Error while listening for OTP: $e");
-  }
-}
-
+ void _listenOtp() {
+      SmsAutoFill().listenForCode().then((_) {
+        SmsAutoFill().code.listen((otp) {
+          print("Received OTP: $otp");
+        }).onError((error) {
+          print("Error listening for OTP: $error");
+        });
+      });
+    }
 
   
     useEffect(() {
@@ -44,7 +44,14 @@ class ResendTimerWidget extends HookWidget {
         }
       });
 
-      return () => timer.value?.cancel();
+    return () {
+        // Clean up the timer
+        timer.value?.cancel();
+        
+        // Stop listening for OTP
+        SmsAutoFill().unregisterListener();
+        print("OTP Listener disposed");
+      };
     }, []);
 
     return TextViewSmall(title:"00 : ${timeLeft.value}s",textcolor: appColor,fontWeight: FontWeight.bold,);

@@ -22,9 +22,14 @@ class LedgerDetailModel {
 class Data {
   LedgerData? ledgerData;
   List<TransactionData>? transactionData;
+  List<AdvancedTransactionData>? advancedTransactionData;
   String? totalAmount;
-
-  Data({this.ledgerData, this.transactionData, this.totalAmount});
+  String? advancedAmount;
+  String? grandTotal;
+  Data({this.ledgerData, this.transactionData,  this.advancedTransactionData,
+      this.totalAmount,
+      this.advancedAmount,
+      this.grandTotal});
 
   Data.fromJson(Map<String, dynamic> json) {
     ledgerData = json['ledger_data'] != null
@@ -36,7 +41,15 @@ class Data {
         transactionData!.add(new TransactionData.fromJson(v));
       });
     }
+     if (json['advanced_transaction_data'] != null) {
+      advancedTransactionData = <AdvancedTransactionData>[];
+      json['advanced_transaction_data'].forEach((v) {
+        advancedTransactionData!.add(new AdvancedTransactionData.fromJson(v));
+      });
+    }
     totalAmount = json['total_amount'];
+    advancedAmount = json['advanced_amount'];
+    grandTotal = json['grand_total'];
   }
 
   Map<String, dynamic> toJson() {
@@ -48,7 +61,13 @@ class Data {
       data['transaction_data'] =
           this.transactionData!.map((v) => v.toJson()).toList();
     }
+    if (this.advancedTransactionData != null) {
+      data['advanced_transaction_data'] =
+          this.advancedTransactionData!.map((v) => v.toJson()).toList();
+    }
     data['total_amount'] = this.totalAmount;
+    data['advanced_amount'] = this.advancedAmount;
+    data['grand_total'] = this.grandTotal;
     return data;
   }
 }
@@ -198,6 +217,42 @@ class TransactionData {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['s_no'] = this.sNo;
     data['installment_no'] = this.installmentNo;
+    data['paid_status'] = this.paidStatus;
+    data['paid_amount'] = this.paidAmount;
+    data['balance_amount'] = this.balanceAmount;
+    data['date'] = this.date;
+    data['amount'] = this.amount;
+    return data;
+  }
+}
+class AdvancedTransactionData {
+  String? sNo;
+  int? paidStatus;
+  String? paidAmount;
+  String? balanceAmount;
+  String? date;
+  String? amount;
+
+  AdvancedTransactionData(
+      {this.sNo,
+      this.paidStatus,
+      this.paidAmount,
+      this.balanceAmount,
+      this.date,
+      this.amount});
+
+  AdvancedTransactionData.fromJson(Map<String, dynamic> json) {
+    sNo = json['s_no'];
+    paidStatus = json['paid_status'];
+    paidAmount = json['paid_amount'];
+    balanceAmount = json['balance_amount'];
+    date = json['date'];
+    amount = json['amount'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['s_no'] = this.sNo;
     data['paid_status'] = this.paidStatus;
     data['paid_amount'] = this.paidAmount;
     data['balance_amount'] = this.balanceAmount;

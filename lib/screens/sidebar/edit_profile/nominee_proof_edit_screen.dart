@@ -20,6 +20,7 @@ import 'package:kasnew/utils/constants/api_constants.dart';
 import 'package:kasnew/utils/enums.dart';
 import 'package:kasnew/widgets/button_widget.dart';
 import 'package:kasnew/widgets/indicator_widget.dart';
+import 'package:kasnew/widgets/no_userId_function.dart';
 import 'package:kasnew/widgets/text_view_medium.dart';
 import 'package:kasnew/widgets/title_app_bar_widget.dart';
 import 'package:kasnew/widgets/toast_widget.dart';
@@ -136,30 +137,31 @@ void isApiBack() {
   final image = await picker.pickImage(source: source);
   if (image != null) {
     final file = File(image.path);
-    imagePath.value = file;
+      imagePath.value = File(image.path);
+ imagePath.value = await Helper.compressImage(imagePath.value!);
 
     if (title == 'idProofPhotoFront' && idType == 'aadhar') {
       apiAF.value=null;
-      aadharFront.value = file;
+      aadharFront.value = imagePath.value;
      
       
     } else if (title == 'idProofPhotoBack' && idType == 'aadhar') {
        apiAB.value=null;
-      aadharBack.value= file;
+      aadharBack.value= imagePath.value;
      
        
     } else if (title == 'idProofPhotoFront' && idType == 'pancard') {
        apipF.value=null;
-      panFront.value = file;
+      panFront.value = imagePath.value;
       
     } else if (title == 'idProofPhotoBack' && idType == 'pancard') {
        apiPB.value=null;
-      panBack.value = file;
+      panBack.value =imagePath.value;
       
     }
 
     // Trigger a rebuild to reflect the updated state
-    imagePath.value = imagePath.value; // This line is to force a rebuild.
+    // This line is to force a rebuild.
   }
 
 
@@ -256,7 +258,7 @@ void isApiBack() {
                                 Row(
                                   children: [
                                     PhotoContainerWidget(
-                                      title: 'Id ProofPhoto Front*',
+                                      title: 'ID Proof Front*',
                                       onTap: () {
                                         print(isIdSelected.value);
                                      idType.value='aadhar';
@@ -269,7 +271,7 @@ void isApiBack() {
                                     
                                                                 ),                            SizedBox(width: 10),
                                     PhotoContainerWidget(
-                                        title: 'Id Proof PhotoBack*',
+                                        title: 'ID Proof Back*',
                                         onTap: () {
                                               idType.value='aadhar';
                                             showImagePickerOptions(
@@ -364,7 +366,7 @@ void isApiBack() {
                              Row(
                                   children: [
                                     PhotoContainerWidget(
-                                      title: 'Id ProofPhoto Front*',
+                                      title: 'ID Proof Front*',
                                       onTap: () {
                                         print(isIdSelected.value);
                                      idType.value='pancard';
@@ -377,7 +379,7 @@ void isApiBack() {
                                     
                                                                 ),                            SizedBox(width: 10),
                                     PhotoContainerWidget(
-                                        title: 'Id Proof PhotoBack*',
+                                        title: 'ID Proof Back*',
                                         onTap: () {
                                               idType.value='pancard';
                                             showImagePickerOptions(

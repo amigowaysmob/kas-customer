@@ -14,14 +14,15 @@ class NoUseridScreen extends StatelessWidget {
   @override
  
   Widget build(BuildContext context) {
-    
+    double swidth = MediaQuery.of(context).size.width;
+    double sheight = MediaQuery.of(context).size.height;
     return Padding(
        padding: const EdgeInsets.all(20),
        child: Center(
          child: Column(
          
             children: [
-            Image.asset('assets/images/login.gif'),  
+            Image.asset('assets/images/login.gif',height:sheight/2 ,width: swidth/2,),  
             TextViewLarge(title: content,textcolor: blackColor,),
             vericalSpaceMedium,
             ButtonWidget(onPressed: (){

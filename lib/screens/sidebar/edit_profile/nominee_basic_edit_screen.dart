@@ -123,7 +123,7 @@ upiController.text=userData?.nomineeBankUpiId??'';
                 child: Column(children: [
                  TextForm(
                             keyboardType: TextInputType.name,
-                            labelText: '${d?.fullName??'FullName'}',
+                            labelText: '${d?.fullName??'Full Name'}',
                             // validating: _validateUsername,
                             controller: nameController,
                            
@@ -141,7 +141,7 @@ upiController.text=userData?.nomineeBankUpiId??'';
                         //  vericalSpaceLarge,
                           TextForm(
                               keyboardType: TextInputType.number,
-                              labelText:  '${d?.mobileNumber??'mobileNumber'}',
+                              labelText:  '${d?.mobileNumber??'Mobile Number'}',
                                 // validating: _validateMobile,
                               controller: mobileController,
                           
@@ -159,7 +159,7 @@ upiController.text=userData?.nomineeBankUpiId??'';
                                  
           TextForm(
             keyboardType: TextInputType.text,
-            labelText:  '${d?.city??'city'}',
+            labelText:  '${d?.city??'City'}',
             
             controller:cityController
             // validating: _validateUsername,
@@ -167,20 +167,20 @@ upiController.text=userData?.nomineeBankUpiId??'';
           vericalSpaceLarge,
           TextForm(
             keyboardType: TextInputType.text,
-            labelText:  '${d?.address1??'address1'}',
+            labelText:  '${d?.address1??'Address1'}',
             controller: adres1Controller,
             // validating: _validateUsername,
           ),
           vericalSpaceLarge,
           TextForm(
             keyboardType: TextInputType.text,
-            labelText:  '${d?.address2??'address2'}',
+            labelText:  '${d?.address2??'Address2'}',
             controller: areaController,
           ),
           vericalSpaceLarge,
           TextForm(
             keyboardType: TextInputType.text,
-            labelText:  '${d?.landmark??'landmark'}',
+            labelText:  '${d?.landmark??'Landmark'}',
             controller: landmarkController,
           ), 
            vericalSpaceLarge,

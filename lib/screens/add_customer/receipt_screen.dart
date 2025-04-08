@@ -10,6 +10,7 @@ import 'package:kasnew/utils/constant.dart';
 import 'package:kasnew/utils/constants/api_constants.dart';
 import 'package:kasnew/utils/enums.dart';
 import 'package:kasnew/widgets/button_widget.dart';
+import 'package:kasnew/widgets/file_downloader.dart';
 import 'package:kasnew/widgets/indicator_widget.dart';
 import 'package:kasnew/widgets/text_view_large.dart';
 import 'package:kasnew/widgets/title_app_bar_widget.dart';
@@ -46,6 +47,13 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
     throw 'Could not launch $urll';
   }
 }
+downloadFileLocal(String url) {
+      if (url.isNotEmpty) {
+       
+        final fileDownloader = FileDownloader();
+        fileDownloader.downloadFile(url );
+      }
+    }
   Widget build(BuildContext context) {
   return 
     BlocConsumer<ReceiptCubit, ReceiptState>(
@@ -81,7 +89,8 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
          ButtonWidget(onPressed: ()async{
                   
                   
-                 _launchURL(link??''); 
+                //  _launchURL(link??''); 
+                downloadFileLocal(link??'');
                 //  context.router.pop();
                   
                 }, buttonName:langData?.download??'', buttonColor: appColor,),

@@ -27,6 +27,7 @@ LangData? langData;
 
     int itemCount = homeSection?.myplans?.length??0;
     return itemCount >0?Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         if (itemCount > 0)
           CarouselSlider.builder(
@@ -40,9 +41,10 @@ LangData? langData;
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       TextViewLarge(title:'${index+1}.${data?.planName}',textcolor: appColor,fontWeight: FontWeight.bold, ),
-                      Row(
+                    data?.planType!='flexible'?  Row(
                         children: [
                           Column(
                             crossAxisAlignment:CrossAxisAlignment.start,
@@ -80,28 +82,37 @@ LangData? langData;
                        
                     ],) 
                         ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                      ):Container(),
+                  data?.planType!='flexible'?     Column(
                         children: [
-                  TextViewSmall(title: data?.record,)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                                            TextViewSmall(title: data?.record,)
+                            ],
+                          ),
+                          LinearProgressIndicator(
+                            borderRadius: BorderRadius.circular(4),
+                            backgroundColor: Color.fromARGB(255, 216, 212, 212),
+                            color: sandleColor,
+                            minHeight: 5,
+                            value:double.parse(data?.progress??'1') /100,),
+                            vericalSpaceMedium,
+                          Row(
+                           
+                            children: [
+                            RowBoldWidget(variable: '${d?.nextDueDate??'Next Due Date'}',value:data?.dueDate ,),
+                              
+                          ],),
                         ],
-                      ),
-                      LinearProgressIndicator(
-                        borderRadius: BorderRadius.circular(4),
-                        backgroundColor: Color.fromARGB(255, 216, 212, 212),
-                        color: sandleColor,
-                        minHeight: 5,
-                        value:double.parse(data?.progress??'1') /100,),
-                        vericalSpaceMedium,
+                      ):Container(),
+                      data?.planType=='flexible'?vericalSpaceLarge:Container(),
+                       data?.planType=='flexible'?RowBoldWidget(variable: '${d?.duration??'Duration'}',value:data?.duration ,):Container(),
+                       vericalSpaceSmall,
+                       data?.planType=='flexible'?RowBoldWidget(variable: '${d?.planCreated??'Next Due Date'}',value:data?.planCreated ,):Container(),
+                     data?.planType=='flexible'?vericalSpaceLarge:Container(), 
                       Row(
-                       
-                        children: [
-                        RowBoldWidget(variable: '${d?.nextDueDate??'Next Due Date'}',value:data?.dueDate ,),
-                          
-                      ],),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment:data?.planType!='flexible'?   MainAxisAlignment.end:MainAxisAlignment.center,
                         children: [
                           InkWell(
                                 onTap:(){
@@ -130,9 +141,10 @@ LangData? langData;
                 position.value = index;
               },
               
-              height: sheight/4.5,
-              enlargeCenterPage: true,
+                height: sheight/4.6,
+               enlargeCenterPage: false,
               enableInfiniteScroll: false,
+             
               viewportFraction: 0.9
               ,
               autoPlay: false,
@@ -140,7 +152,7 @@ LangData? langData;
             ),
           ),
           vericalSpaceSmall,
-        if (itemCount > 0)
+        if (itemCount > 1)
           DotsIndicator(
             dotsCount: itemCount,
             position: position.value,

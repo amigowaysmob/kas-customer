@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kasnew/response_model/home_model.dart';
 import 'package:kasnew/router/app_router.gr.dart';
+import 'package:kasnew/router/router_path.dart';
 import 'package:kasnew/utils/constant.dart';
 import 'package:kasnew/utils/constants/api_constants.dart';
 import 'package:kasnew/utils/constants/sharedpreference_help.dart';
@@ -60,7 +61,12 @@ if(ApiConstant.homeIconKey=='offers-gift'){
    context.router.push(GiftListScreen());
 }
  
-
+else if(ApiConstant.homeIconKey=='our-plan-details'){
+context.router.pushNamed(RouterPath.plan_types_path);
+}
+else if(ApiConstant.homeIconKey=='lucky-draw'){
+context.router.pushNamed(RouterPath.lucky_path);
+}
 else{
                 Helper.navigate(context);}
                 },

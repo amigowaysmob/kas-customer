@@ -10,6 +10,7 @@ import 'package:kasnew/utils/constant.dart';
 import 'package:kasnew/utils/constants/api_constants.dart';
 import 'package:kasnew/utils/enums.dart';
 import 'package:kasnew/widgets/button_widget.dart';
+import 'package:kasnew/widgets/file_downloader.dart';
 import 'package:kasnew/widgets/indicator_widget.dart';
 import 'package:kasnew/widgets/no_data_widget.dart';
 import 'package:kasnew/widgets/plan_name_widget.dart';
@@ -30,6 +31,13 @@ class _PassBookScreenState extends State<PassBookScreen> {
 context.read<EPassBookCubit>().login(HomeRequestModel(userId: ApiConstant.userId,
     lang: ApiConstant.langCode,));
   }
+  downloadFileLocal(String url) {
+      if (url.isNotEmpty) {
+       
+        final fileDownloader = FileDownloader();
+        fileDownloader.downloadFile(url );
+      }
+    }
   @override
   Widget build(BuildContext context) {
        LangModel? lang=ApiConstant.language;
@@ -83,7 +91,7 @@ context.read<EPassBookCubit>().login(HomeRequestModel(userId: ApiConstant.userId
                          ],
                        ),
                       ButtonWidget(onPressed: (){
-                            _launchURL(pData?.downloadLink??'');
+                           downloadFileLocal(pData?.downloadLink??'');
                       }, buttonName: d?.download??'Download', buttonColor: appColor,
                       width: swidth/3,
                       icon: Icon(Icons.download_outlined,color: whiteColor,),)

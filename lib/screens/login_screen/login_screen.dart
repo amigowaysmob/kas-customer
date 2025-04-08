@@ -7,6 +7,7 @@ import 'package:kasnew/router/app_router.gr.dart';
 import 'package:kasnew/router/router_path.dart';
 import 'package:kasnew/states/login_state.dart';
 import 'package:kasnew/utils/constant.dart';
+import 'package:kasnew/utils/constants/api_constants.dart';
 import 'package:kasnew/utils/constants/sharedpreference_help.dart';
 import 'package:kasnew/utils/enums.dart';
 import 'package:kasnew/widgets/button_widget.dart';
@@ -40,8 +41,13 @@ class _LoginScreenState extends State<LoginScreen> {
     sharedPreferenceHelper = SharedPreferenceHelper();
     sharedPreferenceHelper.init();
     nameFocusNode.requestFocus(); 
+   _loadSignature();
+
   }
-   
+   void _loadSignature() async {
+  String? signature = await Helper.getSignature(); // Await the Future
+  sharedPreferenceHelper.savesignature(signature);
+}
      String? _validateUsername(String? value) {
     if (value == null || value.isEmpty) {
       return 'please enter an email!';
@@ -64,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (loginKey.currentState!.validate()) {
       context
           .read<LoginCubit>()
-          .login(LoginRequestModel(phoneNumber: loginController.text,
+          .login(LoginRequestModel(phoneNumber: loginController.text,smsSignature:ApiConstant.signature
            ));}
     }
   @override
