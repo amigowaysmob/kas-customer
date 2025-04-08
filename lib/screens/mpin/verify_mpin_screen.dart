@@ -185,7 +185,9 @@ body:MultiBlocListener(
                 if (forgotMpinstate.networkStatusEnum == NetworkStatusEnum.loaded &&
                     forgotMpinstate.model.text == "Success") {
                  
-        context.router.push(OtpVerifyRoute(isForgotMpin:true,forgotMpinOtp:forgotMpinstate.model.otp.toString()));
+        context.router.push(OtpVerifyRoute(isForgotMpin:true,
+        phoneNumber:forgotMpinstate.model.data?.phoneNumber,
+        forgotMpinOtp:forgotMpinstate.model.otp.toString()));
                   ToastWidget(message:forgotMpinstate.model.message,color: Colors.green,).build(context);
                   // Navigate to appropriate screen or handle logic
                 } else if (forgotMpinstate.networkStatusEnum == NetworkStatusEnum.loaded &&
@@ -270,7 +272,7 @@ body:MultiBlocListener(
              }       else{ return   TextButton(onPressed: (){
                       context
                               .read<ForgotMpinCubit>()
-                              .login(UserIdRequestModel(userId: sharedPreferenceHelper.getUserId));
+                              .login(UserIdRequestModel(userId: sharedPreferenceHelper.getUserId,smsSignature: ApiConstant.signature));
                               
                       
                     }, child: TextViewSmall(title: 'Forgot MPIN?',textcolor: appColor,));

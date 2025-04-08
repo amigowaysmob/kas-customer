@@ -14,11 +14,13 @@ class TitleAppBarWidget extends HookWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    double swidth = MediaQuery.of(context).size.width;
+    double sheight = MediaQuery.of(context).size.height;
         return AppBar(
           
            backgroundColor: appColor,
-         title: TextViewLarge(title: title,textcolor: whiteColor,fontWeight: FontWeight.bold,),
+         title:  FittedBox(
+    fit: BoxFit.scaleDown,child: TextViewLarge(title:'$title' ,textcolor: whiteColor,fontWeight: FontWeight.bold,)),
           );
          
    

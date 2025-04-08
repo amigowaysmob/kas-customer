@@ -21,7 +21,8 @@ import 'package:kasnew/widgets/toast_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 @RoutePage()
 class ContactScreen extends StatefulWidget {
-  const ContactScreen({super.key});
+  bool? isLucky;
+  ContactScreen({this.isLucky});
 
   @override
   State<ContactScreen> createState() => _ContactScreenState();
@@ -43,6 +44,10 @@ class _ContactScreenState extends State<ContactScreen> {
     super.initState();
     context.read<ContactCubit>().login(
         HomeRequestModel(userId: ApiConstant.userId, lang: ApiConstant.langCode));
+        if(widget.isLucky==true){
+           subjectController.text='Lucky Draw';
+        }
+        
   }
 
   String? _validateName(String? value, String? errorMessage) {
@@ -126,7 +131,7 @@ class _ContactScreenState extends State<ContactScreen> {
             contactData = contactState.model.data?.contactData;
 
             return Scaffold(
-              appBar: TitleAppBarWidget(title: "ContactUs"),
+              appBar: TitleAppBarWidget(title: "Contact Us"),
               body: SingleChildScrollView(
                 child: Padding(
                   padding: EdgeInsets.all(screenPadding),
@@ -136,30 +141,30 @@ class _ContactScreenState extends State<ContactScreen> {
                       children: [
                         TextForm(
                           keyboardType: TextInputType.name,
-                          labelText: 'fullName',
-                          hintText: 'fullName',
+                          labelText: 'FullName',
+                          hintText: 'FullName',
                           controller: nameController,
                           type:'name',
                           validating: (value) =>
-                              _validateName(value,"nameRequired"),
+                              _validateName(value,"Name Required"),
                               readOnly: contactState.model.data?.userData?.name!=null && (contactState.model.data?.userData?.name?.isNotEmpty??false)? true:false,
                         ),
                         vericalSpaceExtraMedium,
                         TextForm(
                           keyboardType: TextInputType.number,
-                          labelText: 'phoneNumber',
-                          hintText: 'phoneNumber',
+                          labelText: 'Phone Number',
+                          hintText: 'Phone Number',
                           controller: phoneNumberController,
                           type: 'mobileNumber',
                           readOnly: contactState.model.data?.userData?.phone!=null && (contactState.model.data?.userData?.phone?.isNotEmpty??false)? true:false,
                           validating: (value) =>
-                              _validatePhoneNumber(value, "mobileRequired"),
+                              _validatePhoneNumber(value, "Mobile Required"),
                         ),
                         vericalSpaceExtraMedium,
                         TextForm(
                           keyboardType: TextInputType.emailAddress,
-                          labelText: 'email',
-                          hintText: 'email',
+                          labelText: 'Email',
+                          hintText: 'Email',
                           controller: emailController,
                           readOnly:contactState.model.data?.userData?.email!=null && (contactState.model.data?.userData?.email?.isNotEmpty??false)? true:false,
                           // Assuming no validation needed for email
@@ -181,12 +186,12 @@ class _ContactScreenState extends State<ContactScreen> {
                           controller: messageController,
                           maxLines: 5,
                           validating: (value) =>
-                              _validateMessage(value, "messageRequired"),
+                              _validateMessage(value, "Message Required"),
                         ),
                         vericalSpaceExtraMedium,
                         ButtonWidget(
                           onPressed: submit,
-                          buttonName: 'submit',
+                          buttonName: 'Submit',
                           buttonColor: appColor,
                         ),
                        
@@ -197,7 +202,7 @@ class _ContactScreenState extends State<ContactScreen> {
                 children: [
           RoundIconWidget(iconData: Icons.location_on_outlined,),
           horizontalSpaceMedium,
-          TextViewMedium(name: "address",fontWeight: FontWeight.w700,textColors: appColor,)]),
+          TextViewMedium(name: "Address",fontWeight: FontWeight.w700,textColors: appColor,)]),
           
           Row(
            
@@ -214,7 +219,7 @@ class _ContactScreenState extends State<ContactScreen> {
                 children: [
           RoundIconWidget(iconData: Icons.phone_outlined,),
           horizontalSpaceMedium,
-          TextViewMedium(name:"phoneNumber",fontWeight: FontWeight.w700,textColors: appColor,)]),
+          TextViewMedium(name:"Phone Number",fontWeight: FontWeight.w700,textColors: appColor,)]),
           
           Row(
            
@@ -246,7 +251,7 @@ class _ContactScreenState extends State<ContactScreen> {
                 children: [
           RoundIconWidget(iconData: Icons.phone_outlined,),
           horizontalSpaceMedium,
-          TextViewMedium(name: "whatsapp",fontWeight: FontWeight.w700,textColors: appColor,)]),
+          TextViewMedium(name: "Whatsapp",fontWeight: FontWeight.w700,textColors: appColor,)]),
           
           Row(
            

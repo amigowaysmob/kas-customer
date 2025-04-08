@@ -92,7 +92,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                        ) 
                       ],
                     ),
-                    TextViewSmall(title: fData?.feedback,textcolor: greyColor,)
+                    TextViewSmall(title: fData?.feedback,textcolor: blackColor,)
                   ],),
                 ),
          );}

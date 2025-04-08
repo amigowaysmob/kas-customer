@@ -7,7 +7,8 @@ class RowBoldTextWidget extends StatelessWidget {
   String? title;
   String? value;
  bool? isNoPadding;
- RowBoldTextWidget({required this.title,required this.value,this.isNoPadding});
+ Color? color;
+ RowBoldTextWidget({required this.title,required this.value,this.isNoPadding,this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,9 @@ class RowBoldTextWidget extends StatelessWidget {
       child: Row(
        
         children: [
-        TextViewSmall(title:'${title} : ',),
+        TextViewSmall(title:'${title} : ',textcolor: color??blackColor,),
         
-        TextViewMedium(name: value,fontWeight: FontWeight.w700,fontSize: 13,)
+        TextViewMedium(name: value,fontWeight: FontWeight.w700,fontSize: 13,textColors: color??blackColor,)
       ],),
     );
   }

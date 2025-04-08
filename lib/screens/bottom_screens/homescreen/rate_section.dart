@@ -31,7 +31,7 @@ class _RateSectionState extends State<RateSection> {
     // Check if there are clients to avoid errors
     if (_scrollController.hasClients) {
       final maxScroll = _scrollController.position.maxScrollExtent;
-      final duration = Duration(seconds: 10); // Adjust speed here
+      final duration = Duration(seconds:15); // Adjust speed here
 
       _scrollController.animateTo(
         maxScroll,

@@ -28,6 +28,7 @@ class Data {
   String? myTransactions;
   String? myReports;
   String? ourPlansDetails;
+  String? ourPlanDetails;
   String? ourGallery;
   String? ourYoutubeChannel;
   String? ourStores;
@@ -50,6 +51,10 @@ class Data {
   String? ourPlans;
   String? imagesGallery;
   String? videosGallery;
+  String? phoneNumberExists;
+  String? emailExists;
+  String? mpinConfirmNotEqual;
+  String? otpSent;
   String? edit;
   String? fullName;
   String? email;
@@ -67,6 +72,8 @@ class Data {
   String? bankAccountNumber;
   String? bankUpiId;
   String? nomineeName;
+  String? nomineeIdProof;
+
   String? nomineeMobileNumber;
   String? nomineeEmail;
   String? nomineeBankAcountHolderName;
@@ -171,6 +178,7 @@ class Data {
   String? join;
   String? change;
   String? online;
+  String? cash;
   String? orderNumber;
   String? transactions;
   String? voucherNumber;
@@ -190,12 +198,21 @@ class Data {
   String? subjectRequired;
   String? messageRequired;
   String? inviteYourFriends;
+  String? copyInvite;
   String? empId;
   String? empName;
   String? yourEarnings;
+  String? contactPerson;
+  String? contactNumber;
+  String? openingTime;
+  String? closingTime;
+  String? map;
   String? clickHere;
+  String? title;
   String? videos;
   String? planDetails;
+  String? planSubHeading;
+  String? welcomePlanDetail;
   String? trainingBook;
   String? clickHereMoreDetails;
   String? leaveCustomerForm;
@@ -208,30 +225,16 @@ class Data {
   String? area;
   String? circle;
   String? transactionType;
+  String? debit;
+  String? credit;
+  String? balance;
   String? receiptNumber;
+  String? location;
   String? withdrawalAmount;
   String? balanceAmount;
   String? fromDate;
   String? toDate;
   String? noData;
-  String? cash;
-  String? title;
-  String? debit;
-  String? credit;
-  String? balance;
-  String? location;
-  String? phoneNumberExists;
-  String? emailExists;
-  String? mpinConfirmNotEqual;
-  String? otpSent;
-  String? copyInvite;
-  String? contactPerson;
-  String? contactNumber;
-  String? openingTime;
-  String? closingTime;
-  String? map;
-  String? planSubHeading;
-  String? welcomePlanDetail;
   String? knowMoreAboutUs;
   String? doYouWantGift;
   String? chooseGift;
@@ -244,6 +247,7 @@ class Data {
   String? passbookRequired;
   String? deliveredProof;
   String? passbook;
+  String? viewPassbook;
   String? download;
   String? referralLinkCopied;
   String? mpin;
@@ -275,6 +279,14 @@ class Data {
   String? cancel;
   String? calendar;
   String? update;
+  String? planCreated;
+  String? advanceAmount;
+  String? advanceAmountTransactions;
+  String? advancePayment;
+  String? chitAmount;
+  String? enterAdvanceAmount;
+  String? pleaseEnterTheAmountAbove;
+  String? useAdvancePayment;
   String? flexiblePlan;
   String? todayGoldPrice;
   String? todaySilverPrice;
@@ -326,7 +338,6 @@ class Data {
   String? amount;
   String? installment;
   String? nomineeDetails;
-  String? nomineeIdProof;
   String? nomineeFullName;
   String? nomineeGender;
   String? nomineeAddress;
@@ -414,6 +425,13 @@ class Data {
   String? selectSize;
   String? sortBy;
   String? shift;
+  String? winners;
+  String? selectMonth;
+  String? luckyDrawVideo;
+
+  String? noWinnersYet;
+  String? nextLuckyDrawDate;
+  String? termsAndConditionsVideo;
   String? myCustomers;
   String? myPlanner;
   String? todayTarget;
@@ -422,6 +440,7 @@ class Data {
   String? home;
   String? newCustomerForm;
   String? myFollowUp;
+  String? myContactPersons;
 
   Data(
       {this.myAccount,
@@ -429,6 +448,7 @@ class Data {
       this.myTransactions,
       this.myReports,
       this.ourPlansDetails,
+      this.ourPlanDetails,
       this.ourGallery,
       this.ourYoutubeChannel,
       this.ourStores,
@@ -451,6 +471,10 @@ class Data {
       this.ourPlans,
       this.imagesGallery,
       this.videosGallery,
+      this.phoneNumberExists,
+      this.emailExists,
+      this.mpinConfirmNotEqual,
+      this.otpSent,
       this.edit,
       this.fullName,
       this.email,
@@ -468,6 +492,8 @@ class Data {
       this.bankAccountNumber,
       this.bankUpiId,
       this.nomineeName,
+      this.nomineeIdProof,
+    
       this.nomineeMobileNumber,
       this.nomineeEmail,
       this.nomineeBankAcountHolderName,
@@ -572,6 +598,7 @@ class Data {
       this.join,
       this.change,
       this.online,
+      this.cash,
       this.orderNumber,
       this.transactions,
       this.voucherNumber,
@@ -591,12 +618,21 @@ class Data {
       this.subjectRequired,
       this.messageRequired,
       this.inviteYourFriends,
+      this.copyInvite,
       this.empId,
       this.empName,
       this.yourEarnings,
+      this.contactPerson,
+      this.contactNumber,
+      this.openingTime,
+      this.closingTime,
+      this.map,
       this.clickHere,
+      this.title,
       this.videos,
       this.planDetails,
+      this.planSubHeading,
+      this.welcomePlanDetail,
       this.trainingBook,
       this.clickHereMoreDetails,
       this.leaveCustomerForm,
@@ -609,30 +645,16 @@ class Data {
       this.area,
       this.circle,
       this.transactionType,
+      this.debit,
+      this.credit,
+      this.balance,
       this.receiptNumber,
+      this.location,
       this.withdrawalAmount,
       this.balanceAmount,
       this.fromDate,
       this.toDate,
       this.noData,
-      this.cash,
-      this.title,
-      this.debit,
-      this.credit,
-      this.balance,
-      this.location,
-      this.phoneNumberExists,
-      this.emailExists,
-      this.mpinConfirmNotEqual,
-      this.otpSent,
-      this.copyInvite,
-      this.contactPerson,
-      this.contactNumber,
-      this.openingTime,
-      this.closingTime,
-      this.map,
-      this.planSubHeading,
-      this.welcomePlanDetail,
       this.knowMoreAboutUs,
       this.doYouWantGift,
       this.chooseGift,
@@ -645,6 +667,7 @@ class Data {
       this.passbookRequired,
       this.deliveredProof,
       this.passbook,
+      this.viewPassbook,
       this.download,
       this.referralLinkCopied,
       this.mpin,
@@ -676,6 +699,14 @@ class Data {
       this.cancel,
       this.calendar,
       this.update,
+      this.planCreated,
+      this.advanceAmount,
+      this.advanceAmountTransactions,
+      this.advancePayment,
+      this.chitAmount,
+      this.enterAdvanceAmount,
+      this.pleaseEnterTheAmountAbove,
+      this.useAdvancePayment,
       this.flexiblePlan,
       this.todayGoldPrice,
       this.todaySilverPrice,
@@ -727,7 +758,6 @@ class Data {
       this.amount,
       this.installment,
       this.nomineeDetails,
-      this.nomineeIdProof,
       this.nomineeFullName,
       this.nomineeGender,
       this.nomineeAddress,
@@ -787,7 +817,7 @@ class Data {
       this.sendReview,
       this.giftAmount,
       this.basicDetails,
-      
+   
       this.nomineeBasicDetails,
       this.ifscNumber,
       this.accountNumber,
@@ -815,6 +845,13 @@ class Data {
       this.selectSize,
       this.sortBy,
       this.shift,
+      this.winners,
+      this.selectMonth,
+      this.luckyDrawVideo,
+ 
+      this.noWinnersYet,
+      this.nextLuckyDrawDate,
+      this.termsAndConditionsVideo,
       this.myCustomers,
       this.myPlanner,
       this.todayTarget,
@@ -822,7 +859,8 @@ class Data {
       this.thisMonthTarget,
       this.home,
       this.newCustomerForm,
-      this.myFollowUp});
+      this.myFollowUp,
+      this.myContactPersons});
 
   Data.fromJson(Map<String, dynamic> json) {
     myAccount = json['my_account'];
@@ -830,6 +868,7 @@ class Data {
     myTransactions = json['my_transactions'];
     myReports = json['my_reports'];
     ourPlansDetails = json['our_plans_details'];
+    ourPlanDetails = json['our_plan_details'];
     ourGallery = json['our_gallery'];
     ourYoutubeChannel = json['our_youtube_channel'];
     ourStores = json['our_stores'];
@@ -852,6 +891,10 @@ class Data {
     ourPlans = json['our_plans'];
     imagesGallery = json['images_gallery'];
     videosGallery = json['videos_gallery'];
+    phoneNumberExists = json['phone_number_exists'];
+    emailExists = json['email_exists'];
+    mpinConfirmNotEqual = json['mpin_confirm_not_equal'];
+    otpSent = json['otp_sent'];
     edit = json['edit'];
     fullName = json['full_name'];
     email = json['email'];
@@ -869,6 +912,8 @@ class Data {
     bankAccountNumber = json['bank_account_number'];
     bankUpiId = json['bank_upi_id'];
     nomineeName = json['nominee_name'];
+    nomineeIdProof = json['nominee_id_proof'];
+    ourPlanDetails = json['our-plan-details'];
     nomineeMobileNumber = json['nominee_mobile_number'];
     nomineeEmail = json['nominee_email'];
     nomineeBankAcountHolderName = json['nominee_bank_acount_holder_name'];
@@ -973,6 +1018,7 @@ class Data {
     join = json['join'];
     change = json['change'];
     online = json['online'];
+    cash = json['cash'];
     orderNumber = json['order_number'];
     transactions = json['transactions'];
     voucherNumber = json['voucher_number'];
@@ -992,12 +1038,21 @@ class Data {
     subjectRequired = json['subject_required'];
     messageRequired = json['message_required'];
     inviteYourFriends = json['invite_your_friends'];
+    copyInvite = json['copy_invite'];
     empId = json['emp_id'];
     empName = json['emp_name'];
     yourEarnings = json['your_earnings'];
+    contactPerson = json['contact_person'];
+    contactNumber = json['contact_number'];
+    openingTime = json['opening_time'];
+    closingTime = json['closing_time'];
+    map = json['map'];
     clickHere = json['click_here'];
+    title = json['title'];
     videos = json['videos'];
     planDetails = json['plan_details'];
+    planSubHeading = json['plan_sub_heading'];
+    welcomePlanDetail = json['welcome_plan_detail'];
     trainingBook = json['training_book'];
     clickHereMoreDetails = json['click_here_more_details'];
     leaveCustomerForm = json['leave_customer_form'];
@@ -1010,30 +1065,16 @@ class Data {
     area = json['area'];
     circle = json['circle'];
     transactionType = json['transaction_type'];
+    debit = json['debit'];
+    credit = json['credit'];
+    balance = json['balance'];
     receiptNumber = json['receipt_number'];
+    location = json['location'];
     withdrawalAmount = json['withdrawal_amount'];
     balanceAmount = json['balance_amount'];
     fromDate = json['from_date'];
     toDate = json['to_date'];
     noData = json['no_data'];
-    cash = json['cash'];
-    title = json['title'];
-    debit = json['debit'];
-    credit = json['credit'];
-    balance = json['balance'];
-    location = json['location'];
-    phoneNumberExists = json['phone_number_exists'];
-    emailExists = json['email_exists'];
-    mpinConfirmNotEqual = json['mpin_confirm_not_equal'];
-    otpSent = json['otp_sent'];
-    copyInvite = json['copy_invite'];
-    contactPerson = json['contact_person'];
-    contactNumber = json['contact_number'];
-    openingTime = json['opening_time'];
-    closingTime = json['closing_time'];
-    map = json['map'];
-    planSubHeading = json['plan_sub_heading'];
-    welcomePlanDetail = json['welcome_plan_detail'];
     knowMoreAboutUs = json['know_more_about_us'];
     doYouWantGift = json['do_you_want_gift'];
     chooseGift = json['choose_gift'];
@@ -1046,6 +1087,7 @@ class Data {
     passbookRequired = json['passbook_required'];
     deliveredProof = json['delivered_proof'];
     passbook = json['passbook'];
+    viewPassbook = json['view_passbook'];
     download = json['download'];
     referralLinkCopied = json['referral_link_copied'];
     mpin = json['mpin'];
@@ -1077,6 +1119,14 @@ class Data {
     cancel = json['cancel'];
     calendar = json['calendar'];
     update = json['update'];
+    planCreated = json['plan_created'];
+    advanceAmount = json['advance_amount'];
+    advanceAmountTransactions = json['advance_amount_transactions'];
+    advancePayment = json['advance_payment'];
+    chitAmount = json['chit_amount'];
+    enterAdvanceAmount = json['enter_advance_amount'];
+    pleaseEnterTheAmountAbove = json['please_enter_the_amount_above'];
+    useAdvancePayment = json['use_advance_payment'];
     flexiblePlan = json['flexible_plan'];
     todayGoldPrice = json['today_gold_price'];
     todaySilverPrice = json['today_silver_price'];
@@ -1128,7 +1178,6 @@ class Data {
     amount = json['amount'];
     installment = json['installment'];
     nomineeDetails = json['nominee_details'];
-    nomineeIdProof = json['nominee_id_proof'];
     nomineeFullName = json['nominee_full_name'];
     nomineeGender = json['nominee_gender'];
     nomineeAddress = json['nominee_address'];
@@ -1216,6 +1265,13 @@ class Data {
     selectSize = json['select_size'];
     sortBy = json['sort_by'];
     shift = json['shift'];
+    winners = json['Winners'];
+    selectMonth = json['Select Month'];
+    luckyDrawVideo = json['Lucky Draw Video'];
+    close = json['Close'];
+    noWinnersYet = json['No Winners Yet'];
+    nextLuckyDrawDate = json['Next Lucky Draw Date'];
+    termsAndConditionsVideo = json['Terms and Conditions Video'];
     myCustomers = json['my_customers'];
     myPlanner = json['my_planner'];
     todayTarget = json['today_target'];
@@ -1224,6 +1280,7 @@ class Data {
     home = json['home'];
     newCustomerForm = json['new_customer_form'];
     myFollowUp = json['my_follow_up'];
+    myContactPersons = json['my_contact_persons'];
   }
 
   Map<String, dynamic> toJson() {
@@ -1233,6 +1290,7 @@ class Data {
     data['my_transactions'] = this.myTransactions;
     data['my_reports'] = this.myReports;
     data['our_plans_details'] = this.ourPlansDetails;
+    data['our_plan_details'] = this.ourPlanDetails;
     data['our_gallery'] = this.ourGallery;
     data['our_youtube_channel'] = this.ourYoutubeChannel;
     data['our_stores'] = this.ourStores;
@@ -1255,6 +1313,10 @@ class Data {
     data['our_plans'] = this.ourPlans;
     data['images_gallery'] = this.imagesGallery;
     data['videos_gallery'] = this.videosGallery;
+    data['phone_number_exists'] = this.phoneNumberExists;
+    data['email_exists'] = this.emailExists;
+    data['mpin_confirm_not_equal'] = this.mpinConfirmNotEqual;
+    data['otp_sent'] = this.otpSent;
     data['edit'] = this.edit;
     data['full_name'] = this.fullName;
     data['email'] = this.email;
@@ -1272,6 +1334,8 @@ class Data {
     data['bank_account_number'] = this.bankAccountNumber;
     data['bank_upi_id'] = this.bankUpiId;
     data['nominee_name'] = this.nomineeName;
+    data['nominee_id_proof'] = this.nomineeIdProof;
+    data['our-plan-details'] = this.ourPlanDetails;
     data['nominee_mobile_number'] = this.nomineeMobileNumber;
     data['nominee_email'] = this.nomineeEmail;
     data['nominee_bank_acount_holder_name'] = this.nomineeBankAcountHolderName;
@@ -1376,6 +1440,7 @@ class Data {
     data['join'] = this.join;
     data['change'] = this.change;
     data['online'] = this.online;
+    data['cash'] = this.cash;
     data['order_number'] = this.orderNumber;
     data['transactions'] = this.transactions;
     data['voucher_number'] = this.voucherNumber;
@@ -1395,12 +1460,21 @@ class Data {
     data['subject_required'] = this.subjectRequired;
     data['message_required'] = this.messageRequired;
     data['invite_your_friends'] = this.inviteYourFriends;
+    data['copy_invite'] = this.copyInvite;
     data['emp_id'] = this.empId;
     data['emp_name'] = this.empName;
     data['your_earnings'] = this.yourEarnings;
+    data['contact_person'] = this.contactPerson;
+    data['contact_number'] = this.contactNumber;
+    data['opening_time'] = this.openingTime;
+    data['closing_time'] = this.closingTime;
+    data['map'] = this.map;
     data['click_here'] = this.clickHere;
+    data['title'] = this.title;
     data['videos'] = this.videos;
     data['plan_details'] = this.planDetails;
+    data['plan_sub_heading'] = this.planSubHeading;
+    data['welcome_plan_detail'] = this.welcomePlanDetail;
     data['training_book'] = this.trainingBook;
     data['click_here_more_details'] = this.clickHereMoreDetails;
     data['leave_customer_form'] = this.leaveCustomerForm;
@@ -1413,30 +1487,16 @@ class Data {
     data['area'] = this.area;
     data['circle'] = this.circle;
     data['transaction_type'] = this.transactionType;
+    data['debit'] = this.debit;
+    data['credit'] = this.credit;
+    data['balance'] = this.balance;
     data['receipt_number'] = this.receiptNumber;
+    data['location'] = this.location;
     data['withdrawal_amount'] = this.withdrawalAmount;
     data['balance_amount'] = this.balanceAmount;
     data['from_date'] = this.fromDate;
     data['to_date'] = this.toDate;
     data['no_data'] = this.noData;
-    data['cash'] = this.cash;
-    data['title'] = this.title;
-    data['debit'] = this.debit;
-    data['credit'] = this.credit;
-    data['balance'] = this.balance;
-    data['location'] = this.location;
-    data['phone_number_exists'] = this.phoneNumberExists;
-    data['email_exists'] = this.emailExists;
-    data['mpin_confirm_not_equal'] = this.mpinConfirmNotEqual;
-    data['otp_sent'] = this.otpSent;
-    data['copy_invite'] = this.copyInvite;
-    data['contact_person'] = this.contactPerson;
-    data['contact_number'] = this.contactNumber;
-    data['opening_time'] = this.openingTime;
-    data['closing_time'] = this.closingTime;
-    data['map'] = this.map;
-    data['plan_sub_heading'] = this.planSubHeading;
-    data['welcome_plan_detail'] = this.welcomePlanDetail;
     data['know_more_about_us'] = this.knowMoreAboutUs;
     data['do_you_want_gift'] = this.doYouWantGift;
     data['choose_gift'] = this.chooseGift;
@@ -1449,6 +1509,7 @@ class Data {
     data['passbook_required'] = this.passbookRequired;
     data['delivered_proof'] = this.deliveredProof;
     data['passbook'] = this.passbook;
+    data['view_passbook'] = this.viewPassbook;
     data['download'] = this.download;
     data['referral_link_copied'] = this.referralLinkCopied;
     data['mpin'] = this.mpin;
@@ -1480,6 +1541,14 @@ class Data {
     data['cancel'] = this.cancel;
     data['calendar'] = this.calendar;
     data['update'] = this.update;
+    data['plan_created'] = this.planCreated;
+    data['advance_amount'] = this.advanceAmount;
+    data['advance_amount_transactions'] = this.advanceAmountTransactions;
+    data['advance_payment'] = this.advancePayment;
+    data['chit_amount'] = this.chitAmount;
+    data['enter_advance_amount'] = this.enterAdvanceAmount;
+    data['please_enter_the_amount_above'] = this.pleaseEnterTheAmountAbove;
+    data['use_advance_payment'] = this.useAdvancePayment;
     data['flexible_plan'] = this.flexiblePlan;
     data['today_gold_price'] = this.todayGoldPrice;
     data['today_silver_price'] = this.todaySilverPrice;
@@ -1532,7 +1601,6 @@ class Data {
     data['amount'] = this.amount;
     data['installment'] = this.installment;
     data['nominee_details'] = this.nomineeDetails;
-    data['nominee_id_proof'] = this.nomineeIdProof;
     data['nominee_full_name'] = this.nomineeFullName;
     data['nominee_gender'] = this.nomineeGender;
     data['nominee_address'] = this.nomineeAddress;
@@ -1620,6 +1688,13 @@ class Data {
     data['select_size'] = this.selectSize;
     data['sort_by'] = this.sortBy;
     data['shift'] = this.shift;
+    data['Winners'] = this.winners;
+    data['Select Month'] = this.selectMonth;
+    data['Lucky Draw Video'] = this.luckyDrawVideo;
+    data['Close'] = this.close;
+    data['No Winners Yet'] = this.noWinnersYet;
+    data['Next Lucky Draw Date'] = this.nextLuckyDrawDate;
+    data['Terms and Conditions Video'] = this.termsAndConditionsVideo;
     data['my_customers'] = this.myCustomers;
     data['my_planner'] = this.myPlanner;
     data['today_target'] = this.todayTarget;
@@ -1628,6 +1703,7 @@ class Data {
     data['home'] = this.home;
     data['new_customer_form'] = this.newCustomerForm;
     data['my_follow_up'] = this.myFollowUp;
+    data['my_contact_persons'] = this.myContactPersons;
     return data;
   }
 }

@@ -7,6 +7,7 @@ import 'package:kasnew/utils/constant.dart';
 import 'package:kasnew/utils/constants/api_constants.dart';
 import 'package:kasnew/widgets/divider_widget.dart';
 import 'package:kasnew/widgets/network_image_widget.dart';
+import 'package:kasnew/widgets/no_userId_function.dart';
 
 import 'package:kasnew/widgets/text_view_medium.dart';
 import 'package:kasnew/widgets/text_view_small.dart';
@@ -47,7 +48,7 @@ LangData? langData;
                            crossAxisAlignment: CrossAxisAlignment.start,
                            children: [
                               TextViewSmall(title: cData?.welcome,textcolor: whiteColor,),
-                              TextViewMedium(name: cData?.fullName,textColors: whiteColor,fontWeight: FontWeight.w700,),
+                              TextViewMedium(name:Helper.capitalizeFirstLetter( cData?.fullName??''),textColors: whiteColor,fontWeight: FontWeight.w700,),
                                TextViewMedium(name: cData?.phoneNumber,textColors: whiteColor,fontWeight: FontWeight.w700,),
                                              cData?.customerId!=null&&(cData?.customerId?.isNotEmpty??false)?      Row(children: [
                                TextViewSmall(title: 'ID :',textcolor: whiteColor,),
@@ -69,7 +70,7 @@ LangData? langData;
                            Row(
                              children: [
                                TextViewSmall(title: '${d?.status??'Status'} : ',textcolor: Colors.yellow,),
-                               TextViewMedium(name: cData?.status,textColors: Colors.yellow,fontWeight: FontWeight.w700,)
+                               TextViewMedium(name:Helper.capitalizeFirstLetter( cData?.status??''),textColors: Colors.yellow,fontWeight: FontWeight.w700,)
                              ],
                            ),
                            
@@ -95,6 +96,7 @@ LangData? langData;
                  ],
                  
                ), 
+               
                           ],
          
          
@@ -104,7 +106,7 @@ LangData? langData;
              // left: .w,
              child: Column(
              children: [
-                DividerWidget(color: whiteColor,),
+                  DividerWidget(color: whiteColor,),
                 vericalSpaceSmall,
                Padding(
                  padding:  EdgeInsets.only(left:8.0),

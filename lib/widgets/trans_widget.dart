@@ -4,6 +4,7 @@ import 'package:kasnew/screens/bottom_screens/homescreen/plan_slider_section.dar
 import 'package:kasnew/screens/paydues/pay_dues_screen.dart';
 import 'package:kasnew/utils/constant.dart';
 import 'package:kasnew/utils/constants/api_constants.dart';
+import 'package:kasnew/widgets/no_userId_function.dart';
 import 'package:kasnew/widgets/text_view_large.dart';
 import 'package:kasnew/widgets/text_view_medium.dart';
 import 'package:kasnew/widgets/text_view_small.dart';
@@ -48,7 +49,7 @@ TextViewMedium(name: transData?.transactionId,fontWeight: FontWeight.bold,textCo
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(5.0),
-                                child: TextViewSmall(title:transData?.paymentStatus ,textcolor:transData?.paymentStatus?.toLowerCase()=='pending'? appColor:whiteColor,fontWeight: FontWeight.bold,),
+                                child: TextViewSmall(title:Helper.capitalizeFirstLetter(transData?.paymentStatus??'') ,textcolor:transData?.paymentStatus?.toLowerCase()=='pending'? appColor:whiteColor,fontWeight: FontWeight.bold,),
                               ),
                             ),
                           ),

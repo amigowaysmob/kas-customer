@@ -258,7 +258,11 @@ var isLoading=useState(false);
               context.router.pushNamed(RouterPath.gallery_path);
               
                 },),
-                
+                 ItemWidget(iconData:Icons.photo_outlined,title: '${'Feedback'}',onTap: (){
+                   context.router.pop();
+              context.router.pushNamed(RouterPath.feed_back_path);
+              
+                },),
                  
                  ItemWidget(iconData:Icons.youtube_searched_for ,title: '${d?.ourYoutubeChannel??"Our Youtube Channel"}',onTap: (){
                    context.router.pop();
@@ -322,7 +326,10 @@ var isLoading=useState(false);
                 context.router.pop();
               context.router.pushNamed(RouterPath.change_mpin_path);  
                 },),
-                
+              //     ItemWidget(iconData:Icons.password_outlined ,title: 'Lucky Draw',onTap: (){
+              //   context.router.pop();
+              // context.router.pushNamed(RouterPath.lucky_path);  
+              //   },),
          ItemWidget(iconData:Icons.delete_outlined ,title: '${d?.dataDeletionRequest??"Data deletion request"}',onTap: (){
                     context.router.pop();
                   context.router.pushNamed(RouterPath.delete_path);  

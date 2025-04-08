@@ -19,6 +19,8 @@ import 'package:kasnew/widgets/text_view_large.dart';
 import 'package:kasnew/widgets/text_view_small.dart';
 import 'package:kasnew/widgets/title_app_bar_widget.dart';
 @RoutePage()
+
+
 class LedgerScreen extends StatefulWidget {
   bool? isChit;
   bool? isMenu;
@@ -44,7 +46,9 @@ class _LedgerScreenState extends State<LedgerScreen> {
   
      double swidth = MediaQuery.of(context).size.width;
     double sheight = MediaQuery.of(context).size.height;
-    return  Scaffold(appBar:widget.isMenu==true? TitleAppBarWidget(title:widget.isChit==true?'Chit List': 'Ledger',):null,
+    return  Scaffold(
+      backgroundColor: whiteColor,
+      appBar:widget.isMenu==true? TitleAppBarWidget(title:widget.isChit==true?'Chit List': 'Ledger',):null,
     body:BlocConsumer<LedgerCubit, LedgerState>(
       listener: (context, state) {
         if (state.networkStatusEnum == NetworkStatusEnum.loaded && state.model.text == 'Success') {
@@ -80,13 +84,13 @@ class _LedgerScreenState extends State<LedgerScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 PlanNameWidget(title: leData?.planName,),
-                TextViewLarge(title: leData?.status,textcolor: getStatusColor(leData?.status),fontWeight: FontWeight.bold,),
+                TextViewLarge(title:Helper.capitalizeFirstLetter(leData?.status??''),textcolor: getStatusColor(leData?.status),fontWeight: FontWeight.bold,),
               ],
             ),
         // leData?.accountNumber!=null &&(leData?.accountNumber?.isNotEmpty??false)?     RowBoldTextWidget(title: 'A/C Number', value:leData?.accountNumber ):Container(),
         //     RowBoldTextWidget(title: 'Installments', value:leData?.installments ),
         leData?.accountNumber!=null &&(leData?.accountNumber?.isNotEmpty??false)?     RowBoldTextWidget(title: 'A/C Number', value:leData?.accountNumber ):Container(),
-            RowBoldTextWidget(title: '${d?.name??'Name'}', value:leData?.passbookName ),
+            RowBoldTextWidget(title: '${d?.name??'Name'}', value:Helper.capitalizeFirstLetter(leData?.passbookName??'') ),
             
              RowBoldTextWidget(title: '${d?.planStartDate??'Plan Start Date'}', value:leData?.planStarted ),
             
@@ -131,7 +135,7 @@ class _LedgerScreenState extends State<LedgerScreen> {
 Color getStatusColor(String? status){
   switch(status?.toLowerCase()){
     
-     case 'inactive':
+     case 'closed':
     return Colors.red;
      case 'pending':
     return Colors.yellow;

@@ -49,13 +49,16 @@ class PayDuesScreen extends HookWidget{
 }, []);
 var selectedPlan=useState<List<String?>>([]);
 var controllers = useState<Map<int, TextEditingController>>({});
+var advanceControllers = useState<Map<int, TextEditingController>>({});
 var flexiController = useTextEditingController();
     var selectedPartial = useState<List<int>>([]);
     var partialValues = useState<List<String>>([]);
+     var selectedAdvance = useState<List<int>>([]);
+        var advanceValues = useState<List<String>>([]);
 var selectedDate=useState<List<String>>([]);
 var selectedDues = useState<List<String>>([]);
 var errorMessage = useState<List<int>>([]);
-
+var advanceErrorMsg=useState<List<int>>([]);
 double swidth = MediaQuery.of(context).size.width;
     double sheight = MediaQuery.of(context).size.height;
     final bottomInset = MediaQuery.of(context).viewInsets.bottom;
@@ -97,7 +100,8 @@ context.read<TotalPayDueCubit>().login(PayNowRequestModel(
         lang: ApiConstant.langCode,
        
         dues: selectedDues.value,
-        inputdues: partialValues.value
+        inputdues: partialValues.value,
+additionAmount: advanceValues.value
         ));  
 }
 void handleCheckboxChanged(bool? isChecked, int findex, String? planId) {
@@ -106,8 +110,14 @@ void handleCheckboxChanged(bool? isChecked, int findex, String? planId) {
          selectedDues.value = selectedDues.value
             .where((item) => !item.startsWith('$planId#'))
             .toList();
+             advanceValues.value = advanceValues.value
+            .where((item) => !item.startsWith('$planId#'))
+            .toList();
+             selectedAdvance.value = List.from(selectedAdvance.value)..remove(findex);
         selectedPartial.value = List.from(selectedPartial.value)..add(findex);
- getTotalAmount();
+       advanceErrorMsg.value =List.from(advanceErrorMsg.value) ..remove(findex);
+ controllers.value[findex]?.clear();
+        advanceControllers.value[findex]?.clear();
         // Initialize a TextEditingController for this index if not already present
         if (!controllers.value.containsKey(findex)) {
           controllers.value = {
@@ -115,16 +125,57 @@ void handleCheckboxChanged(bool? isChecked, int findex, String? planId) {
             findex: TextEditingController(),
           };
         }
+        getTotalAmount();
       } else {
         // Remove the index from selectedPartial
         selectedPartial.value = List.from(selectedPartial.value)..remove(findex);
 
         // Clear and remove the TextEditingController
         controllers.value[findex]?.clear();
+        advanceControllers.value[findex]?.clear();
         controllers.value = Map.from(controllers.value)..remove(findex);
 
         // Remove any previously stored value for this plan
         partialValues.value = partialValues.value
+            .where((item) => !item.startsWith('$planId#'))
+            .toList();
+
+            getTotalAmount();
+      }
+    }
+    void advanceCheckboxChanged(bool? isChecked, int findex, String? planId) {
+      if (isChecked == true) {
+        // Add the index to selectedPartial
+         selectedDues.value = selectedDues.value
+            .where((item) => !item.startsWith('$planId#'))
+            .toList();
+             partialValues.value = partialValues.value
+            .where((item) => !item.startsWith('$planId#'))
+            .toList();
+             selectedPartial.value = List.from(selectedPartial.value)..remove(findex);
+        selectedAdvance.value = List.from(selectedAdvance.value)..add(findex);
+   errorMessage.value =List.from(errorMessage.value) ..remove(findex);
+ getTotalAmount();
+ controllers.value[findex]?.clear();
+        advanceControllers.value[findex]?.clear();
+        // Initialize a TextEditingController for this index if not already present
+        if (!advanceControllers.value.containsKey(findex)) {
+          advanceControllers.value = {
+            ...advanceControllers.value,
+            findex: TextEditingController(),
+          };
+        }
+      } else {
+        // Remove the index from selectedPartial
+        selectedAdvance.value = List.from(selectedAdvance.value)..remove(findex);
+
+        // Clear and remove the TextEditingController
+        advanceControllers.value[findex]?.clear();
+      controllers.value[findex]?.clear();
+       advanceControllers.value = Map.from(advanceControllers.value)..remove(findex);
+
+        // Remove any previously stored value for this plan
+        advanceValues.value = advanceValues.value
             .where((item) => !item.startsWith('$planId#'))
             .toList();
 
@@ -158,7 +209,32 @@ void handleCheckboxChanged(bool? isChecked, int findex, String? planId) {
         //     }
           
     }
-    
+     void handleAdvanceTextChanged(String value, int findex, String? planId) {
+      print('textbox value--------$value');
+      if(value!=null && value.isNotEmpty){
+       
+      advanceValues.value = advanceValues.value
+          .where((item) => !item.startsWith('$planId#'))
+          .toList();
+ print('partialValues.value 2${partialValues.value}');
+      // Add the updated value
+       advanceValues.value = List.from(advanceValues.value)
+        ..add('$planId#$value');
+         print('partialValues.value 3${advanceValues.value}');
+         getTotalAmount();}
+        // if (value.isNotEmpty) {
+        //       int parsedValue = int.tryParse(value) ?? 0;
+
+        //       // Add the new value
+            
+        //       // Update the total amount
+        //       amount.value = partialValues.value.fold<int>(
+        //         0,
+        //         (prev, element) => prev + int.parse(element.split('#').last),
+        //       );
+        //     }
+          
+    }
 
 
     return  MultiBlocListener(
@@ -232,33 +308,64 @@ void handleCheckboxChanged(bool? isChecked, int findex, String? planId) {
                       (ldata?.accountNo!=null &&(ldata?.accountNo?.isNotEmpty??false))?      RowTextWidget(title: 'Account Number',value:ldata?.accountNo ,):Container(),
                            
                             RowTextWidget(title: '${d?.group??'Group'}', value:ldata?.planGroup ),
-                            Row(
-                              children: [
-                                  TextViewSmall(title:'${d?.dueAmount??'Due Amount'} : ',textcolor: blackColor,),
-                                BigAmountWidget(rupees:ldata?.paymentAmount ),
-                              ],
-                            ),
+                            // Row(
+                            //   children: [
+                            //       TextViewSmall(title:'${d?.dueAmount??'Due Amount'} : ',textcolor: blackColor,),
+                            //     BigAmountWidget(rupees:ldata?.paymentAmount ),
+                            //   ],
+                            // ),
                            
                           ],
                         ),
                       ),
                         children: [
-                      int.parse(ldata?.maximumPartialAmount??'0')  >0?   Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                         Checkbox(
-                          splashRadius: 10,
-                          activeColor: appColor,
-                                      value:
-                                          selectedPartial.value.contains(findex),
-                                      onChanged: (p0) => handleCheckboxChanged(
-                                          p0, findex, ldata?.orderId),
+                      Row(
+                        children: [
+                          Row(
+                              
+                                children: [
+                                   
+                             Checkbox(
+                              splashRadius: 10,
+                              activeColor: appColor,
+                                          value:
+                                              selectedAdvance.value.contains(findex),
+                                          onChanged: (p0) => advanceCheckboxChanged(
+                                              p0, findex, ldata?.orderId),
+                                        ),
+                                        Container(
+                                          width: swidth/3.5,
+                                          child: TextViewMedium(name:d?.useAdvancePayment?? "Use Advance Payment",fontWeight: FontWeight.w700,
+                                          fontSize: ApiConstant.langCode=='ta'?10.sp:12,textColors: Colors.green,),
+                                        ),
+                                        horizontalSpaceSmall,
+                                      ],
                                     ),
-                                    TextViewMedium(name: '${d?.usePartialPayment??'Use Partial Payment'}',fontWeight: FontWeight.w700,
-                                    fontSize: ApiConstant.langCode=='ta'?10.sp:null,),
-                                    horizontalSpaceSmall,
-                                  ],
-                                ):Container(),
+                int.parse(ldata?.maximumPartialAmount??'0')  >0? 
+                 
+                           Row(
+                             
+                                children: [
+                                   
+                             Checkbox(
+                              splashRadius: 10,
+                              activeColor: appColor,
+                                          value:
+                                              selectedPartial.value.contains(findex),
+                                          onChanged: (p0) => handleCheckboxChanged(
+                                              p0, findex, ldata?.orderId),
+                                        ),
+                                        Container(
+                                         width: swidth/2,
+                                          child: TextViewMedium(name: '${d?.usePartialPayment??'Use Partial Payment'}',fontWeight: FontWeight.w700,
+                                          fontSize: ApiConstant.langCode=='ta'?10.sp:12.sp,),
+                                        ),
+                                        horizontalSpaceSmall,
+                                      ],
+                                    )
+                                    :Container(),
+                        ],
+                      ),
                                 selectedPartial.value.contains(findex)
                                     ? Padding(
                                         padding: const EdgeInsets.all(8.0),
@@ -321,7 +428,71 @@ void handleCheckboxChanged(bool? isChecked, int findex, String? planId) {
                                         //         width: swidth/3,)
                                           ],
                                         )
-                                      ):    Column(
+                                      ): selectedAdvance.value.contains(findex)
+                                    ? Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                         child:
+                                          // TextFormField(
+                                          
+                                        //   keyboardType: TextInputType.number,
+                                        //   controller: controllers.value[findex],
+                                        //   onChanged: (value) => handleTextChanged(
+                                        //       value, findex, ldata?.orderId),
+                                        //   decoration: InputDecoration(
+                                        //     labelText: 'Enter Partial Amount',
+                                        //     border: OutlineInputBorder(),
+                                        //     hintText: 'Enter Your Amount here',
+                                        //     isDense: 
+                                        //   ),
+                                        // ),
+                                       Column(
+                                         
+                                          children: [
+                                            TextForm(keyboardType:TextInputType.number ,
+                                            controller: advanceControllers.value[findex],
+                                            type: 'ruppee',
+                                             errorText: advanceErrorMsg.value.contains(findex)?"Please enter the amount above ₹10":null,
+                                            isDense:false,
+                                            // charLength: (ldata?.maximumPartialAmount?.length??0)+1,
+                                             labelText: d?.enterAdvanceAmount??'Enter Advance Amount', hintText: d?.enterAdvanceAmount??'Enter Your Advnace Amount',
+                                             onChanged: (value) {
+                                                if (value!=null && value.isNotEmpty  ) {
+                                                  int enteredValue = int.tryParse(value) ?? 0;
+                                            int minValue=10;
+                                                  // Check if the value exceeds the allowed limit
+
+                                               
+                                                  if (enteredValue <minValue) {
+                                                    advanceErrorMsg.value =List.from(advanceErrorMsg.value) ..add(findex);
+                                                  } else {
+                                                   advanceErrorMsg.value =List.from(advanceErrorMsg.value) ..remove(findex);
+                                                    handleAdvanceTextChanged(
+                                          advanceControllers.value[findex]!.text   , findex, ldata?.orderId); // Clear the error message if valid
+                                                  }
+                                                } else {
+
+                                                 advanceErrorMsg.value =List.from(advanceErrorMsg.value) ..remove(findex);
+                                                   advanceValues.value = advanceValues.value
+          .where((item) => !item.startsWith('${ldata?.orderId}#'))
+          .toList();
+                                                  getTotalAmount(); // Clear the error message if input is empty
+                                                }
+                                              },   
+                                                ),
+                                        //         vericalSpaceSmall,
+                                        //  !errorMessage.value.contains(findex) && (controllers.value[findex]?.text.isNotEmpty??false)   ?   ButtonWidget(
+                                        //           width: swidth/3,
+                                        //           onPressed: (){
+                                        //           FocusScope.of(context).unfocus();
+                                        //          handleTextChanged(
+                                        //   controllers.value[findex]!.text   , findex, ldata?.orderId);
+                                        //         }, buttonName: 'Confirm', buttonColor: appColor):ButtonWidget1(buttonName: 'Confirm', buttonColor: greyColor,
+                                        //         width: swidth/3,)
+                                          ],
+                                        )
+                                      ):
+                                      
+                                         Column(
                             children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -334,7 +505,7 @@ void handleCheckboxChanged(bool? isChecked, int findex, String? planId) {
                               ]),
                               vericalSpaceSmall,
                               SizedBox(
-                                height:sheight/3,
+                                height:sheight/2.5,
                                 child: Scrollbar(
                                   child: ListView.builder(
                                    scrollDirection: Axis.vertical,
@@ -422,15 +593,15 @@ void handleCheckboxChanged(bool? isChecked, int findex, String? planId) {
                             
                             TextViewLarge(title:ldata?.planName,textcolor: appColor,
                             fontWeight: FontWeight.w900,),
-                            RowTextWidget(title: '${d?.passbookNumber??'Passbook Number'}',value:ldata?.accountNo ,),
+                         (ldata?.accountNo!=null &&(ldata?.accountNo?.isNotEmpty??false))?   RowTextWidget(title: '${d?.passbookNumber??'Passbook Number'}',value:ldata?.accountNo ,):Container(),
                            
                             RowTextWidget(title: '${d?.group??'Group'}', value:ldata?.planGroup ),
-                            Row(
-                              children: [
-                                  TextViewSmall(title:'${d?.dueAmount??'Due Amount'} : ',textcolor: blackColor,),
-                                BigAmountWidget(rupees:ldata?.paymentAmount ),
-                              ],
-                            ),
+                            // Row(
+                            //   children: [
+                            //       TextViewSmall(title:'${d?.dueAmount??'Due Amount'} : ',textcolor: blackColor,),
+                            //     BigAmountWidget(rupees:ldata?.paymentAmount ),
+                            //   ],
+                            // ),
                             
                              vericalSpaceMedium,
                             TextForm(keyboardType:TextInputType.number ,
@@ -480,14 +651,15 @@ void handleCheckboxChanged(bool? isChecked, int findex, String? planId) {
                   TextViewLarge(title: '₹${amountNew.value}',fontWeight: FontWeight.w700,textcolor: blackColor,)
                 ],)),
               ),
-        errorMessage.value.isEmpty?      InkWell(
+        errorMessage.value.isEmpty && advanceErrorMsg.value.isEmpty?      InkWell(
                 onTap: (){
                    context.router.push(SummaryScreen(payNowRequestModel: PayNowRequestModel(
                          userId: ApiConstant.userId,
                       lang: ApiConstant.langCode,
                       totalAmount: amount.value.toString(),
                       dues: selectedDues.value,
-                      inputdues: partialValues.value
+                      inputdues: partialValues.value,
+                      additionAmount: advanceValues.value
                       )));
                 },
                 child: Container(
@@ -528,13 +700,14 @@ void handleCheckboxChanged(bool? isChecked, int findex, String? planId) {
 class RowTextWidget extends StatelessWidget {
   String? title;
   String? value;
-   RowTextWidget({required this.title,required this.value});
+  Color? color;
+   RowTextWidget({required this.title,required this.value,this.color});
 
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      TextViewSmall(title:'$title : ',textcolor: blackColor,),
-TextViewMedium(name: value,fontWeight: FontWeight.bold,textColors: blackColor,fontSize: 13,)
+      TextViewSmall(title:'$title : ',textcolor:color?? blackColor,),
+TextViewMedium(name: value,fontWeight: FontWeight.bold,textColors:color?? blackColor,fontSize: 13,)
     ],);
   }
 }

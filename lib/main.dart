@@ -32,6 +32,9 @@ import 'package:kasnew/cubits/ledger_cubit.dart';
 import 'package:kasnew/cubits/ledger_detail_cubit.dart';
 import 'package:kasnew/cubits/login_cubit.dart';
 import 'package:kasnew/cubits/login_mpin_cubit.dart';
+import 'package:kasnew/cubits/lucky_draw_cubit.dart';
+import 'package:kasnew/cubits/lucky_months_cubit.dart';
+import 'package:kasnew/cubits/lucky_terms_cubit.dart';
 import 'package:kasnew/cubits/mobile_check_cubit.dart';
 import 'package:kasnew/cubits/month_plans_cubit.dart';
 import 'package:kasnew/cubits/my_plans_cubit.dart';
@@ -68,6 +71,7 @@ import 'package:kasnew/cubits/trans_cubit.dart';
 import 'package:kasnew/cubits/update_profile_cubit.dart';
 import 'package:kasnew/cubits/update_profile_photo_cubit.dart';
 import 'package:kasnew/cubits/view_profile_cubit.dart';
+import 'package:kasnew/cubits/winners_cubit.dart';
 import 'package:kasnew/cubits/wp_check_cubit.dart';
 import 'package:kasnew/firebase_options.dart';
 import 'package:kasnew/router/app_router.dart';
@@ -471,6 +475,22 @@ class MyApp extends StatelessWidget {
           ),
            BlocProvider<CatListCubit>(
             create: (repoContext) =>CatListCubit(authRepository:AuthRepository(apiService)),
+            
+          ),
+          BlocProvider<LuckyDrawCubit>(
+            create: (repoContext) =>LuckyDrawCubit(authRepository:AuthRepository(apiService)),
+            
+          ),
+          BlocProvider<LuckyTermsCubit>(
+            create: (repoContext) =>LuckyTermsCubit(authRepository:AuthRepository(apiService)),
+            
+          ),
+           BlocProvider<WinnersCubit>(
+            create: (repoContext) =>WinnersCubit(authRepository:AuthRepository(apiService)),
+            
+          ),
+           BlocProvider<LuckyMonthsCubit>(
+            create: (repoContext) =>LuckyMonthsCubit(authRepository:AuthRepository(apiService)),
             
           ),
           ],

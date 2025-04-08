@@ -16,8 +16,10 @@ import 'package:kasnew/utils/constants/api_constants.dart';
 import 'package:kasnew/utils/enums.dart';
 import 'package:kasnew/widgets/button_widget.dart';
 import 'package:kasnew/widgets/column_text_widget.dart';
+import 'package:kasnew/widgets/grand_total_widget.dart';
 import 'package:kasnew/widgets/indicator_widget.dart';
 import 'package:kasnew/widgets/no_data_widget.dart';
+import 'package:kasnew/widgets/no_userId_function.dart';
 import 'package:kasnew/widgets/text_view_large.dart';
 import 'package:kasnew/widgets/text_view_medium.dart';
 import 'package:kasnew/widgets/text_view_small.dart';
@@ -73,6 +75,7 @@ class _LedgerDetailScreenState extends State<LedgerDetailScreen> {
         
           var cData=state.model.data?.ledgerData;
           var tData=state.model.data?.transactionData;
+          var aData=state.model.data?.advancedTransactionData;
        return SingleChildScrollView(
          child: Padding(
            padding: const EdgeInsets.all(5),
@@ -153,15 +156,7 @@ class _LedgerDetailScreenState extends State<LedgerDetailScreen> {
                   elevation: 5,
                   child: Column(children: [
          TextViewLarge(title: '${d?.transactions??'Transactions'}',textcolor: blackColor,fontWeight: FontWeight.w700,),
-          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children:[
-                           Container(),
-                           
-                            
-                             
-                             
-                          ]),
+         vericalSpaceMedium,
             Scrollbar(
               child: ListView.builder(
              shrinkWrap: true,
@@ -261,7 +256,7 @@ class _LedgerDetailScreenState extends State<LedgerDetailScreen> {
   children: [
     SizedBox(width: swidth * 0.15), // Matches S.No column width
     SizedBox(width: swidth * 0.28,
-    child: TextViewMedium(name: 'Grand Total',fontWeight: FontWeight.w700,),), // Matches Date column width
+    child: TextViewMedium(name: d?.totalAmount??'Total Amount',fontWeight: FontWeight.w700,),), // Matches Date column width
     SizedBox(
       width: swidth * 0.2, // Matches Amount column width
       child: Align(
@@ -277,7 +272,9 @@ class _LedgerDetailScreenState extends State<LedgerDetailScreen> {
   ],
 ),
 
-            vericalSpaceSmall,
+
+
+
    widget.isChit==true?    cData?.chitStatus=='-' ?    Row(
         mainAxisAlignment: MainAxisAlignment.end,
          children: [
@@ -300,10 +297,126 @@ class _LedgerDetailScreenState extends State<LedgerDetailScreen> {
            ),
          ],
        ):Container()
-                 ],),):NoDataWidget(title:'${d?.noTransactionData?? 'No Transactions!!'}')
+                 ],),):NoDataWidget(title:'${d?.noTransactionData?? 'No Transactions!!'}'),
+                 
+            vericalSpaceSmall,
+
+((aData?.length??0)>0  )? Card(
+                  elevation: 5,
+                  child: Column(children: [
+         TextViewLarge(title: 'Advance Amount Transactions',textcolor: blackColor,fontWeight: FontWeight.w700,),
+         vericalSpaceMedium,
+            Scrollbar(
+              child: ListView.builder(
+             shrinkWrap: true,
+               
+               scrollDirection: Axis.vertical,
+             
+                     physics: NeverScrollableScrollPhysics(),
+                     itemCount:aData?.length,
+                     itemBuilder: (context,index){
+                       var tdataa= aData?[index];
+                     
+                     
+                     return Column(
+                       children: [
+            
+                  Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                children: [
+                                              SizedBox(
+                                                width: swidth*0.1,
+                                                child: Column(
+                                                  children: [
+                                                 index==0?    TextViewMedium(name: 'S.No',textColors: appColor,fontWeight: FontWeight.bold,):Container(),
+                                                    Padding(
+                                                      padding:  EdgeInsets.only(bottom:5.0,right: 8.0,left: 8.0,top:3),
+                                                      child: TextViewMedium(name:tdataa?.sNo, fontWeight: FontWeight.w700,),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              // horizontalSpaceSmall,
+                                              // Column(
+                                              //   children: [
+                                              //   index==0?       TextViewMedium(name: 'Status'):Container(),
+                                              //     _icon(tdataa?.paidStatus),
+                                              //   ],
+                                              // ),
+                                             SizedBox(
+                                                width: swidth*0.3,
+                                                child: Column(
+                                                  children: [
+                                                                                             index==0?          TextViewMedium(name: '${d?.date??'Date'}',textColors: appColor,fontWeight: FontWeight.bold):Container(),
+                                                     Padding(
+                                                      padding:  EdgeInsets.only(bottom:5.0,right: 8.0,left: 8.0,top:3),
+                                                      child: TextViewMedium(name:tdataa?.date ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                 width: swidth*0.2,
+                                                child: Column(
+                                                  children: [
+                                                index==0?          TextViewMedium(name:'${d?.amount?? 'Amount'}',textColors: appColor,fontWeight: FontWeight.bold):Container(),
+                                                      Padding(
+                                                      padding:  EdgeInsets.only(bottom:5.0,right: 8.0,left:index==0? 10: 8.0,top:3),
+                                                        child: TextViewMedium(name:'₹${ tdataa?.amount}'),
+                                                      ),
+                                                  ],
+                                                ),
+                                              ),
+                                         
+                                              
+                                                ],
+                                              ),
+                  Divider()
+               ],
+             );
+                       
+               
+                       
+                       
+               
+              }),
+            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //   Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: RowBoldTextWidget(title: 'Grand Total', value: '₹${state.model.data?.totalAmount}'),
+            //   )
+            // ],),
+            Row(
+  mainAxisAlignment: MainAxisAlignment.spaceAround, // Ensures alignment matches the list
+  children: [
+    SizedBox(width: swidth * 0.1), // Matches S.No column width
+     SizedBox(
+                                                width: swidth*0.3,
+    child: TextViewMedium(name:d?.totalAmount?? 'Total Amount',fontWeight: FontWeight.w700,),), // Matches Date column width
+    SizedBox(
+      width: swidth * 0.2, // Matches Amount column width
+      child: Align(
+        alignment: Alignment.center,
+        child: TextViewLarge(
+          title: '₹${state.model.data?.advancedAmount}',
+          fontWeight: FontWeight.w700,
+          textcolor: appColor,
+        ),
+      ),
+    ),
+    // SizedBox(width: swidth * 0.2), // Matches Installment column width
+  ],
+),
             ],),
-         ),
-       );
+         ):Container(),
+vericalSpaceLarge,
+      int.parse(state.model.data?.advancedAmount??'')>0?   GrandTotalWidget(chitAmount: state.model.data?.totalAmount,
+         advanceAmount: state.model.data?.advancedAmount,
+         grandTotalAmount: state.model.data?.grandTotal,):Container()
+      ] )));
   }
   else{
     return CircularWidgetS();
@@ -379,9 +492,9 @@ void showChitCloseDialog(BuildContext context,
                 //            ColumnTextWidget(title: 'Total Amount', value:'₹${ cData?.closingAmount}'),
                           
                 
-                RowTextWidget(title: 'Payable Amount', value:'₹${cData?.payableAmount??'0'}' ),
-                RowTextWidget(title: 'Paid Amount     ', value:'₹${cData?.paidAmount??'0'}' ),
-                 RowTextWidget(title: 'Balance Amount', value: '₹${cData?.pendingAmount??'0'}'),
+                RowTextWidget(title: 'Payable Amount', value:'${Helper.rupee(cData?.payableAmount)}${cData?.payableAmount??'0'}' ),
+                RowTextWidget(title: 'Paid Amount     ', value:'${Helper.rupee(cData?.paidAmount)}${cData?.paidAmount??'0'}' ),
+                 RowTextWidget(title: 'Balance Amount', value: '${Helper.rupee(cData?.pendingAmount)}${cData?.pendingAmount??'0'}'),
                 
 Column(
  

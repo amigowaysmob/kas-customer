@@ -12,6 +12,9 @@ Color yellowColor=Colors.yellow;
 Color appDarkColor = Color(0xFF7A1F24);
 Color appLightColor = Color(0xFFE71F28);
 Color sandleColor= Color(0xFFF0D53F);
+Color goldYellowColor = Color(0xFFF0D53F);
+Color redColor=Color(0xFFDF3841);
+
 double textViewLarge = 18.sp;
 double textViewMedium = 16.sp;
 double textViewSmall= 12.sp;

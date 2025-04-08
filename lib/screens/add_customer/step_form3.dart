@@ -8,6 +8,7 @@ import 'package:kasnew/request_model/stepper_form_request_model.dart';
 import 'package:kasnew/screens/add_customer/heading_widget.dart';
 import 'package:kasnew/screens/add_customer/month_plan_form.dart';
 import 'package:kasnew/utils/constant.dart';
+import 'package:kasnew/widgets/no_userId_function.dart';
 import 'package:kasnew/widgets/plan_widget.dart';
 import 'package:kasnew/widgets/text_form_widget.dart';
 import 'package:kasnew/widgets/text_view_large.dart';
@@ -77,7 +78,7 @@ final isJoined=useState('');
                               height: sheight/18,
               width: swidth,
               color: appColor,
-                              child: Center(child: TextViewLarge(title: main?.title,fontWeight: FontWeight.w700,)))),
+                              child: Center(child: TextViewLarge(title:Helper.capitalizeFirstLetter(main?.title??'') ,fontWeight: FontWeight.w700,)))),
                             children: [
                             ListView.builder(
                                itemCount: main?.values?.length,

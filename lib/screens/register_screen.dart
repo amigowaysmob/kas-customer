@@ -11,6 +11,8 @@ import 'package:kasnew/router/app_router.gr.dart';
 import 'package:kasnew/router/router_path.dart';
 import 'package:kasnew/states/register_state.dart';
 import 'package:kasnew/utils/constant.dart';
+import 'package:kasnew/utils/constants/api_constants.dart';
+import 'package:kasnew/utils/constants/sharedpreference_help.dart';
 import 'package:kasnew/utils/enums.dart';
 import 'package:kasnew/widgets/contact_widget.dart';
 import 'package:kasnew/widgets/indicator_widget.dart';
@@ -39,10 +41,19 @@ class _RegisterPageState extends State<RegisterPage> {
   final GlobalKey<FormState> registerKey = GlobalKey<FormState>();
   FocusNode nameFocusNode = FocusNode();
   bool _isLoading = false;
+   late SharedPreferenceHelper sharedPreferenceHelper;
   void initState() {
-    super.initState();
+   super.initState();
+    sharedPreferenceHelper = SharedPreferenceHelper();
+    sharedPreferenceHelper.init();
     nameFocusNode.requestFocus(); // Set autofocus to the name field
+   _loadSignature();
+
   }
+   void _loadSignature() async {
+  String? signature = await Helper.getSignature(); // Await the Future
+  sharedPreferenceHelper.savesignature(signature);
+}
   String? _validateUsername(String? value) {
    
     if (value!=null&& value.isNotEmpty&& !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value!)) {
@@ -105,7 +116,9 @@ String? _validatePhoneNumber(String? value) {
      
       context
           .read<RegisterCubit>()
-          .login(RegisterRequestModel(email: emailController.text,fullName: nameController.text,phoneNumber: phoneNumberController.text));
+          .login(RegisterRequestModel(email: emailController.text,fullName: nameController.text,phoneNumber: phoneNumberController.text,
+          smsSignature: ApiConstant.signature
+          ));
     }
     else if(_isChecked!=true){
       ToastWidget(message: 'Please agree to the terms and conditions',).build(context);

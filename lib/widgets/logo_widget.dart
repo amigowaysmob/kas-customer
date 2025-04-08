@@ -15,8 +15,6 @@ class LogoWidget extends StatelessWidget {
      double swidth = MediaQuery.of(context).size.width;
     double sheight = MediaQuery.of(context).size.height;
     return 
-    ApiConstant.logoUrl!=null &&ApiConstant.logoUrl.isNotEmpty? Image.network(
-                 ApiConstant.logoUrl,
-                ):Image.asset('assets/images/logo.png',height: 100,width: 100,);
+   Image.asset('assets/images/logo.png',height: 100,width: 100,);
   }
 }

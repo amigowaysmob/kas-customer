@@ -13,6 +13,7 @@ import 'package:kasnew/request_model/home_request_model.dart';
 import 'package:kasnew/request_model/ledger_detail_request_model.dart';
 import 'package:kasnew/request_model/login_mpin_request_model.dart';
 import 'package:kasnew/request_model/login_request_model.dart';
+import 'package:kasnew/request_model/lucky_draw_request_mode.dart';
 import 'package:kasnew/request_model/mobile_chek_request_model.dart';
 import 'package:kasnew/request_model/pay_due_request_model.dart';
 import 'package:kasnew/request_model/pay_now_request_model.dart';
@@ -33,6 +34,7 @@ import 'package:kasnew/request_model/submit_enquiry_request_model.dart';
 import 'package:kasnew/request_model/trans_request_model.dart';
 import 'package:kasnew/request_model/update_profile_photo_request_model.dart';
 import 'package:kasnew/request_model/user_id_request_model.dart';
+import 'package:kasnew/request_model/winners_request_model.dart';
 import 'package:kasnew/response_model/about_us_model.dart';
 import 'package:kasnew/response_model/cat_list_model.dart';
 import 'package:kasnew/response_model/change_mpin_model.dart';
@@ -60,6 +62,9 @@ import 'package:kasnew/response_model/ledger_detail_model.dart';
 import 'package:kasnew/response_model/ledger_model.dart';
 import 'package:kasnew/response_model/login_model.dart';
 import 'package:kasnew/response_model/login_mpin_model.dart';
+import 'package:kasnew/response_model/lucky_draw_model.dart';
+import 'package:kasnew/response_model/lucky_months_model.dart';
+import 'package:kasnew/response_model/lucky_terms_model.dart';
 import 'package:kasnew/response_model/mobile_check_model.dart';
 import 'package:kasnew/response_model/month_plans_model.dart';
 import 'package:kasnew/response_model/my_plans_model.dart';
@@ -95,6 +100,7 @@ import 'package:kasnew/response_model/trans_model.dart';
 import 'package:kasnew/response_model/update_profile_model.dart';
 import 'package:kasnew/response_model/update_profile_photo_model.dart';
 import 'package:kasnew/response_model/view_profile_model.dart';
+import 'package:kasnew/response_model/winners_model.dart';
 import 'package:kasnew/screens/bottom_screens/homescreen/contact_person_model.dart';
 import 'package:kasnew/utils/apiservice/api_service.dart';
 import 'package:kasnew/utils/constants/api_constants.dart';
@@ -1401,4 +1407,84 @@ final ApiService apiService;
       return (false, ProductListModel());
     }
     }     
+     Future<dynamic> userLuckyDraw(LuckyDrawRequestModel requestModel)async{
+ try {
+ 
+      var response = await apiService.post(ApiConstant.userLuckyDraw,requestModel);
+       if (response.statusCode == 200 ) {
+        var responseData = response.data;
+        print('home-----${responseData}');
+        return (true,LuckyDrawModel.fromJson(responseData));
+       }
+       else {
+        // Handle other status codes
+        print('Unexpected status code: ${response.statusCode}');
+        return (false,LuckyDrawModel());
+      }
+    } catch (e,stacktrace) {
+      print('Exception occurred: $e');
+      print('Stacktrace${stacktrace}');
+      return (false, LuckyDrawModel());
+    }
+    }     
+      Future<dynamic> userLuckyTerms(AboutUsRequestModel requestModel)async{
+ try {
+ 
+      var response = await apiService.post(ApiConstant.userLuckyTerms,requestModel);
+       if (response.statusCode == 200 ) {
+        var responseData = response.data;
+        print('home-----${responseData}');
+        return (true,LuckyTermsModel.fromJson(responseData));
+       }
+       else {
+        // Handle other status codes
+        print('Unexpected status code: ${response.statusCode}');
+        return (false,LuckyTermsModel());
+      }
+    } catch (e,stacktrace) {
+      print('Exception occurred: $e');
+      print('Stacktrace${stacktrace}');
+      return (false, LuckyTermsModel());
+    }
+    }     
+      Future<dynamic> userWinners(WinnersRequestModel requestModel)async{
+ try {
+ 
+      var response = await apiService.post(ApiConstant.userWinners,requestModel);
+       if (response.statusCode == 200 ) {
+        var responseData = response.data;
+        print('home-----${responseData}');
+        return (true,WinnersModel.fromJson(responseData));
+       }
+       else {
+        // Handle other status codes
+        print('Unexpected status code: ${response.statusCode}');
+        return (false,WinnersModel());
+      }
+    } catch (e,stacktrace) {
+      print('Exception occurred: $e');
+      print('Stacktrace${stacktrace}');
+      return (false, WinnersModel());
+    }
+    } 
+     Future<dynamic> userLuckyMonths(HomeRequestModel requestModel)async{
+ try {
+ 
+      var response = await apiService.post(ApiConstant.userLuckyMonths,requestModel);
+       if (response.statusCode == 200 ) {
+        var responseData = response.data;
+        print('home-----${responseData}');
+        return (true,LuckyMonthsModel.fromJson(responseData));
+       }
+       else {
+        // Handle other status codes
+        print('Unexpected status code: ${response.statusCode}');
+        return (false,LuckyMonthsModel());
+      }
+    } catch (e,stacktrace) {
+      print('Exception occurred: $e');
+      print('Stacktrace${stacktrace}');
+      return (false, LuckyMonthsModel());
+    }
+    }         
 }

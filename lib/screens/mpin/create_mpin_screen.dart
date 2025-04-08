@@ -7,6 +7,7 @@ import 'package:kasnew/router/app_router.gr.dart';
 import 'package:kasnew/states/register_mpin_state.dart';
 
 import 'package:kasnew/utils/constant.dart';
+import 'package:kasnew/utils/constants/api_constants.dart';
 import 'package:kasnew/utils/constants/sharedpreference_help.dart';
 import 'package:kasnew/utils/enums.dart';
 import 'package:kasnew/widgets/button_widget.dart';
@@ -65,7 +66,7 @@ class _CreateMpihScreenState extends State<CreateMpinScreen> {
       if (_createMpinKey.currentState!.validate()) {
       context
           .read<RegisterMpinCubit>()
-          .login(RegisterMpinRequestModel(userId:sharedPreferenceHelper?.getUserId,
+          .login(RegisterMpinRequestModel(userId:ApiConstant.userId,
           mpin:createMpinController.text,confirmMpin: confirmMpinController.text  ));}
     }
   @override

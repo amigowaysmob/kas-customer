@@ -73,4 +73,5 @@ static String pay_others_otp_path='/pay_others_otp_list_path';
 static String pay_others_list_path='/pay_others_list_path';
 static String product_list_path='/product_list_path';
 static String full_slider_path='/full_slider_path';
+static String lucky_terms_path='/lucky_terms_path';
 }

@@ -68,13 +68,22 @@ class Data {
   String? employeeApprovalNotifyNumbers;
   String? customerRegNotifyNumbers;
   String? empRequestSummaryNotifyNumbers;
+  String? dailycollectionReportsNotifyNumbers;
+  String? totalcollectionReportsNotifyNumbers;
+  String? chitclosedReportsNotifyNumbers;
+  String? inwardoutwardReportsNotifyNumbers;
+  String? sourcewiseReportsNotifyNumbers;
+  String? approvalStatusReportsNotifyNumbers;
   String? goldPrice;
   String? silverPrice;
   String? priceUpdatedTime;
+  String? collectionAuthorizationNotifyNumber;
+  String? deleteReceiptNotifyNumber;
   String? mobWelcomeLogo;
   String? mobHomeLogo;
   String? headerLogo;
   String? websiteUrl;
+  String? luckyDrawVideo;
 
   Data(
       {this.id,
@@ -117,13 +126,22 @@ class Data {
       this.employeeApprovalNotifyNumbers,
       this.customerRegNotifyNumbers,
       this.empRequestSummaryNotifyNumbers,
+      this.dailycollectionReportsNotifyNumbers,
+      this.totalcollectionReportsNotifyNumbers,
+      this.chitclosedReportsNotifyNumbers,
+      this.inwardoutwardReportsNotifyNumbers,
+      this.sourcewiseReportsNotifyNumbers,
+      this.approvalStatusReportsNotifyNumbers,
       this.goldPrice,
       this.silverPrice,
       this.priceUpdatedTime,
+      this.collectionAuthorizationNotifyNumber,
+      this.deleteReceiptNotifyNumber,
       this.mobWelcomeLogo,
       this.mobHomeLogo,
       this.headerLogo,
-      this.websiteUrl});
+      this.websiteUrl,
+      this.luckyDrawVideo});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -167,13 +185,27 @@ class Data {
     employeeApprovalNotifyNumbers = json['employee_approval_notify_numbers'];
     customerRegNotifyNumbers = json['customer_reg_notify_numbers'];
     empRequestSummaryNotifyNumbers = json['emp_request_summary_notify_numbers'];
+    dailycollectionReportsNotifyNumbers =
+        json['dailycollection_reports_notify_numbers'];
+    totalcollectionReportsNotifyNumbers =
+        json['totalcollection_reports_notify_numbers'];
+    chitclosedReportsNotifyNumbers = json['chitclosed_reports_notify_numbers'];
+    inwardoutwardReportsNotifyNumbers =
+        json['inwardoutward_reports_notify_numbers'];
+    sourcewiseReportsNotifyNumbers = json['sourcewise_reports_notify_numbers'];
+    approvalStatusReportsNotifyNumbers =
+        json['approval_status_reports_notify_numbers'];
     goldPrice = json['gold_price'];
     silverPrice = json['silver_price'];
     priceUpdatedTime = json['price_updated_time'];
+    collectionAuthorizationNotifyNumber =
+        json['collection_authorization_notify_number'];
+    deleteReceiptNotifyNumber = json['delete_receipt_notify_number'];
     mobWelcomeLogo = json['mob_welcome_logo'];
     mobHomeLogo = json['mob_home_logo'];
     headerLogo = json['header-logo'];
     websiteUrl = json['website_url'];
+    luckyDrawVideo = json['lucky_draw_video'];
   }
 
   Map<String, dynamic> toJson() {
@@ -222,13 +254,29 @@ class Data {
     data['customer_reg_notify_numbers'] = this.customerRegNotifyNumbers;
     data['emp_request_summary_notify_numbers'] =
         this.empRequestSummaryNotifyNumbers;
+    data['dailycollection_reports_notify_numbers'] =
+        this.dailycollectionReportsNotifyNumbers;
+    data['totalcollection_reports_notify_numbers'] =
+        this.totalcollectionReportsNotifyNumbers;
+    data['chitclosed_reports_notify_numbers'] =
+        this.chitclosedReportsNotifyNumbers;
+    data['inwardoutward_reports_notify_numbers'] =
+        this.inwardoutwardReportsNotifyNumbers;
+    data['sourcewise_reports_notify_numbers'] =
+        this.sourcewiseReportsNotifyNumbers;
+    data['approval_status_reports_notify_numbers'] =
+        this.approvalStatusReportsNotifyNumbers;
     data['gold_price'] = this.goldPrice;
     data['silver_price'] = this.silverPrice;
     data['price_updated_time'] = this.priceUpdatedTime;
+    data['collection_authorization_notify_number'] =
+        this.collectionAuthorizationNotifyNumber;
+    data['delete_receipt_notify_number'] = this.deleteReceiptNotifyNumber;
     data['mob_welcome_logo'] = this.mobWelcomeLogo;
     data['mob_home_logo'] = this.mobHomeLogo;
     data['header-logo'] = this.headerLogo;
     data['website_url'] = this.websiteUrl;
+    data['lucky_draw_video'] = this.luckyDrawVideo;
     return data;
   }
 }

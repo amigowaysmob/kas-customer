@@ -515,7 +515,7 @@ var isLoading=useState(false);
     void resendOtpAction() {
       if (canResendOtp.value) {
         context.read<ResendOtpCubit>().login(
-              ResendOtpRequestModel(phoneNumber: phoneNumber, userId: ApiConstant.userId),
+              ResendOtpRequestModel(phoneNumber: phoneNumber, userId: ApiConstant.userId,smsSignature: ApiConstant.signature),
             );
         startResendTimer();
       }
@@ -549,9 +549,11 @@ var isLoading=useState(false);
                   ).build(context);
 
                   if (mpinStatus == null || mpinStatus == "0") {
-                    context.router.replaceNamed(RouterPath.create_mpin_path);
+                    sharedPreferenceHelper.savefirstLaunch(false);
+                    context.router.replaceAll([CreateMpinScreen()]);
                   } else {
-                    context.router.replaceNamed(RouterPath.verify_mpin_path);
+                    sharedPreferenceHelper.savefirstLaunch(false);
+                    context.router.replaceAll([VerifyMpinScreen()]);
                   }
                 } else if (state.networkStatusEnum == NetworkStatusEnum.loaded &&
                     state.model.text != 'Success') {
@@ -624,13 +626,18 @@ Navigator.of(context).pop();
                     codeLength: 4,
                     onCodeChanged: (code) {
                       if (code?.length == 4) {
-                        if (isForgotMpin ?? false) {
+                        print(registerOtp);
+                         print(loginOtp
+                         );
+                        if (isForgotMpin ?? false)
+                         {
                           if (checkOTP(code!, resendOtp.value ?? forgotMpinOtp)) {
                             context.router.replaceNamed(RouterPath.reset_mpin_path);
                           } else {
                             otpController.clear();
                           }
-                        }  else if(isRegister??false){
+                        } 
+                        else if(isRegister??false){
                          if (
                             checkOTP(code!, resendOtp.value ?? registerOtp)) {
                               print(registerOtp);
@@ -638,16 +645,17 @@ Navigator.of(context).pop();
                           }
                            else {
                             otpController.clear();
-                            print('Otp controller clear');
                           }
                         } else if(isogin??false){
                          if (checkOTP(code!, resendOtp.value ?? loginOtp)) {
                           sharedPreferenceHelper.saveUserID(userId);
                           final mpinStatus = sharedPreferenceHelper.getMpinStatus;
                           if (mpinStatus == '1') {
-                            context.router.replaceNamed(RouterPath.verify_mpin_path);
+                            sharedPreferenceHelper.savefirstLaunch(false);
+                             context.router.replaceAll([VerifyMpinScreen()]);
                           } else if (mpinStatus == '0') {
-                            context.router.replaceAll([CreateMpinScreen()]);
+                            sharedPreferenceHelper.savefirstLaunch(false);
+                             context.router.replaceAll([CreateMpinScreen()]);
                           }
                         } else {
                           otpController.clear();
@@ -673,41 +681,8 @@ Navigator.of(context).pop();
                       registerOtp=null;
                     },
                   ),
-                  vericalSpaceLarge,
-              // isLoading.value!=true ?   ButtonWidget(onPressed: (){
-              //        if (otpController.text.length == 4) {
-              //           if (isForgotMpin ?? false) {
-              //             if (checkOTP(otpController.text, resendOtp.value ?? forgotMpinOtp)) {
-              //               context.router.replaceNamed(RouterPath.reset_mpin_path);
-              //             } else {
-              //               otpController.clear();
-              //             }
-              //           }  else if(isRegister??false){
-              //            if (
-              //               checkOTP(otpController.text, resendOtp.value ?? registerOtp)) {
-              //                 print(registerOtp);
-              //             context.read<ConRegisterCubit>().login(conRegisterRequestModel??ConRegisterRequestModel());
-              //             }
-              //              else {
-              //               otpController.clear();
-              //             }
-              //           } else if(isogin??false){
-              //            if (checkOTP(otpController.text, resendOtp.value ?? loginOtp)) {
-              //             sharedPreferenceHelper.saveUserID(userId);
-              //             final mpinStatus = sharedPreferenceHelper.getMpinStatus;
-              //             if (mpinStatus == '1') {
-              //               context.router.replaceNamed(RouterPath.verify_mpin_path);
-              //             } else if (mpinStatus == '0') {
-              //               context.router.replaceAll([CreateMpinScreen()]);
-              //             }
-              //           } else {
-              //             otpController.clear();
-              //           }}
-              //         }
-              //     }, buttonName: 'Verify OTP', buttonColor: appColor):CircularWidgetC()
               ],
-            ),
-          ),
+            ),          ),
         ),
       ),
     );

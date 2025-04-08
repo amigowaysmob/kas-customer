@@ -205,6 +205,12 @@ class AppRouter extends $AppRouter {
             path: RouterPath.full_slider_path,
             page:FullScreenSlider.page ),
               AutoRoute(
+            path: RouterPath.lucky_path,
+            page:LuckyScreen.page ),
+             AutoRoute(
+            path: RouterPath.lucky_terms_path,
+            page:LuckyTermsScreen.page ),
+              AutoRoute(
             path: RouterPath.bottom_path,
             page: BottomNavigationRoute.page,
             children: [

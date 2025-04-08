@@ -57,11 +57,19 @@ static String get homeLogoUrl {
     final prefs =SharedPreferenceHelper();
    return prefs.getLanguage();
   }
+   static List<String>? get imageList{
+    final prefs =SharedPreferenceHelper();
+   return prefs.getImageList;
+  }
   static SiteSettingsModel? get siteModel{
     final prefs =SharedPreferenceHelper();
    return prefs.getSite();
   }
-  static String baseUrl = "https://www.kasjewellery.in/";
+  static String get signature{
+    final prefs =SharedPreferenceHelper();
+   return prefs.getSignature;
+  } 
+  static String baseUrl = "https://www.kasjewellery.com/";
  static const String token="app-customer-generate-token";
  
  static const String userRegister= "app-customer-register";
@@ -131,5 +139,9 @@ static const String userPayOthersOtp="app-customer-pay-others-otp";
 static const String userDelete='app-customer-deactivate-account';
 static const String userCatList='app-customer-product-category-group';
 static const String userProductList='app-customer-products';
+static const String userLuckyDraw='app-my-customer-lucky-draw-ledger';
+static const String userLuckyTerms='app-my-customer-lucky-draw-terms-conditions';
+static const String userWinners='app-my-customer-lucky-draw-winners';
+static const String userLuckyMonths='app-my-customer-lucky-draw-months';
   }
   
