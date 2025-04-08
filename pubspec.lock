@@ -772,10 +772,10 @@ packages:
     dependency: "direct main"
     description:
       name: hypersdkflutter
-      sha256: dbc9d97134e58b164c669c6c758db409f703ca8a36da851aa7bfae302ffecfa6
+      sha256: b797e1aecdbcdcfdabbb244e0404fd0d448bf20eabc1ab6d9d83839b7fc56cb4
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.25"
+    version: "4.0.27"
   image:
     dependency: transitive
     description:
