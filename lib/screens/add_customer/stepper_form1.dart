@@ -183,7 +183,9 @@ class Step1Form extends HookWidget {
     var selectedCityValue = useState<String?>(null);
     Future<void> getImage(
         ImageSource source, String? title, String? idType) async {
+          print('image picker calling');
       final image = await picker.pickImage(source: source);
+      print('image picker calling');
       if (image != null) {
         imagePath.value = File(image.path);
         // Ensure the file path is set in formData
