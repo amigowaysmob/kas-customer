@@ -649,7 +649,8 @@ Navigator.of(context).pop();
                         } else if(isogin??false){
                          if (checkOTP(code!, resendOtp.value ?? loginOtp)) {
                           sharedPreferenceHelper.saveUserID(userId);
-                          final mpinStatus = sharedPreferenceHelper.getMpinStatus;
+                          sharedPreferenceHelper.saveMpinStatus(mpinStatus);
+                          // final mpinStatus = sharedPreferenceHelper.getMpinStatus;
                           if (mpinStatus == '1') {
                             sharedPreferenceHelper.savefirstLaunch(false);
                              context.router.replaceAll([VerifyMpinScreen()]);

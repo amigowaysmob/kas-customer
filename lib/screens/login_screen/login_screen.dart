@@ -87,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
      ToastWidget(message: state.model.message,color: Colors.green,
         ).build(context);
     
-       sharedPreferenceHelper.saveMpinStatus(state.model.data?[0].mpinStatus);
+       
         context.router.push( OtpVerifyRoute(loginOtp: state.model.otp.toString(),
         isogin: true,
           mpinStatus: state.model.data?[0].mpinStatus,

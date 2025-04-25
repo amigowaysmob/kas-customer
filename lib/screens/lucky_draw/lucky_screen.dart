@@ -153,7 +153,7 @@ time.value=selectedValue;
                                             RowTextWidget(title:d?.acNumber?? 'A/C Number', value: lData?.accountNumber,color: whiteColor,),
                                            RowTextWidget(title:d?.planType?? 'Plan Type', value: lData?.planType,color: whiteColor,),
                                            ],),
-                                           children: [
+                                           children: [ 
                                             DetailCardWidget(cData: lData,),
                                             PaidListWidget(ldata: lData,),
                                             NoneligibleWidget(eligible: lData?.luckyDrawEligible,win: lData?.win,time: time.value,nextLuckyDrawDate: lData?.nextLuckyDrawDate,),
