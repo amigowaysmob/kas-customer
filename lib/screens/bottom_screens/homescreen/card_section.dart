@@ -119,15 +119,15 @@ LangData? langData;
                         children: [
                          TextViewSmall(title: '${d?.totalAccount??'Total Accounts'}',
                          textcolor: whiteColor,
-                         fontSizes: ApiConstant.langCode!='ta'? 10:9,),
+                         fontSizes: ApiConstant.langCode!='ta'? 10.sp:9.sp,),
                         vericalSpaceMedium,
                           TextViewSmall(title: '${d?.nextDueDate??'Next DueDate'}',
                          textcolor: whiteColor,
-                         fontSizes: ApiConstant.langCode!='ta'? 10:9,),
+                         fontSizes: ApiConstant.langCode!='ta'? 10.sp:9.sp,),
                           vericalSpaceMedium,
                           TextViewSmall(title: '${d?.nextDueAmount??'Next Due Amount'}',
                          textcolor: whiteColor,
-                         fontSizes: ApiConstant.langCode!='ta'? 10:9,),
+                         fontSizes: ApiConstant.langCode!='ta'? 10.sp:9.sp,),
                          
                          
                          
@@ -137,11 +137,11 @@ LangData? langData;
                              crossAxisAlignment:CrossAxisAlignment.start,
                         children: [
                          
-                 TextViewSmall(title: ':',textcolor: whiteColor,fontSizes:ApiConstant.langCode!='ta'? 10:9,),
+                 TextViewSmall(title: ':',textcolor: whiteColor,fontSizes:ApiConstant.langCode!='ta'? 10.sp:9.sp,),
                   vericalSpaceMedium,
-                 TextViewSmall(title: ':',textcolor: whiteColor,fontSizes:ApiConstant.langCode!='ta'? 10:9,),
+                 TextViewSmall(title: ':',textcolor: whiteColor,fontSizes:ApiConstant.langCode!='ta'? 10.sp:9.sp,),
                   vericalSpaceMedium,
-                 TextViewSmall(title: ':',textcolor: whiteColor,fontSizes:ApiConstant.langCode!='ta'? 10:9,),
+                 TextViewSmall(title: ':',textcolor: whiteColor,fontSizes:ApiConstant.langCode!='ta'? 10.sp:9.sp,),
                  
                         ],
                       ),
@@ -152,15 +152,15 @@ LangData? langData;
                           
                          TextViewSmall(title: cData?.totalAccount,
                           textcolor: whiteColor,
-                          fontWeight: FontWeight.w700,fontSizes:ApiConstant.langCode!='ta'? 10:9,),
+                          fontWeight: FontWeight.w700,fontSizes:ApiConstant.langCode!='ta'? 10.sp:9.sp,),
                           vericalSpaceMedium,
                           TextViewSmall(title: cData?.nextDueDate,
                           textcolor: whiteColor,
-                          fontWeight: FontWeight.w700,fontSizes: ApiConstant.langCode!='ta'? 10:9,),
+                          fontWeight: FontWeight.w700,fontSizes: ApiConstant.langCode!='ta'? 10.sp:9.sp,),
                            vericalSpaceMedium,
                           TextViewSmall(title:cData?.nextDueAmount!=null &&(cData?.nextDueAmount?.isNotEmpty??false)? '₹${cData?.nextDueAmount??'0'}':'-',
                           textcolor: whiteColor,
-                          fontWeight: FontWeight.w700,fontSizes: ApiConstant.langCode!='ta'? 10:9,),
+                          fontWeight: FontWeight.w700,fontSizes: ApiConstant.langCode!='ta'? 10.sp:9.sp,),
                          
                       ],)
                     ],),

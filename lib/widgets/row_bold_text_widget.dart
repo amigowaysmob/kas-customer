@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kasnew/utils/constant.dart';
 import 'package:kasnew/widgets/text_view_medium.dart';
 import 'package:kasnew/widgets/text_view_small.dart';
@@ -19,7 +20,7 @@ class RowBoldTextWidget extends StatelessWidget {
         children: [
         TextViewSmall(title:'${title} : ',textcolor: color??blackColor,),
         
-        TextViewMedium(name: value,fontWeight: FontWeight.w700,fontSize: 13,textColors: color??blackColor,)
+        TextViewMedium(name: value,fontWeight: FontWeight.w700,fontSize: 13.sp,textColors: color??blackColor,)
       ],),
     );
   }

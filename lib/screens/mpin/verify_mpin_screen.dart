@@ -117,7 +117,14 @@ class _VerifyMpinScreenState extends State<VerifyMpinScreen> {
     if (verifyMpinKey.currentState!.validate()) {
       var sig=await SmsAutoFill().getAppSignature;
  print('Sinature------$sig');
-       String? token = await FirebaseHelper().getToken();
+       String? token ;
+        try {
+      token = await FirebaseHelper().getToken();
+      print('FCM token ----- $token');
+    } catch (e, s) {
+      token='';
+  print('🔥 Error fetching FCM token: $e');
+  print('🔍 Stack trace: $s');}
        print('fcm token-----$token');
         context
           .read<LoginMpinCubit>()

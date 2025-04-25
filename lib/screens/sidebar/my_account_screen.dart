@@ -392,7 +392,7 @@ class EditIconWidget extends StatelessWidget {
       onTap: onTap,
       child: Row(
         children: [
-          Icon(Icons.edit),
+          Icon(Icons.edit,size: 20.sp,),
           TextViewSmall(title: edit??'Edit')
         ],
       ),

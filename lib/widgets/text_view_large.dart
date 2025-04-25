@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextViewLarge extends StatelessWidget {
   final String? title;
@@ -17,7 +18,7 @@ class TextViewLarge extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .bodyLarge!
-                .copyWith(fontWeight: fontWeight,color: textcolor ?? Colors.white,fontSize: fontSize),
+                .copyWith(fontWeight: fontWeight,color: textcolor ?? Colors.white,fontSize: fontSize??18.sp),
           );
   }
 }

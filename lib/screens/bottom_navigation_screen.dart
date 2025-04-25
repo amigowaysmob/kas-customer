@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kasnew/router/app_router.gr.dart';
 import 'package:kasnew/screens/sidebar/side_drawer.dart';
 import 'package:kasnew/utils/constant.dart';
@@ -59,28 +60,28 @@ class BottomNavigationPage extends HookWidget {
         selectedItemColor: Colors.white,
         backgroundColor: Colors.transparent, // Make the background transparent
         unselectedItemColor: Colors.grey,
-        unselectedFontSize:10.0,
-        selectedFontSize: 11,
+        unselectedFontSize:10.0.sp,
+        selectedFontSize: 11.sp,
         items: [
           BottomNavigationBarItem(
               icon: Icon(tabsRouter.activeIndex == 0
                   ? Icons.home
-                  : Icons.home_outlined),
+                  : Icons.home_outlined,size: 20.sp,),
               label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(tabsRouter.activeIndex == 1
                   ? Icons.card_giftcard
-                  : Icons.card_giftcard_outlined),
+                  : Icons.card_giftcard_outlined,size: 20.sp,),
               label: 'My Ledger'),
           BottomNavigationBarItem(
               icon: Icon(tabsRouter.activeIndex == 2
                   ? Icons.payment
-                  : Icons.payment_outlined),
+                  : Icons.payment_outlined,size: 20.sp,),
               label: 'Transactions'),
           BottomNavigationBarItem(
               icon: Icon(tabsRouter.activeIndex == 3
                   ? Icons.account_circle
-                  : Icons.account_circle_outlined),
+                  : Icons.account_circle_outlined,size: 20.sp,),
               label: 'My Account'),
         ],
       ),
