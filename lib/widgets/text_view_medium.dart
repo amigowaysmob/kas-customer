@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextViewMedium extends StatelessWidget {
   final String? name;
@@ -12,7 +13,7 @@ class TextViewMedium extends StatelessWidget {
     return Text(
       name?? "",
       textAlign: textAlign,
-      style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: textColors,fontWeight: fontWeight,fontSize: fontSize),
+      style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: textColors,fontWeight: fontWeight,fontSize: fontSize??15.sp),
     );
   }
 }

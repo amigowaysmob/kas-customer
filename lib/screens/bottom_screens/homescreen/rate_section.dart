@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kasnew/response_model/home_model.dart';
 import 'package:kasnew/response_model/language_model.dart';
 import 'package:kasnew/utils/constant.dart';
@@ -67,7 +68,7 @@ class _RateSectionState extends State<RateSection> {
         );
       },
       child: Container(
-        height: 50, // Fixed height for ticker
+        height: 50.sp, // Fixed height for ticker
         color: appColor,
         child: ListView(
           scrollDirection: Axis.horizontal,

@@ -37,7 +37,7 @@ class _HomeIconSectionState extends State<HomeIconSection> {
         physics: NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-         mainAxisExtent:  ApiConstant.langCode != 'ta' ?150:160,
+         mainAxisExtent:  ApiConstant.langCode != 'ta' ?150.sp:160.sp,
          
           
           ),
@@ -80,7 +80,7 @@ else{
                   shadowColor:Color(0xFFF0D53F),
                
                    child: Container(
-                    height: 100,
+                    height: 100.sp,
                     decoration: BoxDecoration(border: Border(bottom: BorderSide(color: yellowColor,width: 3),
                    top: BorderSide(color: yellowColor,width: 1), left: BorderSide(color: yellowColor,width: 1),
                     right: BorderSide(color: yellowColor,width: 1)
@@ -91,7 +91,7 @@ else{
                     ),
                     child: Center(child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Image.network(data?.image??'',height: 60,width: 60,),
+                      child: Image.network(data?.image??'',height: 60.sp,width: 60.sp,),
                     ))),
                  ),
                  Padding(

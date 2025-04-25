@@ -68,7 +68,7 @@ final Widget? icon;
                
                 horizontalSpaceSmall,
                 TextViewMedium(name: buttonName,textColors: buttonColor!=appColor?appColor:whiteColor,
-                fontSize:ApiConstant.langCode=='ta'?9:null,
+                fontSize:ApiConstant.langCode=='ta'?9.sp:null,
                 fontWeight: FontWeight.bold,)
               ],),
             ),
@@ -108,7 +108,7 @@ double? width;
           buttonName??'',
           style:  TextStyle(
             color: buttonColor!=whiteColor?whiteColor:blackColor,
-            fontSize: 15,
+            fontSize: 15.sp,
             fontWeight: FontWeight.bold,
           ),
         ),

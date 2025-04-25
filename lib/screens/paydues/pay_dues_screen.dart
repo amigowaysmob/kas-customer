@@ -86,12 +86,12 @@ Widget _icon(int? status,String? progress,String? paidAmount,String? pendingAmou
     ),
   ) ;
   else if(status==0 && int.parse(progress??"0")==0){
-return Icon(Icons.remove);
+return Icon(Icons.remove,size: 20.sp,);
    }
   else if (status==1)
-    return Icon(  Icons.check_circle_outline,color: Colors.green,);
+    return Icon(  Icons.check_circle_outline,color: Colors.green,size: 20.sp);
     else 
-    return Icon( Icons.cancel_outlined,color: Colors.red,); 
+    return Icon( Icons.cancel_outlined,color: Colors.red,size: 20.sp); 
   
 }
 void getTotalAmount(){
@@ -336,7 +336,7 @@ void handleCheckboxChanged(bool? isChecked, int findex, String? planId) {
                                         Container(
                                           width: swidth/3.5,
                                           child: TextViewMedium(name:d?.useAdvancePayment?? "Use Advance Payment",fontWeight: FontWeight.w700,
-                                          fontSize: ApiConstant.langCode=='ta'?10.sp:12,textColors: Colors.green,),
+                                          fontSize: ApiConstant.langCode=='ta'?10.sp:12.sp,textColors: Colors.green,),
                                         ),
                                         horizontalSpaceSmall,
                                       ],
@@ -707,7 +707,7 @@ class RowTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       TextViewSmall(title:'$title : ',textcolor:color?? blackColor,),
-TextViewMedium(name: value,fontWeight: FontWeight.bold,textColors:color?? blackColor,fontSize: 13,)
+TextViewMedium(name: value,fontWeight: FontWeight.bold,textColors:color?? blackColor,fontSize: 13.sp,)
     ],);
   }
 }

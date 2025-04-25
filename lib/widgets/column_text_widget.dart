@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kasnew/utils/constant.dart';
 import 'package:kasnew/utils/constants/api_constants.dart';
 import 'package:kasnew/widgets/text_view_medium.dart';
@@ -19,9 +20,9 @@ class ColumnTextWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: getAlign(position),
         children: [
-        TextViewSmall(title:title,textcolor: blackColor,fontSizes: ApiConstant.langCode=='ta' ?10:null, ),
+        TextViewSmall(title:title,textcolor: blackColor,fontSizes: ApiConstant.langCode=='ta' ?10.sp:null, ),
        
-        TextViewMedium(name: value,textColors: blackColor,fontWeight: FontWeight.bold,fontSize:ApiConstant.langCode=='ta' ?10: 12,)
+        TextViewMedium(name: value,textColors: blackColor,fontWeight: FontWeight.bold,fontSize:ApiConstant.langCode=='ta' ?10.sp: 12.sp,)
       ],),
     );
   }

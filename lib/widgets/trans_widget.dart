@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kasnew/response_model/trans_model.dart';
 import 'package:kasnew/screens/bottom_screens/homescreen/plan_slider_section.dart';
 import 'package:kasnew/screens/paydues/pay_dues_screen.dart';
@@ -32,7 +33,7 @@ class TransWidget extends StatelessWidget {
               transData?.passbookNumber!=null &&(transData?.passbookNumber?.isNotEmpty??false)?  RowTextWidget(title: langData?.passbook, value:transData?.passbookNumber):Container(),
               transData?.transactionId!=null && (transData?.transactionId?.isNotEmpty??false)? Row(children: [
       TextViewSmall(title:'${langData?.transactionId} : ',textcolor: blackColor,),
-TextViewMedium(name: transData?.transactionId,fontWeight: FontWeight.bold,textColors: blackColor,fontSize:ApiConstant.langCode=='ta' ?12:13,)
+TextViewMedium(name: transData?.transactionId,fontWeight: FontWeight.bold,textColors: blackColor,fontSize:ApiConstant.langCode=='ta' ?12.sp:13.sp,)
     ],):Container(),
               // RowTextWidget(title: langData?.transactionId, value:transData?.transactionId):Container(),
                 RowTextWidget(title:langData?.paidAt, value:transData?.date),

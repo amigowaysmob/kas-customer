@@ -63,7 +63,7 @@ final sharedPreferenceHelper = useState<SharedPreferenceHelper?>(null);
                   return isLocalFile
                       ? Container(
   width: double.infinity,
-  height: double.infinity,child: Image.file(File(imagePath), fit: BoxFit.cover))
+  height: double.infinity,child: Image.file(File(imagePath), fit: BoxFit.fill))
                       : NetworkImageWidget(optimizeImageUrl(imagePath),
                           fit: BoxFit.cover);
             },

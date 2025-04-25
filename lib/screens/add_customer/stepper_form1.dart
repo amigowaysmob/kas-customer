@@ -188,7 +188,9 @@ class Step1Form extends HookWidget {
 }
     Future<void> getImage(
         ImageSource source, String? title, String? idType) async {
+          print('image picker calling');
       final image = await picker.pickImage(source: source);
+      print('image picker calling');
       if (image != null) {
         imagePath.value = File(image.path);
       imagePath.value = await Helper.compressImage(imagePath.value!);
@@ -1020,7 +1022,7 @@ class PhotoContainerWidget extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.add_a_photo_outlined,
-                      size: 50,
+                      size: 50.sp,
                       color: greyColor,
                     ),
                     vericalSpaceSmall,
@@ -1029,7 +1031,7 @@ class PhotoContainerWidget extends StatelessWidget {
                       child: TextViewSmall(
                         title: title,
                         textcolor: greyColor,
-                        fontSizes: 10,
+                        fontSizes: 10.sp,
                       ),
                     ),
                   ],

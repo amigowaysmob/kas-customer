@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kasnew/response_model/home_model.dart';
 import 'package:kasnew/router/app_router.gr.dart';
 import 'package:kasnew/utils/constant.dart';
@@ -74,11 +75,11 @@ LangData? langData;
                       children: [
                        TextViewSmall(title:'${data?.duration}  ',
                         textcolor: appColor,
-                        fontWeight: FontWeight.w700,fontSizes: 10,),
+                        fontWeight: FontWeight.w700,fontSizes: 10.sp,),
                         vericalSpaceSmall,
                         TextViewSmall(title:'₹${data?.payable??'0'}' ,
                         textcolor:  appColor,
-                        fontWeight: FontWeight.w700,fontSizes: 12,),
+                        fontWeight: FontWeight.w700,fontSizes: 12.sp,),
                        
                     ],) 
                         ],
