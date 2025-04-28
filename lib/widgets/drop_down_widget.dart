@@ -91,10 +91,11 @@ class  DropDownWidget1 extends StatefulWidget {
  double? height;
  double? width;
  bool? isSearch;
+ bool? isNoBorder;
    DropDownWidget1({required this.hint,required this.items,
    required this.onChanged,this.size,
    this.width,
-   this.height,this.isSearch});
+   this.height,this.isSearch,this.isNoBorder});
 
   @override
   State<DropDownWidget1> createState() => _DropDownWidget1State();
@@ -159,9 +160,9 @@ Widget build(BuildContext context) {
                   ),
                   hintText: 'Search for Group Code...',
                   hintStyle: const TextStyle(fontSize: 12),
-                  border: OutlineInputBorder(
+                  border:widget.isNoBorder!=true? OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                  ),
+                  ):InputBorder.none,
                 ),
               ))):null,
             

@@ -31,6 +31,7 @@ import 'package:kasnew/widgets/indicator_widget.dart';
 import 'package:kasnew/widgets/no_data_widget.dart';
 import 'package:kasnew/widgets/no_userId_function.dart';
 import 'package:kasnew/widgets/plan_name_widget.dart';
+import 'package:kasnew/widgets/text_view_medium.dart';
 import 'package:kasnew/widgets/title_app_bar_widget.dart';
 
 import '../../utils/constants/api_constants.dart';
@@ -43,10 +44,13 @@ class LuckyScreen extends HookWidget {
     double swidth = MediaQuery.of(context).size.width;
     double sheight = MediaQuery.of(context).size.height;
      LangModel? lang=ApiConstant.language;
-  
+  var selectedMonth=useState<String?>(null);
     var d=lang?.data;
+    var isFirst=useState(true);
     var months=useState<List<String?>?>(null);
   var time=useState<String?>(null);
+  
+  var isShowWinner=useState(false);
     useEffect(() {
       // Trigger the API call when the widget is first built
       context.read<LuckyMonthsCubit>().login(HomeRequestModel(
@@ -59,6 +63,7 @@ class LuckyScreen extends HookWidget {
         lang: ApiConstant.langCode,
          // Replace with the appropriate value for orderId
       ));
+       context.read<WinnersCubit>().login(WinnersRequestModel(userId: ApiConstant.userId,period: time.value));
       return null; // No cleanup needed
     }, []);
     return Scaffold(
@@ -86,39 +91,108 @@ class LuckyScreen extends HookWidget {
                       print('month called');
                        List<String> monthLabels =
           mstate.model.data?.map((e) => e.label ?? '').toList() ?? [];
-                                     return DropDownWidget1(hint:d?.selectMonth??'Select Month' ,items:monthLabels,
-                                     width: swidth,
-                                     onChanged: (p0){
-                                       String? selectedValue = mstate.model.data
-              ?.firstWhere((e) => e.label == p0, )
-              .value;
-time.value=selectedValue;
-          if (selectedValue != null) {
-            context.read<LuckyDrawCubit>().login(LuckyDrawRequestModel(
-        userId: ApiConstant.userId,
-        lang: ApiConstant.langCode,
-        period: selectedValue
-         // Replace with the appropriate value for orderId
-      ));
-                                     }},);
-                                   }
-                                   else{
-                                    return Container();
-                                   }
-   } ),
-   TitleContainerWidget(iconData: Icons.group,
+                                     return 
+         monthLabels.length>0 ?    TitleContainerWidget(
+                                      iconData: Icons.calendar_month,
+                                      title:selectedMonth.value!=null ?selectedMonth.value:d?.selectMonth??'Select Month' ,onTap: (){
+                      // context.router.push(ContactScreen(isLucky: true));
+                     
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+       
+        content: Column(
+       mainAxisSize: MainAxisSize.min,
+          children: [
+            TextViewMedium(name: d?.selectMonth??'Select Month',textColors: appColor,fontWeight: FontWeight.bold,),
+            vericalSpaceMedium,
+            ListView.builder(
+              shrinkWrap: true,
+            physics: AlwaysScrollableScrollPhysics(),
+              itemCount: monthLabels.length,
+              itemBuilder: (context,index){
+              return  Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: InkWell(
+                  onTap: (){
+                    selectedMonth.value= monthLabels[index];
+                    print(selectedMonth.value);
+                    String? selectedValue = mstate.model.data
+                                                           ?.firstWhere((e) => e.label == monthLabels[index], )
+                                                           .value;
+                                             time.value=selectedValue;
+                                                       if (selectedValue != null) {
+                                                         context.read<LuckyDrawCubit>().login(LuckyDrawRequestModel(
+                                                     userId: ApiConstant.userId,
+                                                     lang: ApiConstant.langCode,
+                                                     period: selectedValue
+                                                      // Replace with the appropriate value for orderId
+                                                   ));
+                                                      isFirst.value=false;
+                                                    context.read<WinnersCubit>().login(WinnersRequestModel(userId: ApiConstant.userId,period: time.value));
+                                                       Navigator.pop(context);
+                  }},
+                  child: Container(
+                    decoration: BoxDecoration(borderRadius:BorderRadius.circular(10.0),border: Border.all(color:appColor)),
+                    child: Center(child:Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextViewMedium(name: monthLabels[index],),
+                    )),),
+                ),
+              );
+                }),
+          ],
+        ));
+    }  
+      );
+    },
+  ):Container();
+
+                                    //  },);
+                                  //    TitleDropContainerWidget(
+                                  //     iconData: Icons.calendar_month,
+                                  //    widget: DropDownWidget1(hint:d?.selectMonth??'Select Month' ,items:monthLabels,
+                                  //      width: swidth,isNoBorder: true,
+                                  //      onChanged: (p0){
+                                  //        String? selectedValue = mstate.model.data
+                                  //                    ?.firstWhere((e) => e.label == p0, )
+                                  //                    .value;
+                                  //      time.value=selectedValue;
+                                  //                if (selectedValue != null) {
+                                  //                  context.read<LuckyDrawCubit>().login(LuckyDrawRequestModel(
+                                  //              userId: ApiConstant.userId,
+                                  //              lang: ApiConstant.langCode,
+                                  //              period: selectedValue
+                                  //               // Replace with the appropriate value for orderId
+                                  //            ));
+                                  //      }},),
+                                  //    );
+                                  //  }
+                                 
+   }
+   else{
+    return Container();
+   } }),
+isShowWinner.value==true?   TitleContainerWidget(iconData: Icons.group,
                 title:d?.winners??"Winners",onTap: (){
                  _showWinnersDialog(context,time.value) ;
-             },), 
+             },):Container(), 
               MultiBlocListener(
                 listeners: [
                   BlocListener<LuckyDrawCubit,LuckyDrawState>(
                     listener: (context,state){
-                          
+                        
                     },),
                      BlocListener<LuckyMonthsCubit,LuckyMonthsState>(
                     listener: (context,state){
-                    
+                  
+                    },),
+                     BlocListener<WinnersCubit,WinnersState>(
+                    listener: (context,state){
+                     if (state.networkStatusEnum == NetworkStatusEnum.loaded && ((state.model.data?.winners?.length??0)>0)){
+                      isShowWinner.value=true;
+                     }
                     },),
                     ],
                   child:  Helper.isUser()?  Column(
@@ -135,7 +209,7 @@ time.value=selectedValue;
                           children: [
                                      
                                      vericalSpaceMedium,
-                              (data?.ledgerData?.length??0)>0?       ListView.builder(
+                              (data?.ledgerData?.length??0 )>0?       ListView.builder(
                                       shrinkWrap: true,
                                       physics: NeverScrollableScrollPhysics(),
                                       itemCount:data?.ledgerData?.length,
@@ -164,7 +238,7 @@ time.value=selectedValue;
                                   
                                 ],
                               );
-                                     },):NoDataWidget(title:'No Plans'),
+                                     },):isFirst.value!=true? NoDataWidget(title:'No Plans'):Container(),
                       
                           
                                     //  TitleContainerWidget(title:'FAQ' ,

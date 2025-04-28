@@ -83,7 +83,9 @@ class _LedgerScreenState extends State<LedgerScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                PlanNameWidget(title: leData?.planName,),
+                Container(
+                  width: swidth/1.5,
+                  child: PlanNameWidget(title: leData?.planName,)),
                 TextViewLarge(title:Helper.capitalizeFirstLetter(leData?.status??''),textcolor: getStatusColor(leData?.status),fontWeight: FontWeight.bold,),
               ],
             ),

@@ -77,7 +77,7 @@ LangData? langData;
                             Row(
                              children: [
                                TextViewSmall(title:'${d?.date??'Date'} : ',textcolor:whiteColor,),
-                               TextViewMedium(name: cData?.date,textColors:whiteColor,fontWeight: FontWeight.w700,)
+                               TextViewSmall(title: cData?.date,textcolor:whiteColor,fontWeight: FontWeight.w700,)
                              ],
                            ),
                            Row(
