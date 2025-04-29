@@ -35,7 +35,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
      double swidth = MediaQuery.of(context).size.width;
     double sheight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: TitleAppBarWidget(title:'${d?.feedBack?? 'FeedBack'}'),
+      appBar: TitleAppBarWidget(title:'${d?.feedBack?? 'Feedback'}'),
       body:  BlocConsumer<GetFeedBackCubit, GetFeedBackState>(
             listener: (context, state) {
            
@@ -54,50 +54,52 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       var data=state.model.data;
      return Padding(
        padding:  EdgeInsets.all(screenPadding),
-       child:(data?.length??0)>0? Column(children: [
-            ListView.builder(
-              itemCount: data?.length,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-       itemBuilder: (context, index) {
-         
-       var fData=data?[index];
-              return Card(
-                elevation: 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                    Row(
+       child:(data?.length??0)>0? SingleChildScrollView(
+         child: Column(children: [
+              ListView.builder(
+                itemCount: data?.length,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+         itemBuilder: (context, index) {
+           
+         var fData=data?[index];
+                return Card(
+                  elevation: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CircleAvatar(
-                          radius: 30,
-                          backgroundImage: NetworkImage(fData?.image??''),
-                        ),
-                       Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                          Container(
-                            width:swidth/2,
-                            child: TextViewLarge(title: fData?.name,fontWeight: FontWeight.w700,textcolor: blackColor,)),
-                          Row(children: [
-                            StarWidget(value:double.parse(fData?.rating??'1') ),
-                            TextViewMedium(name:fData?.rating),
-                          ],),
-                          
-                         ],),
-                       ) 
-                      ],
-                    ),
-                    TextViewSmall(title: fData?.feedback,textcolor: blackColor,)
-                  ],),
-                ),
-         );}
-            )
-          ],):ReviewWidget()
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 30,
+                            backgroundImage: NetworkImage(fData?.image??''),
+                          ),
+                         Padding(
+                           padding: const EdgeInsets.all(8.0),
+                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                            Container(
+                              width:swidth/2,
+                              child: TextViewLarge(title: fData?.name,fontWeight: FontWeight.w700,textcolor: blackColor,)),
+                            Row(children: [
+                              StarWidget(value:double.parse(fData?.rating??'1') ),
+                              TextViewMedium(name:fData?.rating),
+                            ],),
+                            
+                           ],),
+                         ) 
+                        ],
+                      ),
+                      TextViewSmall(title: fData?.feedback,textcolor: blackColor,)
+                    ],),
+                  ),
+           );}
+              )
+            ],),
+       ):ReviewWidget()
      );}
         else
 return CircularWidgetC();
