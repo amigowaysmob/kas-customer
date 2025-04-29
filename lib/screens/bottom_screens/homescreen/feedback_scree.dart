@@ -35,7 +35,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
      double swidth = MediaQuery.of(context).size.width;
     double sheight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: TitleAppBarWidget(title:'${d?.feedBack?? 'Feed Back'}'),
+      appBar: TitleAppBarWidget(title:'${d?.feedBack?? 'FeedBack'}'),
       body:  BlocConsumer<GetFeedBackCubit, GetFeedBackState>(
             listener: (context, state) {
            

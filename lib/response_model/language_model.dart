@@ -280,13 +280,8 @@ class Data {
   String? calendar;
   String? update;
   String? planCreated;
-  String? advanceAmount;
-  String? advanceAmountTransactions;
-  String? advancePayment;
-  String? chitAmount;
-  String? enterAdvanceAmount;
-  String? pleaseEnterTheAmountAbove;
-  String? useAdvancePayment;
+  String? reviewType;
+  String? reviewSubject;
   String? flexiblePlan;
   String? todayGoldPrice;
   String? todaySilverPrice;
@@ -432,6 +427,13 @@ class Data {
   String? noWinnersYet;
   String? nextLuckyDrawDate;
   String? termsAndConditionsVideo;
+  String? advanceAmountTransactions;
+  String? chitAmount;
+  String? advanceAmount;
+  String? enterAdvanceAmount;
+  String? pleaseEnterTheAmountAbove;
+  String? useAdvancePayment;
+  String? advancePayment;
   String? myCustomers;
   String? myPlanner;
   String? todayTarget;
@@ -493,7 +495,7 @@ class Data {
       this.bankUpiId,
       this.nomineeName,
       this.nomineeIdProof,
-    
+
       this.nomineeMobileNumber,
       this.nomineeEmail,
       this.nomineeBankAcountHolderName,
@@ -700,13 +702,8 @@ class Data {
       this.calendar,
       this.update,
       this.planCreated,
-      this.advanceAmount,
-      this.advanceAmountTransactions,
-      this.advancePayment,
-      this.chitAmount,
-      this.enterAdvanceAmount,
-      this.pleaseEnterTheAmountAbove,
-      this.useAdvancePayment,
+      this.reviewType,
+      this.reviewSubject,
       this.flexiblePlan,
       this.todayGoldPrice,
       this.todaySilverPrice,
@@ -817,7 +814,7 @@ class Data {
       this.sendReview,
       this.giftAmount,
       this.basicDetails,
-   
+
       this.nomineeBasicDetails,
       this.ifscNumber,
       this.accountNumber,
@@ -848,10 +845,17 @@ class Data {
       this.winners,
       this.selectMonth,
       this.luckyDrawVideo,
- 
+
       this.noWinnersYet,
       this.nextLuckyDrawDate,
       this.termsAndConditionsVideo,
+      this.advanceAmountTransactions,
+      this.chitAmount,
+      this.advanceAmount,
+      this.enterAdvanceAmount,
+      this.pleaseEnterTheAmountAbove,
+      this.useAdvancePayment,
+      this.advancePayment,
       this.myCustomers,
       this.myPlanner,
       this.todayTarget,
@@ -1120,13 +1124,8 @@ class Data {
     calendar = json['calendar'];
     update = json['update'];
     planCreated = json['plan_created'];
-    advanceAmount = json['advance_amount'];
-    advanceAmountTransactions = json['advance_amount_transactions'];
-    advancePayment = json['advance_payment'];
-    chitAmount = json['chit_amount'];
-    enterAdvanceAmount = json['enter_advance_amount'];
-    pleaseEnterTheAmountAbove = json['please_enter_the_amount_above'];
-    useAdvancePayment = json['use_advance_payment'];
+    reviewType = json['review_type'];
+    reviewSubject = json['review_subject'];
     flexiblePlan = json['flexible_plan'];
     todayGoldPrice = json['today_gold_price'];
     todaySilverPrice = json['today_silver_price'];
@@ -1272,6 +1271,13 @@ class Data {
     noWinnersYet = json['No Winners Yet'];
     nextLuckyDrawDate = json['Next Lucky Draw Date'];
     termsAndConditionsVideo = json['Terms and Conditions Video'];
+    advanceAmountTransactions = json['advance_amount_transactions'];
+    chitAmount = json['chit_amount'];
+    advanceAmount = json['advance_amount'];
+    enterAdvanceAmount = json['enter_advance_amount'];
+    pleaseEnterTheAmountAbove = json['please_enter_the_amount_above_'];
+    useAdvancePayment = json['use_advance_payment'];
+    advancePayment = json['advance_payment'];
     myCustomers = json['my_customers'];
     myPlanner = json['my_planner'];
     todayTarget = json['today_target'];
@@ -1542,13 +1548,8 @@ class Data {
     data['calendar'] = this.calendar;
     data['update'] = this.update;
     data['plan_created'] = this.planCreated;
-    data['advance_amount'] = this.advanceAmount;
-    data['advance_amount_transactions'] = this.advanceAmountTransactions;
-    data['advance_payment'] = this.advancePayment;
-    data['chit_amount'] = this.chitAmount;
-    data['enter_advance_amount'] = this.enterAdvanceAmount;
-    data['please_enter_the_amount_above'] = this.pleaseEnterTheAmountAbove;
-    data['use_advance_payment'] = this.useAdvancePayment;
+    data['review_type'] = this.reviewType;
+    data['review_subject'] = this.reviewSubject;
     data['flexible_plan'] = this.flexiblePlan;
     data['today_gold_price'] = this.todayGoldPrice;
     data['today_silver_price'] = this.todaySilverPrice;
@@ -1695,6 +1696,13 @@ class Data {
     data['No Winners Yet'] = this.noWinnersYet;
     data['Next Lucky Draw Date'] = this.nextLuckyDrawDate;
     data['Terms and Conditions Video'] = this.termsAndConditionsVideo;
+    data['advance_amount_transactions'] = this.advanceAmountTransactions;
+    data['chit_amount'] = this.chitAmount;
+    data['advance_amount'] = this.advanceAmount;
+    data['enter_advance_amount'] = this.enterAdvanceAmount;
+    data['please_enter_the_amount_above_'] = this.pleaseEnterTheAmountAbove;
+    data['use_advance_payment'] = this.useAdvancePayment;
+    data['advance_payment'] = this.advancePayment;
     data['my_customers'] = this.myCustomers;
     data['my_planner'] = this.myPlanner;
     data['today_target'] = this.todayTarget;

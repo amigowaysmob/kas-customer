@@ -83,7 +83,8 @@ class Data {
   String? mobHomeLogo;
   String? headerLogo;
   String? websiteUrl;
-  String? luckyDrawVideo;
+  List<ReviewTypes>? reviewTypes;
+  List<ReviewTypes>? reviewSubject;
 
   Data(
       {this.id,
@@ -141,7 +142,8 @@ class Data {
       this.mobHomeLogo,
       this.headerLogo,
       this.websiteUrl,
-      this.luckyDrawVideo});
+      this.reviewTypes,
+      this.reviewSubject});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -205,7 +207,18 @@ class Data {
     mobHomeLogo = json['mob_home_logo'];
     headerLogo = json['header-logo'];
     websiteUrl = json['website_url'];
-    luckyDrawVideo = json['lucky_draw_video'];
+    if (json['review_types'] != null) {
+      reviewTypes = <ReviewTypes>[];
+      json['review_types'].forEach((v) {
+        reviewTypes!.add(new ReviewTypes.fromJson(v));
+      });
+    }
+    if (json['review_subject'] != null) {
+      reviewSubject = <ReviewTypes>[];
+      json['review_subject'].forEach((v) {
+        reviewSubject!.add(new ReviewTypes.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -276,7 +289,32 @@ class Data {
     data['mob_home_logo'] = this.mobHomeLogo;
     data['header-logo'] = this.headerLogo;
     data['website_url'] = this.websiteUrl;
-    data['lucky_draw_video'] = this.luckyDrawVideo;
+    if (this.reviewTypes != null) {
+      data['review_types'] = this.reviewTypes!.map((v) => v.toJson()).toList();
+    }
+    if (this.reviewSubject != null) {
+      data['review_subject'] =
+          this.reviewSubject!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class ReviewTypes {
+  String? key;
+  String? value;
+
+  ReviewTypes({this.key, this.value});
+
+  ReviewTypes.fromJson(Map<String, dynamic> json) {
+    key = json['key'];
+    value = json['value'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['key'] = this.key;
+    data['value'] = this.value;
     return data;
   }
 }

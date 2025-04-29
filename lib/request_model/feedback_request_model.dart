@@ -2,14 +2,24 @@ class FeedBackRequestModel {
   String? userId;
   String? feedback;
   String? rating;
+  String? ratingTerm;
+  String? ratingIssueType;
   String? lang;
 
-  FeedBackRequestModel({this.userId, this.feedback, this.rating, this.lang});
+  FeedBackRequestModel(
+      {this.userId,
+      this.feedback,
+      this.rating,
+      this.ratingTerm,
+      this.ratingIssueType,
+      this.lang});
 
   FeedBackRequestModel.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
     feedback = json['feedback'];
     rating = json['rating'];
+    ratingTerm = json['rating_term'];
+    ratingIssueType = json['rating_issue_type'];
     lang = json['lang'];
   }
 
@@ -18,6 +28,8 @@ class FeedBackRequestModel {
     data['user_id'] = this.userId;
     data['feedback'] = this.feedback;
     data['rating'] = this.rating;
+    data['rating_term'] = this.ratingTerm;
+    data['rating_issue_type'] = this.ratingIssueType;
     data['lang'] = this.lang;
     return data;
   }

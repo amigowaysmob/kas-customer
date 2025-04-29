@@ -9,7 +9,9 @@ import 'package:kasnew/response_model/language_model.dart';
 import 'package:kasnew/utils/constant.dart';
 import 'package:kasnew/utils/constants/api_constants.dart';
 import 'package:kasnew/widgets/button_widget.dart';
+import 'package:kasnew/widgets/drop_down_widget.dart';
 import 'package:kasnew/widgets/text_view_large.dart';
+import 'package:kasnew/widgets/text_view_small.dart';
 import 'package:kasnew/widgets/toast_widget.dart';
 
 class ReviewWidget extends HookWidget {
@@ -17,14 +19,38 @@ class ReviewWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    double swidth = MediaQuery.of(context).size.width;
+    double sheight = MediaQuery.of(context).size.height;
     final lang = ApiConstant.language; // Language configuration
     final d = lang?.data;
-
+    var revTypeKey=useState<List<String>>([]);
+       var revTypevalue=useState<List<String>>([]);
+        var revSubKey=useState<List<String>>([]);
+       var revSubvalue=useState<List<String>>([]);
+var site=ApiConstant.siteModel;
+ useEffect(() {
+      // Trigger the API call when the widget is first built
+    for (var option in site?.data?[0].reviewTypes??[]) {
+    revTypeKey.value.add(option.key??'');
+    revTypevalue.value.add(option.value??'');
+  }
+   for (var option in site?.data?[0].reviewSubject??[]) {
+    revSubKey.value.add(option.key??'');
+    revSubvalue.value.add(option.value??'');
+  }
+      return null; // No cleanup needed
+    }, []);
+ 
+  print('review typekey------------${revTypeKey.value}');
+ print('review subkey------------${revSubKey.value}');
     // State controllers
     final reviewController = useTextEditingController();
     final ratingValue = useState<double>(0.0);
     final formKey = useMemoized(() => GlobalKey<FormState>());
-
+var reviewType=useState<String?>(null);
+var reviewFor=useState<String?>(null);
+var reviewTypeKey=useState<String?>(null);
+var reviewForKey=useState<String?>(null);
     // Review validation
     String? _validateReview(String? value) {
       if (value == null || value.trim().isEmpty) {
@@ -40,7 +66,7 @@ class ReviewWidget extends HookWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Title
             TextViewLarge(
@@ -92,8 +118,33 @@ class ReviewWidget extends HookWidget {
               keyboardType: TextInputType.multiline,
               maxLines: null,
             ),
-            const SizedBox(height: 24),
-
+          vericalSpaceLarge,
+            TextViewSmall(title: d?.reviewType??'Choose Review Type',fontWeight: FontWeight.bold,),
+            vericalSpaceMedium,
+            DropDownWidget1(
+              width: swidth,
+              size: reviewType.value,
+              hint:  d?.reviewType??'Choose Review Type', items: revTypevalue.value, onChanged: (p0){
+            reviewType.value=p0;
+            var index=revTypevalue.value.indexOf(p0??'');
+            
+            reviewTypeKey.value=revTypeKey.value[index];
+            print('review type key-------------${reviewTypeKey.value}');
+            }),
+            vericalSpaceLarge,
+            
+            
+            TextViewSmall(title: d?.reviewSubject??'Choose Review Subject',fontWeight: FontWeight.bold,),
+ vericalSpaceMedium,
+ DropDownWidget1(
+  width: swidth,
+   size: reviewFor.value,
+  hint: d?.reviewSubject??'Choose Review Subject', items:revSubvalue.value , onChanged: (p0){
+reviewFor.value=p0;
+var index=revSubvalue.value.indexOf(p0??'');
+reviewForKey.value=revSubKey.value?[index];
+            }),
+            vericalSpaceMedium,
             // Buttons
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -119,6 +170,8 @@ class ReviewWidget extends HookWidget {
                               feedback: reviewController.text,
                               rating: ratingValue.value.toString(),
                               lang: ApiConstant.langCode,
+                              ratingTerm: reviewTypeKey.value,
+                              ratingIssueType: reviewForKey.value
                             ),
                           );
 

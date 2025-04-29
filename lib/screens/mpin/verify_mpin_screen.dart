@@ -362,7 +362,7 @@ body:MultiBlocListener(
                                  buttonName: 'Upgrade Now',
                                   onPressed: () {
                                     _launchURL(
-                                        'https://play.google.com/store/apps/details?id=com.kascustomer.app&pli=1');
+                                      Platform.isIOS!=true?  'https://play.google.com/store/apps/details?id=com.kascustomer.app&pli=1':'https://apps.apple.com/us/app/kas-jewellery-digigold-savings/id6741509982');
                                   },
                                   buttonColor: appColor,
                                 ),
@@ -410,7 +410,7 @@ body:MultiBlocListener(
                                     buttonName: 'Update Now',
                                     onPressed: () {
                                       _launchURL(
-                                          'https://play.google.com/store/apps/details?id=com.kascustomer.app&pli=1');
+                                         Platform.isIOS!=true?  'https://play.google.com/store/apps/details?id=com.kascustomer.app&pli=1':'https://apps.apple.com/us/app/kas-jewellery-digigold-savings/id6741509982');
                                     },
                                     buttonColor: appColor,
                                   ),
