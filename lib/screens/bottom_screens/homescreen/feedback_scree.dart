@@ -64,9 +64,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextViewLarge(title: 'My Reviews',textcolor: appColor,fontWeight: FontWeight.bold,),
-              ButtonWidget(onPressed: (){
+          (data?.length??0)==0?     ButtonWidget(onPressed: (){
               showAddReview(context:context);
-              }, buttonName: 'Add Review', buttonColor: appColor,width: swidth/2.5,)
+              }, buttonName: 'Add Review', buttonColor: appColor,width: swidth/2.5,):Container()
             ],
           ),
           (data?.length??0)>0?    ListView.builder(

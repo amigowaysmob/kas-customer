@@ -17,7 +17,7 @@ class TableWidget extends StatelessWidget {
     double sheight = MediaQuery.of(context).size.height;
     
     return Container(
-      height: sheight/1.1,
+      height: sheight/1.2,
       child: data!.isEmpty
           ? TextViewSmall(
               title:d?.noData?? "No Data !",

@@ -160,7 +160,7 @@ var reviewForKey=useState<String?>(null);
               isTicket==true?    Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextViewSmall(title: d?.reviewSubject??'Choose Review Subject',fontWeight: FontWeight.bold,),
+                    TextViewSmall(title: d?.reviewSubject??'Choose Review Subject*',fontWeight: FontWeight.bold,),
                      vericalSpaceMedium,
                      DropDownWidget1(
                       width: swidth,
@@ -196,7 +196,7 @@ var reviewForKey=useState<String?>(null);
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                   
-                    TextViewSmall(title: d?.reviewType??'Choose Review Type',fontWeight: FontWeight.bold,),
+                    TextViewSmall(title: d?.reviewType??'Choose Review Type*',fontWeight: FontWeight.bold,),
                vericalSpaceMedium,
                 DropDownWidget1(
                   width: swidth,
@@ -229,7 +229,7 @@ var reviewForKey=useState<String?>(null);
                   controller: reviewController,
                   // validator: _validateReview,
                   decoration: InputDecoration(
-                    labelText: 'Write your review*',
+                    labelText: 'Write your review',
                     hintText: 'Write your review',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
