@@ -59,11 +59,12 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
          child: Column(children: [
           // ReviewWidget(),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextViewLarge(title: 'My Reviews',textcolor: appColor,fontWeight: FontWeight.bold,),
               ButtonWidget(onPressed: (){
               _showAddReview(context,);
-              }, buttonName: 'Add Review', buttonColor: appColor,width: swidth/2,)
+              }, buttonName: 'Add Review', buttonColor: appColor,width: swidth/2.5,)
             ],
           ),
           (data?.length??0)>0?    ListView.builder(
@@ -105,11 +106,11 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                       ),
                       TextViewSmall(title: fData?.feedback,textcolor: blackColor,),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        // mainAxisAlignment: MainAxisAlignment.end,
                         children: [
 ButtonWidget(onPressed: (){
   
-}, buttonName: 'Edit', buttonColor: appColor)
+}, buttonName: 'Edit', buttonColor: appColor,width:ApiConstant.langCode!='ta'? swidth/ 4:swidth/ 3,icon: Icon(Icons.edit,color: whiteColor,),)
                       ],)
                     ],),
                   ),
