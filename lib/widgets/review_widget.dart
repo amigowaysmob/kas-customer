@@ -13,9 +13,11 @@ import 'package:kasnew/widgets/drop_down_widget.dart';
 import 'package:kasnew/widgets/text_view_large.dart';
 import 'package:kasnew/widgets/text_view_small.dart';
 import 'package:kasnew/widgets/toast_widget.dart';
-
+@RoutePage()
 class ReviewWidget extends HookWidget {
-  ReviewWidget({super.key});
+  String? reviewContent;
+ double? star;
+  ReviewWidget({this.reviewContent,this.star});
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,9 @@ class ReviewWidget extends HookWidget {
         var revSubKey=useState<List<String>>([]);
        var revSubvalue=useState<List<String>>([]);
 var site=ApiConstant.siteModel;
+var ratingError=useState<String?>(null);
+ var reviewController = useTextEditingController();
+    var ratingValue = useState<double>(0.0);
  useEffect(() {
       // Trigger the API call when the widget is first built
     for (var option in site?.data?[0].reviewTypes??[]) {
@@ -38,14 +43,15 @@ var site=ApiConstant.siteModel;
     revSubKey.value.add(option.key??'');
     revSubvalue.value.add(option.value??'');
   }
+  reviewController.text=reviewContent??'';
+  ratingValue.value=star??0.0;
       return null; // No cleanup needed
     }, []);
  
   print('review typekey------------${revTypeKey.value}');
  print('review subkey------------${revSubKey.value}');
     // State controllers
-    final reviewController = useTextEditingController();
-    final ratingValue = useState<double>(0.0);
+  
     final formKey = useMemoized(() => GlobalKey<FormState>());
 var reviewType=useState<String?>(null);
 var reviewFor=useState<String?>(null);
@@ -70,7 +76,7 @@ var reviewForKey=useState<String?>(null);
           children: [
             // Title
             TextViewLarge(
-              title: 'Add Review',
+              title: 'Add Ratings',
               textcolor: blackColor,
               fontWeight: FontWeight.bold,
             ),
@@ -80,7 +86,9 @@ var reviewForKey=useState<String?>(null);
             RatingStars(
               axis: Axis.horizontal,
               value: ratingValue.value,
-              onValueChanged: (v) => ratingValue.value = v,
+              onValueChanged: (v) { ratingValue.value = v;
+ratingError.value=null;
+              },
               starCount: 5,
               starSize: 24,
               valueLabelColor: const Color(0xff9b9b9b),
@@ -97,12 +105,26 @@ var reviewForKey=useState<String?>(null);
               starOffColor: const Color.fromARGB(255, 202, 208, 218),
               starColor: sandleColor,
             ),
-            const SizedBox(height: 24),
-
+               ratingError.value!=null?TextViewSmall(title: ratingError.value,textcolor: Colors.red,):Container(),                                                                                                                                                                                                                                                                                                                                                                                                                                                
+  vericalSpaceLarge,
+            
+            
+            TextViewSmall(title: d?.reviewSubject??'Choose Review Subject',fontWeight: FontWeight.bold,),
+ vericalSpaceMedium,
+ DropDownWidget1(
+  width: swidth,
+   size: reviewFor.value,
+  hint: d?.reviewSubject??'Choose Review Subject', items:revSubvalue.value , onChanged: (p0){
+reviewFor.value=p0;
+var index=revSubvalue.value.indexOf(p0??'');
+reviewForKey.value=revSubKey.value?[index];
+            }),
+          
+            vericalSpaceMedium,
             // Review Input Field
             TextFormField(
               controller: reviewController,
-              validator: _validateReview,
+              // validator: _validateReview,
               decoration: InputDecoration(
                 labelText: 'Write your review*',
                 hintText: 'Write your review',
@@ -116,35 +138,22 @@ var reviewForKey=useState<String?>(null);
                 ),
               ),
               keyboardType: TextInputType.multiline,
-              maxLines: null,
+              maxLines:5,
             ),
-          vericalSpaceLarge,
-            TextViewSmall(title: d?.reviewType??'Choose Review Type',fontWeight: FontWeight.bold,),
-            vericalSpaceMedium,
-            DropDownWidget1(
-              width: swidth,
-              size: reviewType.value,
-              hint:  d?.reviewType??'Choose Review Type', items: revTypevalue.value, onChanged: (p0){
-            reviewType.value=p0;
-            var index=revTypevalue.value.indexOf(p0??'');
+          // vericalSpaceLarge,
+          //   TextViewSmall(title: d?.reviewType??'Choose Review Type',fontWeight: FontWeight.bold,),
+          //   vericalSpaceMedium,
+          //   DropDownWidget1(
+          //     width: swidth,
+          //     size: reviewType.value,
+          //     hint:  d?.reviewType??'Choose Review Type', items: revTypevalue.value, onChanged: (p0){
+          //   reviewType.value=p0;
+          //   var index=revTypevalue.value.indexOf(p0??'');
             
-            reviewTypeKey.value=revTypeKey.value[index];
-            print('review type key-------------${reviewTypeKey.value}');
-            }),
-            vericalSpaceLarge,
-            
-            
-            TextViewSmall(title: d?.reviewSubject??'Choose Review Subject',fontWeight: FontWeight.bold,),
- vericalSpaceMedium,
- DropDownWidget1(
-  width: swidth,
-   size: reviewFor.value,
-  hint: d?.reviewSubject??'Choose Review Subject', items:revSubvalue.value , onChanged: (p0){
-reviewFor.value=p0;
-var index=revSubvalue.value.indexOf(p0??'');
-reviewForKey.value=revSubKey.value?[index];
-            }),
-            vericalSpaceMedium,
+          //   reviewTypeKey.value=revTypeKey.value[index];
+          //   print('review type key-------------${reviewTypeKey.value}');
+          //   }),
+          
             // Buttons
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -177,9 +186,10 @@ reviewForKey.value=revSubKey.value?[index];
 
                       await context.router.pop();
                     } else if (ratingValue.value == 0.0) {
-                      ToastWidget(
-                        message: 'Please give your ratings',
-                      ).build(context);
+                      // ToastWidget(
+                      //   message: 'Please give your ratings',
+                      // ).build(context);
+                      ratingError.value='Please give your ratings';
                     }
                   },
                   buttonName: 'Send Review',

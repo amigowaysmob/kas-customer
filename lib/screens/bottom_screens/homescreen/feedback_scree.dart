@@ -8,6 +8,7 @@ import 'package:kasnew/states/get_feed_back_state.dart';
 import 'package:kasnew/utils/constant.dart';
 import 'package:kasnew/utils/constants/api_constants.dart';
 import 'package:kasnew/utils/enums.dart';
+import 'package:kasnew/widgets/button_widget.dart';
 import 'package:kasnew/widgets/indicator_widget.dart';
 import 'package:kasnew/widgets/review_widget.dart';
 import 'package:kasnew/widgets/star_widget.dart';
@@ -54,9 +55,18 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       var data=state.model.data;
      return Padding(
        padding:  EdgeInsets.all(screenPadding),
-       child:(data?.length??0)>0? SingleChildScrollView(
+       child: SingleChildScrollView(
          child: Column(children: [
-              ListView.builder(
+          // ReviewWidget(),
+          Row(
+            children: [
+              TextViewLarge(title: 'My Reviews',textcolor: appColor,fontWeight: FontWeight.bold,),
+              ButtonWidget(onPressed: (){
+              _showAddReview(context,);
+              }, buttonName: 'Add Review', buttonColor: appColor,width: swidth/2,)
+            ],
+          ),
+          (data?.length??0)>0?    ListView.builder(
                 itemCount: data?.length,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -88,18 +98,26 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                               StarWidget(value:double.parse(fData?.rating??'1') ),
                               TextViewMedium(name:fData?.rating),
                             ],),
-                            
+                            TextViewSmall(title: 'date and time',textcolor: blackColor,)
                            ],),
                          ) 
                         ],
                       ),
-                      TextViewSmall(title: fData?.feedback,textcolor: blackColor,)
+                      TextViewSmall(title: fData?.feedback,textcolor: blackColor,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+ButtonWidget(onPressed: (){
+  
+}, buttonName: 'Edit', buttonColor: appColor)
+                      ],)
                     ],),
                   ),
            );}
-              )
+              ):Container()
             ],),
-       ):ReviewWidget()
+       )
+       
      );}
         else
 return CircularWidgetC();
@@ -108,3 +126,10 @@ return CircularWidgetC();
     );
   }
 }
+ void _showAddReview(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        content: ReviewWidget(),
+      );});}

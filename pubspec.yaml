@@ -83,6 +83,7 @@ dependencies:
   device_info_plus: ^10.1.2
   flutter_image_compress: ^2.3.0
   font_awesome_flutter: ^10.8.0
+  two_dimensional_scrollables: ^0.3.3
   
 flutter_launcher_icons:
   android: true
