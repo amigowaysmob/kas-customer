@@ -143,5 +143,7 @@ static const String userLuckyDraw='app-my-customer-lucky-draw-ledger';
 static const String userLuckyTerms='app-my-customer-lucky-draw-terms-conditions';
 static const String userWinners='app-my-customer-lucky-draw-winners';
 static const String userLuckyMonths='app-my-customer-lucky-draw-months';
+static const String userFeedSubCat='app-my-customer-get-subcategory';
+static const String userSubmitTicket='app-my-customer-submit-ticket';
   }
   

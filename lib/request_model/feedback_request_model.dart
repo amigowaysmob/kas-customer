@@ -5,6 +5,7 @@ class FeedBackRequestModel {
   String? ratingTerm;
   String? ratingIssueType;
   String? lang;
+  String? reviewId;
 
   FeedBackRequestModel(
       {this.userId,
@@ -12,7 +13,8 @@ class FeedBackRequestModel {
       this.rating,
       this.ratingTerm,
       this.ratingIssueType,
-      this.lang});
+      this.lang,
+      this.reviewId});
 
   FeedBackRequestModel.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
@@ -21,6 +23,7 @@ class FeedBackRequestModel {
     ratingTerm = json['rating_term'];
     ratingIssueType = json['rating_issue_type'];
     lang = json['lang'];
+    reviewId=json['review_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -31,6 +34,7 @@ class FeedBackRequestModel {
     data['rating_term'] = this.ratingTerm;
     data['rating_issue_type'] = this.ratingIssueType;
     data['lang'] = this.lang;
+    data['review_id']=this.reviewId;
     return data;
   }
 }

@@ -17,6 +17,7 @@ import 'package:kasnew/cubits/e_cat_cubit.dart';
 import 'package:kasnew/cubits/e_passbook_cubit.dart';
 import 'package:kasnew/cubits/ecat_detail_cubit.dart';
 import 'package:kasnew/cubits/feed_back_cubit.dart';
+import 'package:kasnew/cubits/feed_sub_cat_cubit.dart';
 import 'package:kasnew/cubits/forgot_mpin_cubit.dart';
 import 'package:kasnew/cubits/gallery_cubit.dart';
 import 'package:kasnew/cubits/get_feedback_cubit.dart';
@@ -63,6 +64,7 @@ import 'package:kasnew/cubits/stepper_form_cubit.dart';
 import 'package:kasnew/cubits/store_detail_cubit.dart';
 import 'package:kasnew/cubits/stores_cubit.dart';
 import 'package:kasnew/cubits/submit_enquiry_cubit.dart';
+import 'package:kasnew/cubits/submit_ticket_cubit.dart';
 import 'package:kasnew/cubits/summary_cubit.dart';
 import 'package:kasnew/cubits/terms_cubit.dart';
 import 'package:kasnew/cubits/token_cubit.dart';
@@ -491,6 +493,14 @@ class MyApp extends StatelessWidget {
           ),
            BlocProvider<LuckyMonthsCubit>(
             create: (repoContext) =>LuckyMonthsCubit(authRepository:AuthRepository(apiService)),
+            
+          ),
+            BlocProvider<FeedSubCatCubit>(
+            create: (repoContext) =>FeedSubCatCubit(authRepository:AuthRepository(apiService)),
+            
+          ),
+            BlocProvider<SubmitTicketCubit>(
+            create: (repoContext) =>SubmitTicketCubit(authRepository:AuthRepository(apiService)),
             
           ),
           ],

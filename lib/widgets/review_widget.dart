@@ -4,12 +4,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:kasnew/cubits/feed_back_cubit.dart';
+import 'package:kasnew/cubits/feed_sub_cat_cubit.dart';
+import 'package:kasnew/cubits/submit_ticket_cubit.dart';
+import 'package:kasnew/request_model/feed_sub_cat_request_model.dart';
 import 'package:kasnew/request_model/feedback_request_model.dart';
+import 'package:kasnew/request_model/submit_ticket_request_model.dart';
 import 'package:kasnew/response_model/language_model.dart';
+import 'package:kasnew/states/feed_sub_cat_state.dart';
 import 'package:kasnew/utils/constant.dart';
 import 'package:kasnew/utils/constants/api_constants.dart';
+import 'package:kasnew/utils/enums.dart';
 import 'package:kasnew/widgets/button_widget.dart';
 import 'package:kasnew/widgets/drop_down_widget.dart';
+import 'package:kasnew/widgets/indicator_widget.dart';
 import 'package:kasnew/widgets/text_view_large.dart';
 import 'package:kasnew/widgets/text_view_small.dart';
 import 'package:kasnew/widgets/toast_widget.dart';
@@ -17,7 +24,9 @@ import 'package:kasnew/widgets/toast_widget.dart';
 class ReviewWidget extends HookWidget {
   String? reviewContent;
  double? star;
-  ReviewWidget({this.reviewContent,this.star});
+ String? reviewId;
+ bool? isTicket;
+  ReviewWidget({this.reviewContent,this.star,this.reviewId,this.isTicket});
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +38,13 @@ class ReviewWidget extends HookWidget {
        var revTypevalue=useState<List<String>>([]);
         var revSubKey=useState<List<String>>([]);
        var revSubvalue=useState<List<String>>([]);
+
 var site=ApiConstant.siteModel;
 var ratingError=useState<String?>(null);
  var reviewController = useTextEditingController();
     var ratingValue = useState<double>(0.0);
+    var reviewSubError=useState<String?>(null);
+    var reviewTypeError=useState<String?>(null);
  useEffect(() {
       // Trigger the API call when the widget is first built
     for (var option in site?.data?[0].reviewTypes??[]) {
@@ -109,18 +121,70 @@ ratingError.value=null;
   vericalSpaceLarge,
             
             
-            TextViewSmall(title: d?.reviewSubject??'Choose Review Subject',fontWeight: FontWeight.bold,),
- vericalSpaceMedium,
- DropDownWidget1(
-  width: swidth,
-   size: reviewFor.value,
-  hint: d?.reviewSubject??'Choose Review Subject', items:revSubvalue.value , onChanged: (p0){
-reviewFor.value=p0;
-var index=revSubvalue.value.indexOf(p0??'');
-reviewForKey.value=revSubKey.value?[index];
-            }),
-          
+          isTicket==true?    Column(
+              children: [
+                TextViewSmall(title: d?.reviewSubject??'Choose Review Subject',fontWeight: FontWeight.bold,),
+                 vericalSpaceMedium,
+                 DropDownWidget1(
+                  width: swidth,
+                   size: reviewFor.value,
+                  hint: d?.reviewSubject??'Choose Review Subject', items:revSubvalue.value , onChanged: (p0){
+                reviewFor.value=p0;
+                reviewSubError.value=null;
+                var index=revSubvalue.value.indexOf(p0??'');
+                reviewForKey.value=revSubKey.value[index];
+                context.read<FeedSubCatCubit>().login(FeedSubCatRequestModel(userId: ApiConstant.userId,categoryId: reviewForKey.value,
+                lang:ApiConstant.langCode));
+                }),
+                          
+                vericalSpaceMedium,
+                BlocConsumer<FeedSubCatCubit,FeedSubCatState>(
+                  listener:(context,feeState){
+                    if(feeState.networkStatusEnum==NetworkStatusEnum.loaded){
+                       // Trigger the API call when the widget is first built
+    for (var option in feeState.model.data??[]) {
+    revTypeKey.value.add(option.key??'');
+    revTypevalue.value.add(option.value??'');
+  }  
+                    }
+                  },
+                  builder:(context,feeState){
+                   if(feeState.networkStatusEnum==NetworkStatusEnum.loading){
+                    return CircularWidgetC();
+                   }
+                   else if(feeState.networkStatusEnum==NetworkStatusEnum.loaded)
+{
+  return   
+  Column(
+    children: [
+      vericalSpaceLarge,
+      TextViewSmall(title: d?.reviewType??'Choose Review Type',fontWeight: FontWeight.bold,),
             vericalSpaceMedium,
+            DropDownWidget1(
+              width: swidth,
+              size: reviewType.value,
+              hint:  d?.reviewType??'Choose Review Type', items: revTypevalue.value, onChanged: (p0){
+            reviewType.value=p0;
+            var index=revTypevalue.value.indexOf(p0??'');
+            
+            reviewTypeKey.value=revTypeKey.value[index];
+            reviewTypeError.value=null;
+            print('review type key-------------${reviewTypeKey.value}');
+            }),
+            reviewTypeError.value!=null?TextViewSmall(title: ratingError.value,textcolor: Colors.red,):Container(), 
+    ],
+  );
+  
+            
+}
+else{
+  return Container();
+}
+                   
+                  }
+                )
+              ],
+            ):Container(),
             // Review Input Field
             TextFormField(
               controller: reviewController,
@@ -170,6 +234,7 @@ reviewForKey.value=revSubKey.value?[index];
                 // Send Review Button
                 ButtonWidget(
                   onPressed: () async {
+                    if(isTicket!=true){
                     if (formKey.currentState!.validate() &&
                         ratingValue.value != 0.0) {
                       // Call feedback submission API
@@ -180,7 +245,7 @@ reviewForKey.value=revSubKey.value?[index];
                               rating: ratingValue.value.toString(),
                               lang: ApiConstant.langCode,
                               ratingTerm: reviewTypeKey.value,
-                              ratingIssueType: reviewForKey.value
+                              ratingIssueType: reviewForKey.value,reviewId: reviewId
                             ),
                           );
 
@@ -191,7 +256,25 @@ reviewForKey.value=revSubKey.value?[index];
                       // ).build(context);
                       ratingError.value='Please give your ratings';
                     }
-                  },
+                  }
+                  else{
+if(reviewFor.value==null){
+  reviewSubError.value='Please Select the Review Subject';
+}else if(reviewType.value==null){
+  reviewTypeError.value='Please Select the Review Type';
+}
+else{
+ context.read<SubmitTicketCubit>() .login(SubmitTicketRequestModel(
+  userId: ApiConstant.userId,
+  lang: ApiConstant.langCode,
+  description: reviewController.text,
+  ticketType:reviewForKey.value,
+  issueType: reviewTypeKey.value,
+ ));
+}
+                  }
+                  }
+                  ,
                   buttonName: 'Send Review',
                   buttonColor: appColor,
                   width: 100,

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kasnew/cubits/get_feedback_cubit.dart';
 import 'package:kasnew/request_model/home_request_model.dart';
 import 'package:kasnew/response_model/language_model.dart';
+import 'package:kasnew/screens/bottom_screens/homescreen/ticket_widget.dart';
 import 'package:kasnew/states/get_feed_back_state.dart';
 import 'package:kasnew/utils/constant.dart';
 import 'package:kasnew/utils/constants/api_constants.dart';
@@ -52,17 +53,18 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       return CircularWidgetC();
     }
     if( state.networkStatusEnum==NetworkStatusEnum.loaded){
-      var data=state.model.data;
+      var data=state.model.data?.reviews;
      return Padding(
        padding:  EdgeInsets.all(screenPadding),
        child: SingleChildScrollView(
          child: Column(children: [
           // ReviewWidget(),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextViewLarge(title: 'My Reviews',textcolor: appColor,fontWeight: FontWeight.bold,),
               ButtonWidget(onPressed: (){
-              _showAddReview(context,);
+              showAddReview(context:context);
               }, buttonName: 'Add Review', buttonColor: appColor,width: swidth/2,)
             ],
           ),
@@ -108,13 +110,15 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
 ButtonWidget(onPressed: (){
-  
-}, buttonName: 'Edit', buttonColor: appColor)
-                      ],)
+   showAddReview(context:context,reviewId: fData?.id,isTicket: false,star:fData?.rating!=null?double.parse(fData?.rating??'1'):0.0,reviewContent: fData?.feedback);
+}, buttonName: 'Edit', buttonColor: appColor),
+
+                      ],),
+                      TicketWidget(tickets: state.model.data?.tickets,)
                     ],),
                   ),
            );}
-              ):Container()
+              ):Container(),
             ],),
        )
        
@@ -126,10 +130,10 @@ return CircularWidgetC();
     );
   }
 }
- void _showAddReview(BuildContext context) {
+ void showAddReview({required BuildContext context,String? reviewId,bool? isTicket,double? star,String? reviewContent}) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        content: ReviewWidget(),
+        content: ReviewWidget(reviewId: reviewId,isTicket: isTicket,star: star,reviewContent: reviewContent,),
       );});}

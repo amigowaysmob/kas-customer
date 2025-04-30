@@ -4,6 +4,7 @@ import 'package:kasnew/request_model/change_mpin_request_model.dart';
 import 'package:kasnew/request_model/chit_close_request%20mode.dart';
 import 'package:kasnew/request_model/con_register_request_model.dart';
 import 'package:kasnew/request_model/due_payment_status_request_model.dart';
+import 'package:kasnew/request_model/feed_sub_cat_request_model.dart';
 import 'package:kasnew/request_model/feedback_request_model.dart';
 import 'package:kasnew/request_model/gift_delivery_request_model.dart';
 import 'package:kasnew/request_model/gift_list_request_model.dart';
@@ -31,6 +32,7 @@ import 'package:kasnew/request_model/resend_otp_request_model.dart';
 import 'package:kasnew/request_model/stepper_form_request_model.dart';
 import 'package:kasnew/request_model/store_detail_request_model.dart';
 import 'package:kasnew/request_model/submit_enquiry_request_model.dart';
+import 'package:kasnew/request_model/submit_ticket_request_model.dart';
 import 'package:kasnew/request_model/trans_request_model.dart';
 import 'package:kasnew/request_model/update_profile_photo_request_model.dart';
 import 'package:kasnew/request_model/user_id_request_model.dart';
@@ -47,6 +49,7 @@ import 'package:kasnew/response_model/e_cat_detail_model.dart';
 import 'package:kasnew/response_model/e_cat_detail_request_model.dart';
 import 'package:kasnew/response_model/e_cat_model.dart';
 import 'package:kasnew/response_model/feed_back_model.dart';
+import 'package:kasnew/response_model/feed_sub_cat_model.dart';
 import 'package:kasnew/response_model/forgot_mpin_model.dart';
 import 'package:kasnew/response_model/gallery_model.dart';
 import 'package:kasnew/response_model/get_feedback_model.dart';
@@ -93,6 +96,7 @@ import 'package:kasnew/response_model/stepper_model.dart';
 import 'package:kasnew/response_model/store_detail_model.dart';
 import 'package:kasnew/response_model/stores_model.dart';
 import 'package:kasnew/response_model/submit_enquiry_model.dart';
+import 'package:kasnew/response_model/submit_ticket_model.dart';
 import 'package:kasnew/response_model/summary_model.dart';
 import 'package:kasnew/response_model/token_model.dart';
 import 'package:kasnew/response_model/total_pay_due_model.dart';
@@ -1486,5 +1490,45 @@ final ApiService apiService;
       print('Stacktrace${stacktrace}');
       return (false, LuckyMonthsModel());
     }
-    }         
+    }  
+    Future<dynamic> userFeedSubCat(FeedSubCatRequestModel requestModel)async{
+ try {
+ 
+      var response = await apiService.post(ApiConstant.userFeedSubCat,requestModel);
+       if (response.statusCode == 200 ) {
+        var responseData = response.data;
+        print('home-----${responseData}');
+        return (true,FeedSubCatModel.fromJson(responseData));
+       }
+       else {
+        // Handle other status codes
+        print('Unexpected status code: ${response.statusCode}');
+        return (false,FeedSubCatModel());
+      }
+    } catch (e,stacktrace) {
+      print('Exception occurred: $e');
+      print('Stacktrace${stacktrace}');
+      return (false, FeedSubCatModel());
+    }
+    }        
+     Future<dynamic> userSubmitTicket(SubmitTicketRequestModel requestModel)async{
+ try {
+ 
+      var response = await apiService.post(ApiConstant.userSubmitTicket,requestModel);
+       if (response.statusCode == 200 ) {
+        var responseData = response.data;
+        print('home-----${responseData}');
+        return (true,SubmitTicketModel.fromJson(responseData));
+       }
+       else {
+        // Handle other status codes
+        print('Unexpected status code: ${response.statusCode}');
+        return (false,SubmitTicketModel());
+      }
+    } catch (e,stacktrace) {
+      print('Exception occurred: $e');
+      print('Stacktrace${stacktrace}');
+      return (false, SubmitTicketModel());
+    }
+    }        
 }
