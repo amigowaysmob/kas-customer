@@ -101,6 +101,7 @@ class Tickets {
   String? ticketType;
   String? issueType;
   String? status;
+  String? statusContent;
 
   Tickets(
       {this.id,
@@ -110,7 +111,8 @@ class Tickets {
       this.dateTime,
       this.ticketType,
       this.issueType,
-      this.status});
+      this.status,
+      this.statusContent});
 
   Tickets.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -120,7 +122,8 @@ class Tickets {
     dateTime = json['date_time'];
     ticketType = json['ticket_type'];
     issueType = json['issue_type'];
-    status=json['status'];
+    status = json['status'];
+    statusContent = json['status_content'];
   }
 
   Map<String, dynamic> toJson() {
@@ -132,7 +135,8 @@ class Tickets {
     data['date_time'] = this.dateTime;
     data['ticket_type'] = this.ticketType;
     data['issue_type'] = this.issueType;
-    data['status']=this.status;
+    data['status'] = this.status;
+    data['status_content'] = this.statusContent;
     return data;
   }
 }

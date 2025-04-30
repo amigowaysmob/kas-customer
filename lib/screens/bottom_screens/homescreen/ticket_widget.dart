@@ -12,13 +12,17 @@ class TicketWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      double swidth = MediaQuery.of(context).size.width;
+    double sheight = MediaQuery.of(context).size.height;
     return Column(
       children: [
-        Row(children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
           TextViewLarge(title: 'My Tickets',textcolor: appColor,fontWeight: FontWeight.bold,),
           ButtonWidget(onPressed: (){
-              showAddReview(context:context);
-          }, buttonName: "Create Ticket", buttonColor:appColor)
+              showAddReview(context:context,isTicket: true);
+          }, buttonName: "Create Ticket", buttonColor:appColor,width:swidth/2 ,)
         ],),
         vericalSpaceMedium,
       TableWidget(data:tickets)

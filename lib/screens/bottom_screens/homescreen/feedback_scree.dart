@@ -11,6 +11,7 @@ import 'package:kasnew/utils/constants/api_constants.dart';
 import 'package:kasnew/utils/enums.dart';
 import 'package:kasnew/widgets/button_widget.dart';
 import 'package:kasnew/widgets/indicator_widget.dart';
+import 'package:kasnew/widgets/no_data_widget.dart';
 import 'package:kasnew/widgets/review_widget.dart';
 import 'package:kasnew/widgets/star_widget.dart';
 import 'package:kasnew/widgets/text_view_large.dart';
@@ -65,7 +66,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               TextViewLarge(title: 'My Reviews',textcolor: appColor,fontWeight: FontWeight.bold,),
               ButtonWidget(onPressed: (){
               showAddReview(context:context);
-              }, buttonName: 'Add Review', buttonColor: appColor,width: swidth/2,)
+              }, buttonName: 'Add Review', buttonColor: appColor,width: swidth/2.5,)
             ],
           ),
           (data?.length??0)>0?    ListView.builder(
@@ -100,25 +101,30 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                               StarWidget(value:double.parse(fData?.rating??'1') ),
                               TextViewMedium(name:fData?.rating),
                             ],),
-                            TextViewSmall(title: 'date and time',textcolor: blackColor,)
+                            TextViewSmall(title: fData?.dateTime,textcolor: blackColor,)
                            ],),
                          ) 
                         ],
                       ),
                       TextViewSmall(title: fData?.feedback,textcolor: blackColor,),
+                      vericalSpaceSmall,
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        // mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-ButtonWidget(onPressed: (){
+ButtonWidget(
+  width:ApiConstant.langCode!='ta'? swidth/4:swidth/3,
+  onPressed: (){
    showAddReview(context:context,reviewId: fData?.id,isTicket: false,star:fData?.rating!=null?double.parse(fData?.rating??'1'):0.0,reviewContent: fData?.feedback);
 }, buttonName: 'Edit', buttonColor: appColor),
 
                       ],),
-                      TicketWidget(tickets: state.model.data?.tickets,)
+                    
                     ],),
                   ),
            );}
-              ):Container(),
+              ):NoDataWidget(title: 'No Reviews!'),
+              vericalSpaceMedium,
+                TicketWidget(tickets: state.model.data?.tickets,)
             ],),
        )
        

@@ -210,6 +210,9 @@ class AppRouter extends $AppRouter {
              AutoRoute(
             path: RouterPath.lucky_terms_path,
             page:LuckyTermsScreen.page ),
+             AutoRoute(
+            path: RouterPath.review_path,
+            page:ReviewWidget.page ),
               AutoRoute(
             path: RouterPath.bottom_path,
             page: BottomNavigationRoute.page,

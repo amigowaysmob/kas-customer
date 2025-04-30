@@ -21,5 +21,8 @@ FeedSubCatCubit({required this.authRepository})
       emit(state.copyWith(networkStatusEnum: NetworkStatusEnum.failed,model: response.$2));
     }
   }
-  
+  void clear() {
+    emit(FeedSubCatState.initial());
+  }
+ 
 }

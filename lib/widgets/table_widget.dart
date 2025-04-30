@@ -17,7 +17,7 @@ class TableWidget extends StatelessWidget {
     double sheight = MediaQuery.of(context).size.height;
     
     return Container(
-      height: sheight/1.2,
+      height: sheight/1.1,
       child: data!.isEmpty
           ? TextViewSmall(
               title:d?.noData?? "No Data !",
@@ -26,7 +26,7 @@ class TableWidget extends StatelessWidget {
               fontWeight: FontWeight.bold)
           : TableView.builder(
             keyboardDismissBehavior:ScrollViewKeyboardDismissBehavior.onDrag,
-              columnCount: 7,
+              columnCount: 6,
               rowCount: data!.length + 1,
               columnBuilder: buildTableSpan,
               rowBuilder: buildTableeSpan,
@@ -44,7 +44,7 @@ class TableWidget extends StatelessWidget {
             // trailing: BorderSide(color: Colors.grey),
             leading: BorderSide(color: Colors.grey)));
     return TableSpan(
-        extent: const FractionalTableSpanExtent(0.35),
+        extent: const FractionalTableSpanExtent(0.45),
         foregroundDecoration: decoration);
   }
 
@@ -91,7 +91,7 @@ class TableWidget extends StatelessWidget {
               fontWeight: FontWeight.bold));
     } else if (vicinity.yIndex == 0 && vicinity.xIndex == 3) {
       return Padding(
-          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8,),
           child: TextViewSmall(
               title:"Description",
               textAlign: TextAlign.center,
@@ -163,6 +163,7 @@ class TableWidget extends StatelessWidget {
       return Padding(
           padding: const EdgeInsets.only(left: 8, right: 8),
           child: TextViewSmall(
+            
               title: data![vicinity.yIndex - 1].description.toString(),textcolor: appColor,));
     } else if (vicinity.xIndex == 4) {
       return Padding(
@@ -172,8 +173,22 @@ class TableWidget extends StatelessWidget {
     } else if (vicinity.xIndex == 5) {
       return Padding(
           padding: const EdgeInsets.only(left: 8, right: 8),
-          child: TextViewSmall(
-              title: data![vicinity.yIndex - 1].status.toString(),textcolor: appColor,));
+          child:   InkWell(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: getColor(data![vicinity.yIndex - 1].status),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: TextViewSmall(title:data![vicinity.yIndex - 1].statusContent.toString() ,
+                                textcolor:data![vicinity.yIndex - 1].status=='1'? appColor:whiteColor,fontWeight: FontWeight.bold,),
+                              ),
+                            ),
+                          ),
+          // TextViewSmall(
+          //     title: data![vicinity.yIndex - 1].statusContent.toString(),textcolor:getColor(data![vicinity.yIndex - 1].status),)
+          );
     }
     //  else if (vicinity.xIndex == 6) {
     //   return Padding(
@@ -194,3 +209,18 @@ class TableWidget extends StatelessWidget {
     return TextViewSmall(title: "");
   }
 }
+Color getColor(String? status){
+  switch(status){
+    
+     case '1':
+    return Colors.yellow;
+     case '2':
+    return Colors.orange;
+      case '3':
+    return Colors.orange;
+     case '4':
+    return Colors.green;
+  default:
+        return Colors.green;
+    
+  }}
