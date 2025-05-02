@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kasnew/cubits/lang_cubit.dart';
 import 'package:kasnew/cubits/login_cubit.dart';
+import 'package:kasnew/request_model/home_request_model.dart';
 import 'package:kasnew/request_model/login_request_model.dart';
 import 'package:kasnew/router/app_router.gr.dart';
 import 'package:kasnew/router/router_path.dart';
@@ -40,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     sharedPreferenceHelper = SharedPreferenceHelper();
     sharedPreferenceHelper.init();
+      context.read<LangCubit>().login(HomeRequestModel(userId: ApiConstant.userId,lang:ApiConstant.langCode));  
     nameFocusNode.requestFocus(); 
    _loadSignature();
 

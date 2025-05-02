@@ -423,7 +423,7 @@ class Data {
   String? winners;
   String? selectMonth;
   String? luckyDrawVideo;
-
+ 
   String? noWinnersYet;
   String? nextLuckyDrawDate;
   String? termsAndConditionsVideo;
@@ -443,6 +443,23 @@ class Data {
   String? newCustomerForm;
   String? myFollowUp;
   String? myContactPersons;
+  String? description;
+  String? pleaseGiveYourRatings;
+  String? pleaseSelectTheSubject;
+  String? pleaseSelectTheTopic;
+  String? ticketNo;
+  String? type;
+  String? createdDate;
+  String? myTickets;
+  String? createTicket;
+  String? editRatings;
+  String? addRatings;
+  String? addTicket;
+  String? view;
+  String? ticketDetails;
+  String? myReviews;
+  String? noReviews;
+  String? ok;
 
   Data(
       {this.myAccount,
@@ -814,7 +831,7 @@ class Data {
       this.sendReview,
       this.giftAmount,
       this.basicDetails,
-
+      
       this.nomineeBasicDetails,
       this.ifscNumber,
       this.accountNumber,
@@ -845,7 +862,7 @@ class Data {
       this.winners,
       this.selectMonth,
       this.luckyDrawVideo,
-
+    
       this.noWinnersYet,
       this.nextLuckyDrawDate,
       this.termsAndConditionsVideo,
@@ -864,7 +881,24 @@ class Data {
       this.home,
       this.newCustomerForm,
       this.myFollowUp,
-      this.myContactPersons});
+      this.myContactPersons,
+      this.description,
+      this.pleaseGiveYourRatings,
+      this.pleaseSelectTheSubject,
+      this.pleaseSelectTheTopic,
+      this.ticketNo,
+      this.type,
+      this.createdDate,
+      this.myTickets,
+      this.createTicket,
+      this.editRatings,
+      this.addRatings,
+      this.addTicket,
+      this.view,
+      this.ticketDetails,
+      this.myReviews,
+      this.noReviews,
+      this.ok});
 
   Data.fromJson(Map<String, dynamic> json) {
     myAccount = json['my_account'];
@@ -1287,6 +1321,23 @@ class Data {
     newCustomerForm = json['new_customer_form'];
     myFollowUp = json['my_follow_up'];
     myContactPersons = json['my_contact_persons'];
+    description = json['description'];
+    pleaseGiveYourRatings = json['please_give_your_ratings'];
+    pleaseSelectTheSubject = json['please_select_the_subject'];
+    pleaseSelectTheTopic = json['please_select_the_topic'];
+    ticketNo = json['ticket_no'];
+    type = json['type'];
+    createdDate = json['created_date'];
+    myTickets = json['my_tickets'];
+    createTicket = json['create_ticket'];
+    editRatings = json['edit_ratings'];
+    addRatings = json['add_ratings'];
+    addTicket = json['add_ticket'];
+    view = json['view'];
+    ticketDetails = json['ticket_details'];
+    myReviews = json['my_reviews'];
+    noReviews = json['no_reviews'];
+    ok = json['ok'];
   }
 
   Map<String, dynamic> toJson() {
@@ -1712,6 +1763,23 @@ class Data {
     data['new_customer_form'] = this.newCustomerForm;
     data['my_follow_up'] = this.myFollowUp;
     data['my_contact_persons'] = this.myContactPersons;
+    data['description'] = this.description;
+    data['please_give_your_ratings'] = this.pleaseGiveYourRatings;
+    data['please_select_the_subject'] = this.pleaseSelectTheSubject;
+    data['please_select_the_topic'] = this.pleaseSelectTheTopic;
+    data['ticket_no'] = this.ticketNo;
+    data['type'] = this.type;
+    data['created_date'] = this.createdDate;
+    data['my_tickets'] = this.myTickets;
+    data['create_ticket'] = this.createTicket;
+    data['edit_ratings'] = this.editRatings;
+    data['add_ratings'] = this.addRatings;
+    data['add_ticket'] = this.addTicket;
+    data['view'] = this.view;
+    data['ticket_details'] = this.ticketDetails;
+    data['my_reviews'] = this.myReviews;
+    data['no_reviews'] = this.noReviews;
+    data['ok'] = this.ok;
     return data;
   }
 }

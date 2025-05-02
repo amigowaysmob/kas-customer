@@ -5,8 +5,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:kasnew/cubits/lang_cubit.dart';
 import 'package:kasnew/cubits/site_settings_cubit.dart';
 import 'package:kasnew/cubits/token_cubit.dart';
+import 'package:kasnew/request_model/home_request_model.dart';
 import 'package:kasnew/router/router_path.dart';
 import 'package:kasnew/screens/no_internet_screen.dart';
 import 'package:kasnew/states/site_settings_state.dart';
@@ -108,6 +110,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
     context.read<TokenCubit>().login(); 
     context.read<SiteSettingsCubit>().login(); 
+      context.read<LangCubit>().login(HomeRequestModel(userId: ApiConstant.userId,lang:ApiConstant.langCode));   
    
   }
   _navigateToNextPage() async {

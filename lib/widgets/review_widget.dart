@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kasnew/cubits/feed_back_cubit.dart';
 import 'package:kasnew/cubits/feed_sub_cat_cubit.dart';
 import 'package:kasnew/cubits/get_feedback_cubit.dart';
@@ -112,6 +113,7 @@ var reviewForKey=useState<String?>(null);
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
+            
             child: Column(
               mainAxisSize:MainAxisSize.min,
               // isTicket!=true? MainAxisSize.min:MainAxisSize.max,
@@ -119,6 +121,14 @@ var reviewForKey=useState<String?>(null);
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Title
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                  InkWell(child: Icon(Icons.close,),
+                  onTap:(){
+context.router.pop();
+                  })
+                ],),
                 TextViewLarge(
                   title: isTicket!=true?reviewId!=null?'Edit Ratings':'Add Ratings':'Add Ticket',
                   textcolor: blackColor,
@@ -160,12 +170,12 @@ var reviewForKey=useState<String?>(null);
               isTicket==true?    Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextViewSmall(title: d?.reviewSubject??'Choose Review Subject*',fontWeight: FontWeight.bold,),
+                    TextViewSmall(title: d?.reviewSubject??'Choose  Subject*',fontWeight: FontWeight.bold,),
                      vericalSpaceMedium,
                      DropDownWidget1(
                       width: swidth,
                        size: reviewFor.value,
-                      hint: d?.reviewSubject??'Choose Review Subject', items:revSubvalue.value , onChanged: (p0){
+                      hint: d?.reviewSubject??'Choose  Subject', items:revSubvalue.value , onChanged: (p0){
                     reviewFor.value=p0;
                     reviewSubError.value=null;
                     var index=revSubvalue.value.indexOf(p0??'');
@@ -179,6 +189,9 @@ var reviewForKey=useState<String?>(null);
                       listener:(context,feeState){
                         if(feeState.networkStatusEnum==NetworkStatusEnum.loaded){
                            // Trigger the API call when the widget is first built
+                           reviewType.value=null;
+                           revTypeKey.value.clear();
+                           revTypevalue.value.clear();
                   for (var option in feeState.model.data??[]) {
                   revTypeKey.value.add(option.key??'');
                   revTypevalue.value.add(option.value??'');
@@ -196,12 +209,12 @@ var reviewForKey=useState<String?>(null);
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                   
-                    TextViewSmall(title: d?.reviewType??'Choose Review Type*',fontWeight: FontWeight.bold,),
+                    TextViewSmall(title: d?.reviewType??'Choose Topic*',fontWeight: FontWeight.bold,),
                vericalSpaceMedium,
                 DropDownWidget1(
                   width: swidth,
                   size: reviewType.value,
-                  hint:  d?.reviewType??'Choose Review Type', items: revTypevalue.value, onChanged: (p0){
+                  hint:  d?.reviewType??'Choose Topic', items: revTypevalue.value, onChanged: (p0){
                 reviewType.value=p0;
                 var index=revTypevalue.value.indexOf(p0??'');
                 
@@ -229,8 +242,8 @@ var reviewForKey=useState<String?>(null);
                   controller: reviewController,
                   // validator: _validateReview,
                   decoration: InputDecoration(
-                    labelText: 'Write your review',
-                    hintText: 'Write your review',
+                    labelText: d?.description??'Description',
+                    hintText:d?.description?? 'Description',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                       borderSide: const BorderSide(color: Colors.grey),
@@ -265,9 +278,9 @@ var reviewForKey=useState<String?>(null);
                     // Cancel Button
                     ButtonWidget(
                       onPressed: () => context.router.pop(),
-                      buttonName: 'Cancel',
+                      buttonName:d?.cancel?? 'Cancel',
                       buttonColor: whiteColor,
-                      width: 100,
+                      width: 80.sp,
                     ),
                     const SizedBox(width: 24),
                   
@@ -294,14 +307,14 @@ var reviewForKey=useState<String?>(null);
                           // ToastWidget(
                           //   message: 'Please give your ratings',
                           // ).build(context);
-                          ratingError.value='Please give your ratings';
+                          ratingError.value=d?.pleaseGiveYourRatings??'Please give your ratings';
                         }
                       }
                       else{
                   if(reviewFor.value==null){
-                    reviewSubError.value='Please Select the Review Subject';
+                    reviewSubError.value=d?.pleaseSelectTheSubject??'Please Select the Review Subject';
                   }else if(revTypevalue.value.length>0 && reviewType.value==null){
-                    reviewTypeError.value='Please Select the Review Type';
+                    reviewTypeError.value=d?.pleaseSelectTheTopic??'Please Select the Review Type';
                   }
                   else{
                    context.read<SubmitTicketCubit>() .login(SubmitTicketRequestModel(
@@ -315,9 +328,9 @@ var reviewForKey=useState<String?>(null);
                       }
                       }
                       ,
-                      buttonName: 'Send Review',
+                      buttonName:d?.submit?? 'Submit',
                       buttonColor: appColor,
-                      width: 100,
+                      width: 80.sp,
                     ),
                   ],
                 ),

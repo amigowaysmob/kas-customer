@@ -63,10 +63,10 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextViewLarge(title: 'My Reviews',textcolor: appColor,fontWeight: FontWeight.bold,),
+              TextViewLarge(title:d?.myReviews?? 'My Reviews',textcolor: appColor,fontWeight: FontWeight.bold,),
           (data?.length??0)==0?     ButtonWidget(onPressed: (){
               showAddReview(context:context);
-              }, buttonName: 'Add Review', buttonColor: appColor,width: swidth/2.5,):Container()
+              }, buttonName:d?.addReview?? 'Add Review', buttonColor: appColor,width: swidth/2.5,):Container()
             ],
           ),
           (data?.length??0)>0?    ListView.builder(
@@ -115,14 +115,14 @@ ButtonWidget(
   width:ApiConstant.langCode!='ta'? swidth/4:swidth/3,
   onPressed: (){
    showAddReview(context:context,reviewId: fData?.id,isTicket: false,star:fData?.rating!=null?double.parse(fData?.rating??'1'):0.0,reviewContent: fData?.feedback);
-}, buttonName: 'Edit', buttonColor: appColor),
+}, buttonName: d?.edit??'Edit', buttonColor: appColor),
 
                       ],),
                     
                     ],),
                   ),
            );}
-              ):NoDataWidget(title: 'No Reviews!'),
+              ):NoDataWidget(title:d?.noReviews?? 'No Reviews!'),
               vericalSpaceMedium,
                 TicketWidget(tickets: state.model.data?.tickets,)
             ],),
@@ -139,7 +139,9 @@ return CircularWidgetC();
  void showAddReview({required BuildContext context,String? reviewId,bool? isTicket,double? star,String? reviewContent}) {
   showDialog(
     context: context,
+     barrierDismissible: false,
     builder: (BuildContext context) {
       return AlertDialog(
+         contentPadding: EdgeInsets.zero,
         content: ReviewWidget(reviewId: reviewId,isTicket: isTicket,star: star,reviewContent: reviewContent,),
       );});}

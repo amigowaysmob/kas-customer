@@ -1,8 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kasnew/response_model/get_feedback_model.dart';
 import 'package:kasnew/response_model/language_model.dart';
+import 'package:kasnew/screens/paydues/pay_dues_screen.dart';
 import 'package:kasnew/utils/constant.dart';
 import 'package:kasnew/utils/constants/api_constants.dart';
+import 'package:kasnew/widgets/button_widget.dart';
+import 'package:kasnew/widgets/text_view_large.dart';
+import 'package:kasnew/widgets/text_view_medium.dart';
 import 'package:kasnew/widgets/text_view_small.dart';
 import 'package:two_dimensional_scrollables/two_dimensional_scrollables.dart';
 class TableWidget extends StatelessWidget {
@@ -26,7 +32,7 @@ class TableWidget extends StatelessWidget {
               fontWeight: FontWeight.bold)
           : TableView.builder(
             keyboardDismissBehavior:ScrollViewKeyboardDismissBehavior.onDrag,
-              columnCount: 6,
+              columnCount: 7,
               rowCount: data!.length + 1,
               columnBuilder: buildTableSpan,
               rowBuilder: buildTableeSpan,
@@ -67,7 +73,7 @@ class TableWidget extends StatelessWidget {
       return Padding(
           padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
           child: TextViewSmall(
-              title:'Ticket No.',
+              title:d?.ticketNo??'Ticket No.',
               textAlign: TextAlign.center,
               textcolor:appColor,
               fontWeight: FontWeight.bold));
@@ -76,7 +82,7 @@ class TableWidget extends StatelessWidget {
       return Padding(
           padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
           child: TextViewSmall(
-              title:"Subject",
+              title:d?.subject??"Subject",
               textAlign: TextAlign.center,
               textcolor:appColor,
               fontWeight: FontWeight.bold));
@@ -85,7 +91,7 @@ class TableWidget extends StatelessWidget {
       return Padding(
           padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
           child: TextViewSmall(
-              title:' Type',
+              title:d?.type??'Type',
               textAlign: TextAlign.center,
               textcolor:appColor,
               fontWeight: FontWeight.bold));
@@ -93,7 +99,7 @@ class TableWidget extends StatelessWidget {
       return Padding(
           padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8,),
           child: TextViewSmall(
-              title:"Description",
+              title:d?.description??"Description",
               textAlign: TextAlign.center,
               textcolor:appColor,
               fontWeight: FontWeight.bold));
@@ -101,7 +107,7 @@ class TableWidget extends StatelessWidget {
       return Padding(
           padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
           child: TextViewSmall(
-              title:"Created Date",
+              title:d?.createdDate??"Created Date",
               textAlign: TextAlign.center,
               textcolor: appColor,
               fontWeight: FontWeight.bold));
@@ -119,7 +125,16 @@ class TableWidget extends StatelessWidget {
       return Padding(
           padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
           child: TextViewSmall(
-              title:"Status",
+              title:d?.status??"Status",
+              textAlign: TextAlign.center,
+              textcolor:appColor,
+              fontWeight: FontWeight.bold));
+    } 
+    else if (vicinity.yIndex == 0 && vicinity.xIndex == 6) {
+      return Padding(
+          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          child: TextViewSmall(
+              title:d?.view??"View",
               textAlign: TextAlign.center,
               textcolor:appColor,
               fontWeight: FontWeight.bold));
@@ -189,7 +204,18 @@ class TableWidget extends StatelessWidget {
           // TextViewSmall(
           //     title: data![vicinity.yIndex - 1].statusContent.toString(),textcolor:getColor(data![vicinity.yIndex - 1].status),)
           );
+          
     }
+    else if (vicinity.xIndex == 6) {
+      return Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8),
+          child:IconButton(icon: Icon(Icons.remove_red_eye_outlined,color: appColor,
+          ),
+          onPressed: () {
+            _showFeedBackDialog(context,data![vicinity.yIndex - 1]);
+          },));
+    }
+    
     //  else if (vicinity.xIndex == 6) {
     //   return Padding(
     //       padding: const EdgeInsets.only(left: 8, right: 8),
@@ -224,3 +250,102 @@ Color getColor(String? status){
         return Colors.green;
     
   }}
+  void _showFeedBackDialog(BuildContext context,Tickets? data) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+       double swidth = MediaQuery.of(context).size.width;
+    double sheight = MediaQuery.of(context).size.height;
+    LangModel? lang=ApiConstant.language;
+     var d=lang?.data;
+     var width=swidth/4;
+      return AlertDialog(
+       
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextViewLarge(title:d?.ticketDetails?? 'Ticket Details',fontWeight: FontWeight.bold,textcolor: appColor,),
+            vericalSpaceMedium,
+//             Column(
+//              crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//               TextViewSmall(title:'Ticket No',textcolor: blackColor,),
+//                TextViewSmall(title:'Subject',textcolor: blackColor,),
+//                 TextViewSmall(title:'Type',textcolor: blackColor,),
+//                  TextViewSmall(title:'Description',textcolor: blackColor,),
+//                    TextViewSmall(title:'Subject',textcolor: blackColor,),
+//                    TextViewSmall(title:'Created Date',textcolor: blackColor,), 
+//  TextViewSmall(title:'Status',textcolor: blackColor,),
+//             ],),
+//             horizontalSpaceSmall,
+//              Column(
+//                crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//               TextViewSmall(title:data?.ticketNo,textcolor: blackColor,),
+//                TextViewSmall(title:data?.ticketType,textcolor: blackColor,),
+//                 TextViewSmall(title:data?.issueType,textcolor: blackColor,),
+//                  Container(
+//                   width: swidth/2.2,
+//                   child: TextViewSmall(title: data?.description,textcolor: blackColor,)),
+                   
+//                    TextViewSmall(title:data?.dateTime,textcolor: blackColor,), 
+//  TextViewSmall(title:data?.statusContent,textcolor: blackColor,),
+//             ],),
+       RowTWidget(title:d?.ticketNo?? 'Ticket No', value: data?.ticketNo,titleWidth: width,width: swidth/2.8),
+       vericalSpaceSmall,
+        RowTWidget(title:d?.subject?? 'Subject', value: data?.ticketType,titleWidth: width,width: swidth/2.8),
+        vericalSpaceSmall,
+       data?.issueType!=null && (data?.issueType?.isNotEmpty??false)?  Column(
+         children: [
+           RowTWidget(title:d?.type?? 'Type', value: data?.issueType,titleWidth: width,width: swidth/2.8),
+                vericalSpaceSmall,
+         ],
+       ):Container(),
+    
+    data?.description!=null && (data?.description?.isNotEmpty??false)?      Column(
+            children: [
+              RowTWidget(title:d?.description?? 'Description', value: data?.description,titleWidth: width,width: swidth/2.8,),
+              vericalSpaceSmall,
+            ],
+          ):Container(),
+           RowTWidget(title:d?.createdDate?? 'Created Date ', value: data?.dateTime,titleWidth: width,width: swidth/2.8),
+           vericalSpaceSmall,
+             RowTWidget(title:d?.status?? 'Status', value: data?.statusContent,titleWidth: width,width: swidth/2.8),
+             vericalSpaceSmall,
+             
+                ButtonWidget(
+                      onPressed: () => context.router.pop(),
+                      buttonName: d?.ok??'Ok',
+                      buttonColor:appColor,
+                      width: 80.sp,
+                    ),
+        ],) ,
+       
+      );
+    },
+  );
+}
+class RowTWidget extends StatelessWidget {
+  String? title;
+  String? value;
+  Color? color;
+  double? width;
+  double? titleWidth;
+   RowTWidget({required this.title,required this.value,this.color,this.width,this.titleWidth});
+
+  @override
+  Widget build(BuildContext context) {
+     double swidth = MediaQuery.of(context).size.width;
+    double sheight = MediaQuery.of(context).size.height;
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+      Container(
+        width:titleWidth??null ,
+        child: TextViewSmall(title:'$title ',textcolor:color?? blackColor,)),
+Container(
+  width: width??null,
+  child: TextViewMedium(name:'$value',fontWeight: FontWeight.bold,textColors:color?? blackColor,fontSize: 13.sp,))
+    ],);
+  }
+}

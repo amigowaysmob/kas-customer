@@ -701,13 +701,23 @@ class RowTextWidget extends StatelessWidget {
   String? title;
   String? value;
   Color? color;
-   RowTextWidget({required this.title,required this.value,this.color});
+  double? width;
+  double? titleWidth;
+   RowTextWidget({required this.title,required this.value,this.color,this.width,this.titleWidth});
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: [
-      TextViewSmall(title:'$title : ',textcolor:color?? blackColor,),
-TextViewMedium(name: value,fontWeight: FontWeight.bold,textColors:color?? blackColor,fontSize: 13.sp,)
+     double swidth = MediaQuery.of(context).size.width;
+    double sheight = MediaQuery.of(context).size.height;
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+      Container(
+        width:titleWidth??null ,
+        child: TextViewSmall(title:'$title : ',textcolor:color?? blackColor,)),
+Container(
+  width: width??null,
+  child: TextViewMedium(name: value,fontWeight: FontWeight.bold,textColors:color?? blackColor,fontSize: 13.sp,))
     ],);
   }
 }
